@@ -1,0 +1,16 @@
+{
+    "name": "iDestination",
+    "short_name": "iDestination",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "red",
+    "theme_color": "blue",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "/img/logo.png",
+            "type": "image/png",
+            "sizes": "400x400"
+        }
+    ]
+}

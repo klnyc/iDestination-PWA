@@ -1,0 +1,27 @@
+{
+  "name": "idestination",
+  "version": "1.0.0",
+  "description": "",
+  "main": "client/app.js",
+  "scripts": {
+    "start-dev": "npm run build-watch & npm run start-server",
+    "start-server": "nodemon --watch server app.js -e html,js,css",
+    "build-watch": "webpack -w",
+    "start": "echo 'Running server for production - developers, use npm run start-dev for development' && node main"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.7.2",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/preset-react": "^7.7.0",
+    "babel-loader": "^8.0.6",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  },
+  "dependencies": {
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
+    "react-router-dom": "^5.1.2"
+  }
+}

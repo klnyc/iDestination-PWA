@@ -1,0 +1,43 @@
+:root {
+    --text: lightblue;
+    --theme:  rgb(63, 63, 63)
+}
+
+body {
+    margin: 0px;
+}
+
+#main {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+#title {
+    flex: 1;
+    height: 40px;
+    border-bottom: 1px solid lightblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--theme);
+}
+
+#nav {
+    flex: 1;
+    height: 40px;
+    border-top: 1px solid lightblue;
+    background-color: var(--theme);
+}
+
+#map {
+    flex: 12;
+    height: 100%;
+}
+
+#appTitle {
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--text);
+    letter-spacing: 8px;
+}
