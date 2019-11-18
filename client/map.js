@@ -10,7 +10,7 @@ export default class extends React.Component {
     render() {
         return (
             <div id="mapContainer">
-                <input id="search" type="text" size="50" placeholder="Anything you want!"></input>
+                <input id="searchBox" type="text" size="50" placeholder="Enter Destination"></input>
                 <div id="map"></div>
             </div>
         )
@@ -31,11 +31,35 @@ function loadScript(url) {
 function initMap() {
     const map = new window.google.maps.Map(document.getElementById('map'), {
         center: newYork,
-        zoom: 12,
+        zoom: 14,
         disableDefaultUI: true
     })
-    const search = new window.google.maps.places.SearchBox(document.getElementById('search'), {
+    const searchBox = new window.google.maps.places.SearchBox(document.getElementById('searchBox'), {
         types: ['establishment', 'address']
     })
-    return map, search
+    map.controls[google.maps.ControlPosition.TOP_CENTER].push(document.getElementById('searchBox'))
+    map.addListener('bounds_changed', function() {
+        searchBox.setBounds(map.getBounds())
+    })
+    let markers = []
+    searchBox.addListener('places_changed', function() {
+        let bounds = new google.maps.LatLngBounds()
+        let places = searchBox.getPlaces()
+        if (!places.length) return
+        places.forEach(place => {
+            if (!place.geometry) return
+            markers.push(new google.maps.Marker({
+                map: map,
+                title: place.name,
+                position: place.geometry.location
+            }))
+            if (place.geometry.viewport) {
+                bounds.union(place.geometry.viewport);
+              } else {
+                bounds.extend(place.geometry.location);
+              }
+        })
+        map.fitBounds(bounds)
+        console.log(markers[0].position.lat())
+    })
 }
