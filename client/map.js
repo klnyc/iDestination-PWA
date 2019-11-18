@@ -4,12 +4,15 @@ import { GOOGLE_MAPS_API_KEY } from '../secrets'
 export default class extends React.Component {
     componentDidMount() {
         window.initMap = initMap
-        loadScript(`https:maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&callback=initMap`)
+        loadScript(`https:maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&callback=initMap&libraries=places`)
     }
 
     render() {
         return (
-            <div id="map"></div>
+            <div id="mapContainer">
+                <input id="search" type="text" size="50" placeholder="Anything you want!"></input>
+                <div id="map"></div>
+            </div>
         )
     }
 }
@@ -26,8 +29,13 @@ function loadScript(url) {
 }
 
 function initMap() {
-    return new window.google.maps.Map(document.getElementById('map'), {
+    const map = new window.google.maps.Map(document.getElementById('map'), {
         center: newYork,
-        zoom: 10
+        zoom: 12,
+        disableDefaultUI: true
     })
+    const search = new window.google.maps.places.SearchBox(document.getElementById('search'), {
+        types: ['establishment', 'address']
+    })
+    return map, search
 }
