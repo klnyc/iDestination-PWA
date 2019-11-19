@@ -5,7 +5,7 @@ export default class extends React.Component {
     componentDidMount() {
         window.initMap = initMap
         loadScript(`https:maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&callback=initMap&libraries=places`)
-    }
+    }                       
 
     render() {
         return (
@@ -41,13 +41,18 @@ function initMap() {
     map.addListener('bounds_changed', function() {
         searchBox.setBounds(map.getBounds())
     })
-    let markers = []
+    let markers = [{
+        title: 'Raku',
+        position: {lat: 40.7264758, lng: -73.9866672}
+    }]
+    markers.map(marker => new google.maps.Marker({map, ...marker}))
     searchBox.addListener('places_changed', function() {
         let bounds = new google.maps.LatLngBounds()
         let places = searchBox.getPlaces()
         if (!places.length) return
         places.forEach(place => {
             if (!place.geometry) return
+            console.log(place.geometry.location.lat(), place.geometry.location.lng())
             markers.push(new google.maps.Marker({
                 map: map,
                 title: place.name,
@@ -60,6 +65,5 @@ function initMap() {
               }
         })
         map.fitBounds(bounds)
-        console.log(markers[0].position.lat())
     })
-}
+} 
