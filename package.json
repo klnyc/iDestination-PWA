@@ -6,7 +6,8 @@
   "scripts": {
     "start": "npm run build-watch & npm run start-server",
     "start-server": "nodemon --watch server -e html,js,css",
-    "build-watch": "webpack -w"
+    "build-watch": "webpack -w",
+    "firebase serve": "npm run start"
   },
   "author": "",
   "license": "ISC",
