@@ -1,11 +1,33 @@
 import React from 'react'
+import { compose, withProps } from "recompose"
+import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
 import { GOOGLE_MAPS_API_KEY } from '../secrets'
+
+// export default compose(
+//     withProps({
+//         googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}v=3.exp&libraries=geometry,drawing,places`,
+//         loadingElement: <div style={{ height: `100%` }} />,
+//         containerElement: <div style={{ height: `400px` }} />,
+//         mapElement: <div style={{ height: `100%` }} />,
+//     }),
+//     withScriptjs,
+//     withGoogleMap(() => {
+//         return (
+//             <GoogleMap 
+//                 defaultZoom={14}
+//                 defaultCenter={newYork}
+//             />
+//         )
+//     })
+// )
+
+const newYork = {lat: 40.7473735256486, lng: -73.98564376909184}
 
 export default class extends React.Component {
     componentDidMount() {
         window.initMap = initMap
         loadScript(`https:maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&callback=initMap&libraries=places`)
-    }                       
+    }
 
     render() {
         return (
@@ -16,8 +38,6 @@ export default class extends React.Component {
         )
     }
 }
-
-const newYork = {lat: 40.7473735256486, lng: -73.98564376909184}
 
 function loadScript(url) {
     const index = window.document.getElementsByTagName("script")[0]

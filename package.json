@@ -6,8 +6,7 @@
   "scripts": {
     "start": "npm run build-watch & npm run start-server",
     "start-server": "nodemon --watch server -e html,js,css",
-    "build-watch": "webpack -w",
-    "firebase serve": "npm run start"
+    "build-watch": "webpack -w"
   },
   "author": "",
   "license": "ISC",
@@ -23,7 +22,9 @@
     "nodemon": "^1.19.4",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
+    "react-google-maps": "^9.4.5",
     "react-icons": "^3.8.0",
-    "react-router-dom": "^5.1.2"
+    "react-router-dom": "^5.1.2",
+    "recompose": "^0.30.0"
   }
 }
