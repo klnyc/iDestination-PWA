@@ -66,15 +66,13 @@ class Map extends React.Component {
   }
 }
 
-export default compose(
-  withProps({
-    googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`,
-    loadingElement: <div id="mapContainer" />,
-    containerElement: <div id="mapContainer" />,
-    mapElement: <div id="mapContainer" />
-  }),
-  withScriptjs,
-  withGoogleMap
-)(Map)
-
 const NYC = {lat: 40.7473735256486, lng: -73.98564376909184}
+
+const properties = {
+  googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`,
+  loadingElement: <div id="map" />,
+  containerElement: <div id="map" />,
+  mapElement: <div id="map" />
+}
+
+export default compose(withProps(properties), withScriptjs, withGoogleMap)(Map)
