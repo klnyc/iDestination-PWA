@@ -1,6 +1,6 @@
 :root {
     --text:white;
-    --theme:  rgb(63, 63, 63)
+    --theme: rgb(63, 63, 63);
 }
 
 body {
@@ -29,12 +29,12 @@ body {
     color: var(--text);
     letter-spacing: 8px;
     text-align: center;
-    flex: 6
+    flex: 6;
 }
 
 #headerIcon {
     flex: 1;
-    color: white;
+    color: var(--text);
     text-align: center;
     font-size: 24px;
     display: flex;
@@ -55,11 +55,14 @@ body {
     visibility: visible;
     margin-top: 10px;
     padding-left: 6px;
-    border: 1px solid black ;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    text-overflow: ellipsis;
 }
 
 #map {
-    flex: 1
+    flex: 1;
 }
 
 #nav {
@@ -72,7 +75,7 @@ body {
 
 #navIcon {
     flex: 1;
-    color: white;
+    color: var(--text);
     justify-content: center;
     align-items: center;
     display: flex;
