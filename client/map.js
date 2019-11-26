@@ -45,11 +45,12 @@ class Map extends React.Component {
         center={this.state.center}
         onBoundsChanged={this.onBoundsChanged}
         defaultZoom={15}
+        defaultOptions={options}
       >
         <SearchBox
           ref={this.onSearchBoxMounted}
           bounds={this.state.bounds}
-          controlPosition={google.maps.ControlPosition.TOP_LEFT}
+          controlPosition={google.maps.ControlPosition.TOP_CENTER}
           onPlacesChanged={this.onPlacesChanged}
         >
           <input
@@ -67,6 +68,10 @@ class Map extends React.Component {
 }
 
 const NYC = {lat: 40.7473735256486, lng: -73.98564376909184}
+
+const options = {
+  disableDefaultUI: true
+}
 
 const properties = {
   googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`,
