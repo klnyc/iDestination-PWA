@@ -12,7 +12,7 @@ class Map extends React.Component {
       bounds: null,
       map: {},
       searchBox: {},
-      markers: [{position: NYC}],
+      markers: [{position: NYC}], //connect to database (componentDidMount)
       currentMarker: {},
       infoWindow: {}
     }
@@ -91,8 +91,12 @@ class Map extends React.Component {
           position={this.state.infoWindow.position}
           onCloseClick={() => this.setState({infoWindow: {}})}
         >
-          <div>INFORMATION</div>
+          <div>
+            LAT: {this.state.infoWindow.position.lat}
+            LNG: {this.state.infoWindow.position.lng}
+          </div>
         </InfoWindow>}
+
       </GoogleMap>
     )
   }
