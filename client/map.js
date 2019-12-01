@@ -105,7 +105,8 @@ class Map extends React.Component {
 const NYC = {lat: 40.7473735256486, lng: -73.98564376909184}
 
 const options = {
-  disableDefaultUI: true
+  disableDefaultUI: true,
+  clickableIcons: false
 }
 
 const properties = {

@@ -9,16 +9,26 @@ export default class Login extends React.Component {
             name: '',
             signUp: false,
         }
-        this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleLogin = this.handleLogin.bind(this)
+        this.handleSignUp = this.handleSignUp.bind(this)
         this.handleChange = this.handleChange.bind(this)
     }
 
-    handleSubmit(event) {
+    handleLogin(event) {
         event.preventDefault()
-        this.setState({
-            email: '',
-            password: '',
-            name: '',
+        const email = this.state.email
+        const password = this.state.password
+        console.log(email, password)
+        // auth.createUserWithEmailAndPassword(email, password)
+    }
+
+    handleSignUp(event) {
+        event.preventDefault()
+        firebase
+        .auth()
+        .createUserWithEmailAndPassword(this.state.email, this.state.password)
+        .then(credential => {
+            console.log(credential)
         })
     }
 
@@ -35,7 +45,7 @@ export default class Login extends React.Component {
                 ?
                 <div>
                     <p>iDestination SIGN UP PAGE</p>
-                    <form onSubmit={this.handleSubmit}>
+                    <form onSubmit={this.handleSignUp}>
                         <label htmlFor="name">Name</label>
                         <input name="name" type="text" value={this.state.name} onChange={this.handleChange} required></input>
                         <label htmlFor="email">Email</label>
@@ -49,7 +59,7 @@ export default class Login extends React.Component {
                 :
                 <div>
                     <p>iDestination LOGIN PAGE</p>
-                    <form onSubmit={this.handleSubmit}>
+                    <form onSubmit={this.handleLogin}>
                         <label htmlFor="email">Email</label>
                         <input name="email" type="email" value={this.state.email} onChange={this.handleChange} required></input>
                         <label htmlFor="password">Password</label>
