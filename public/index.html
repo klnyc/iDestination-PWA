@@ -15,6 +15,24 @@
 </head>
 <body>
     <div id="app"></div>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-firestore.js"></script>
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyAJTmT147N4OhGIRyIkN62PmA7HJKacgMY",
+            authDomain: "idestination.firebaseapp.com",
+            databaseURL: "https://idestination.firebaseio.com",
+            projectId: "idestination",
+            storageBucket: "idestination.appspot.com",
+            messagingSenderId: "1095447875198",
+            appId: "1:1095447875198:web:8a45fc6eb602d5bef9122f",
+            measurementId: "G-1ZE9RN4P1D"
+        }
+        firebase.initializeApp(firebaseConfig)
+        const auth = firebase.auth()
+        const db = firebase.firestore()
+    </script>
     <script src="./bundle.js"></script>
 </body>
 </html>

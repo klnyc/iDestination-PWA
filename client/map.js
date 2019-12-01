@@ -92,8 +92,8 @@ class Map extends React.Component {
           onCloseClick={() => this.setState({infoWindow: {}})}
         >
           <div>
-            LAT: {this.state.infoWindow.position.lat}
-            LNG: {this.state.infoWindow.position.lng}
+            <p>LAT: {this.state.infoWindow.position.lat}</p>
+            <p>LNG: {this.state.infoWindow.position.lng}</p>
           </div>
         </InfoWindow>}
 
