@@ -4,7 +4,10 @@
 }
 
 body {
-    margin: 0px;
+  margin: 0px;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 #main {
@@ -15,7 +18,6 @@ body {
 
 #header {
     flex: 1;
-    height: 40px;
     border-bottom: 1px solid black;
     display: flex;
     justify-content: center;
@@ -45,7 +47,6 @@ body {
 
 #map {
     flex: 12;
-    height: 100%;
 }
 
 #searchBox {
@@ -62,7 +63,6 @@ body {
 
 #nav {
     flex: 1;
-    height: 40px;
     border-top: 1px solid black;
     background-color: var(--theme);
     display: flex;
