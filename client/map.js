@@ -11,7 +11,8 @@ class Map extends React.Component {
       center: NYC,
       bounds: null,
       map: {},
-      searchBox: {}
+      searchBox: {},
+      markers: [{position: NYC}]
     }
     this.onMapMounted = this.onMapMounted.bind(this)
     this.onSearchBoxMounted = this.onSearchBoxMounted.bind(this)
@@ -35,7 +36,10 @@ class Map extends React.Component {
     const place = this.state.searchBox.getPlaces()[0]
     const lat = place.geometry.location.lat()
     const lng = place.geometry.location.lng()
-    this.setState({center: {lat, lng}})
+    this.setState({
+      center: {lat, lng}, 
+      markers: [...this.state.markers, {position:{lat,lng}}]
+    })
   }
 
   render() {
@@ -59,9 +63,9 @@ class Map extends React.Component {
             placeholder="Enter Destination"
           />
         </SearchBox>
-        {/* {props.markers.map((marker, index) =>
+        {this.state.markers.map((marker, index) =>
           <Marker key={index} position={marker.position} />
-        )} */}
+        )}
       </GoogleMap>
     )
   }
