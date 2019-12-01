@@ -1,5 +1,5 @@
 import React from 'react'
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
+import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from "react-google-maps"
 import { SearchBox } from "react-google-maps/lib/components/places/SearchBox"
 import { compose, withProps } from 'recompose'
 import { GOOGLE_MAPS_API_KEY } from '../secrets'
@@ -12,12 +12,15 @@ class Map extends React.Component {
       bounds: null,
       map: {},
       searchBox: {},
-      markers: [{position: NYC}]
+      markers: [{position: NYC}],
+      currentMarker: {},
+      infoWindow: {}
     }
     this.onMapMounted = this.onMapMounted.bind(this)
     this.onSearchBoxMounted = this.onSearchBoxMounted.bind(this)
     this.onBoundsChanged = this.onBoundsChanged.bind(this)
     this.onPlacesChanged = this.onPlacesChanged.bind(this)
+    this.openInfoWindow = this.openInfoWindow.bind(this)
   }
 
   onMapMounted(reference) {
@@ -38,8 +41,12 @@ class Map extends React.Component {
     const lng = place.geometry.location.lng()
     this.setState({
       center: {lat, lng}, 
-      markers: [...this.state.markers, {position:{lat,lng}}]
+      currentMarker: {position: {lat, lng}}
     })
+  }
+
+  openInfoWindow(marker) {
+    this.setState({infoWindow: marker})
   }
 
   render() {
@@ -51,6 +58,7 @@ class Map extends React.Component {
         defaultZoom={15}
         defaultOptions={options}
       >
+
         <SearchBox
           ref={this.onSearchBoxMounted}
           bounds={this.state.bounds}
@@ -63,9 +71,28 @@ class Map extends React.Component {
             placeholder="Enter Destination"
           />
         </SearchBox>
+
         {this.state.markers.map((marker, index) =>
-          <Marker key={index} position={marker.position} />
+          <Marker 
+            key={index} 
+            position={marker.position}
+            onClick={() => this.openInfoWindow(marker)}
+          />
         )}
+
+        {this.state.currentMarker.position &&
+        <Marker 
+          position={this.state.currentMarker.position} 
+          onClick={() => this.openInfoWindow(this.state.currentMarker)}
+        />}
+
+        {this.state.infoWindow.position &&
+        <InfoWindow
+          position={this.state.infoWindow.position}
+          onCloseClick={() => this.setState({infoWindow: {}})}
+        >
+          <div>INFORMATION</div>
+        </InfoWindow>}
       </GoogleMap>
     )
   }
