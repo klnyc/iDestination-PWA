@@ -23,13 +23,17 @@ export default class Main extends React.Component {
     }
 
     render() {
-        return (
-            <div id="main">
-                <Header />
-                {this.state.isLoggedIn ? <Map /> : <Login />}
-                <Nav />
-            </div>
-        )
+        return this.state.isLoggedIn
+        ?
+        <div id="main">
+            <Header />
+            <Map />
+            <Nav />
+        </div>
+        :
+        <div id="login">
+            <Login />
+        </div>
     }
 }
 

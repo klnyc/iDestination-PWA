@@ -10,6 +10,14 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
+#login {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: var(--theme);
+    color: var(--text);
+}
+
 #main {
     display: flex;
     flex-direction: column;
