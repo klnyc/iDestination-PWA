@@ -12,23 +12,16 @@ export default class Login extends React.Component {
         this.handleLogin = this.handleLogin.bind(this)
         this.handleSignUp = this.handleSignUp.bind(this)
         this.handleChange = this.handleChange.bind(this)
+        this.handleLogout = this.handleLogout.bind(this)
     }
 
-    handleLogin(event) {
-        event.preventDefault()
-        const email = this.state.email
-        const password = this.state.password
-        console.log(email, password)
-        // auth.createUserWithEmailAndPassword(email, password)
-    }
-
-    handleSignUp(event) {
-        event.preventDefault()
-        firebase
-        .auth()
-        .createUserWithEmailAndPassword(this.state.email, this.state.password)
-        .then(credential => {
-            console.log(credential)
+    componentDidMount() {
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                console.log('Logged in!')
+            } else {
+                console.log('Logged out!')
+            }
         })
     }
 
@@ -36,6 +29,27 @@ export default class Login extends React.Component {
         this.setState({
             [event.target.name]: event.target.value,
         })
+    }
+
+    handleLogin(event) {
+        event.preventDefault()
+        firebase
+        .auth()
+        .signInWithEmailAndPassword(this.state.email, this.state.password)
+        .catch(error => console.log(error.message))
+    }
+
+    handleSignUp(event) {
+        event.preventDefault()
+        firebase
+        .auth()
+        .createUserWithEmailAndPassword(this.state.email, this.state.password)
+        .catch(error => console.log(error.message))
+    }
+
+    handleLogout(event) {
+        event.preventDefault()
+        firebase.auth().signOut()
     }
 
     render () {
@@ -68,6 +82,7 @@ export default class Login extends React.Component {
                         <button onClick={() => this.setState({signUp: true})}>Sign Up</button>
                     </form>
                 </div>}
+                <div><p onClick={this.handleLogout}>LOGOUT</p></div>
             </div>
         )
     }
