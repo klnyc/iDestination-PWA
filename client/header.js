@@ -5,7 +5,7 @@ import { IoMdPerson } from 'react-icons/io'
 export default () => {
     return (
         <div id="header">
-            <div id="headerIcon"><IoMdPerson /></div>
+            <div id="headerIcon" onClick={() => firebase.auth().signOut()}><IoMdPerson /></div>
             <div id="title">iDestination</div>
             <div id="headerIcon"><MdAddCircle /></div>
         </div>

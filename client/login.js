@@ -3,7 +3,7 @@ import React from 'react'
 export default class Login extends React.Component {
     constructor() {
         super()
-        this.state ={
+        this.state = {
             email: '',
             password: '',
             name: '',
@@ -12,17 +12,6 @@ export default class Login extends React.Component {
         this.handleLogin = this.handleLogin.bind(this)
         this.handleSignUp = this.handleSignUp.bind(this)
         this.handleChange = this.handleChange.bind(this)
-        this.handleLogout = this.handleLogout.bind(this)
-    }
-
-    componentDidMount() {
-        firebase.auth().onAuthStateChanged(user => {
-            if (user) {
-                console.log('Logged in!')
-            } else {
-                console.log('Logged out!')
-            }
-        })
     }
 
     handleChange(event) {
@@ -47,14 +36,9 @@ export default class Login extends React.Component {
         .catch(error => console.log(error.message))
     }
 
-    handleLogout(event) {
-        event.preventDefault()
-        firebase.auth().signOut()
-    }
-
     render () {
         return (
-            <div>
+            <div id="map">
                 {this.state.signUp
                 ?
                 <div>
@@ -82,7 +66,6 @@ export default class Login extends React.Component {
                         <button onClick={() => this.setState({signUp: true})}>Sign Up</button>
                     </form>
                 </div>}
-                <div><p onClick={this.handleLogout}>LOGOUT</p></div>
             </div>
         )
     }
