@@ -8,6 +8,7 @@ export default class Login extends React.Component {
             password: '',
             name: '',
             signUp: false,
+            logIn: false
         }
         this.handleLogin = this.handleLogin.bind(this)
         this.handleSignUp = this.handleSignUp.bind(this)
@@ -38,34 +39,43 @@ export default class Login extends React.Component {
 
     render () {
         return (
-            <div id="map">
-                {this.state.signUp
-                ?
-                <div>
-                    <p>iDestination SIGN UP PAGE</p>
-                    <form onSubmit={this.handleSignUp}>
-                        <label htmlFor="name">Name</label>
-                        <input name="name" type="text" value={this.state.name} onChange={this.handleChange} required></input>
-                        <label htmlFor="email">Email</label>
-                        <input name="email" type="email" value={this.state.email} onChange={this.handleChange} required></input>
-                        <label htmlFor="password">Password</label>
-                        <input name="password" type="password" value={this.state.password} onChange={this.handleChange} required></input>
-                        <button onClick={() => this.setState({signUp: false})}>Log In</button>
-                        <button type="submit">Sign Up</button>
-                    </form>
-                </div>
-                :
-                <div>
-                    <p>iDestination LOGIN PAGE</p>
-                    <form onSubmit={this.handleLogin}>
-                        <label htmlFor="email">Email</label>
-                        <input name="email" type="email" value={this.state.email} onChange={this.handleChange} required></input>
-                        <label htmlFor="password">Password</label>
-                        <input name="password" type="password" value={this.state.password} onChange={this.handleChange} required></input>
-                        <button type="submit">Log In</button>
-                        <button onClick={() => this.setState({signUp: true})}>Sign Up</button>
-                    </form>
-                </div>}
+            <div id="loginContainer">
+                <p id="loginTitle">iDestination</p>
+
+                {!this.state.logIn && !this.state.signUp && (
+                    <div id="loginFormContainer">
+                        <p onClick={() => this.setState({signUp: false, logIn: true})}>Log In</p>
+                        <p onClick={() => this.setState({signUp: true, logIn: false})}>Sign Up</p>
+                    </div>
+                )}
+
+                {this.state.logIn && !this.state.signUp && (
+                    <div id="loginFormContainer">
+                        <p onClick={() => this.setState({signUp: false, logIn: false})}>BACK</p>
+                        <form id="loginForm" onSubmit={this.handleLogin}>
+                            <label htmlFor="email">Email</label>
+                            <input name="email" type="email" value={this.state.email} onChange={this.handleChange} required></input>
+                            <label htmlFor="password">Password</label>
+                            <input name="password" type="password" value={this.state.password} onChange={this.handleChange} required></input>
+                            <button id="loginFormButton" type="submit">Log In</button>
+                        </form>
+                    </div>
+                )}
+
+                {!this.state.logIn && this.state.signUp && (
+                    <div id="loginFormContainer">
+                        <p onClick={() => this.setState({signUp: false, logIn: false})}>BACK</p>
+                        <form id="loginForm" onSubmit={this.handleSignUp}>
+                            <label htmlFor="name">Name</label>
+                            <input name="name" type="text" value={this.state.name} onChange={this.handleChange} required></input>
+                            <label htmlFor="email">Email</label>
+                            <input name="email" type="email" value={this.state.email} onChange={this.handleChange} required></input>
+                            <label htmlFor="password">Password</label>
+                            <input name="password" type="password" value={this.state.password} onChange={this.handleChange} required></input>
+                            <button id="loginFormButton" type="submit">Sign Up</button>
+                        </form>
+                    </div>
+                )}
             </div>
         )
     }

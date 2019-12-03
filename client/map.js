@@ -80,22 +80,24 @@ class Map extends React.Component {
           />
         )}
 
-        {this.state.currentMarker.position &&
-        <Marker 
-          position={this.state.currentMarker.position} 
-          onClick={() => this.openInfoWindow(this.state.currentMarker)}
-        />}
+        {this.state.currentMarker.position && (
+          <Marker 
+            position={this.state.currentMarker.position} 
+            onClick={() => this.openInfoWindow(this.state.currentMarker)}
+          />
+        )}
 
-        {this.state.infoWindow.position &&
-        <InfoWindow
-          position={this.state.infoWindow.position}
-          onCloseClick={() => this.setState({infoWindow: {}})}
-        >
-          <div>
-            <p>LAT: {this.state.infoWindow.position.lat}</p>
-            <p>LNG: {this.state.infoWindow.position.lng}</p>
-          </div>
-        </InfoWindow>}
+        {this.state.infoWindow.position && (
+          <InfoWindow
+            position={this.state.infoWindow.position}
+            onCloseClick={() => this.setState({infoWindow: {}})}
+          >
+            <div>
+              <p>LAT: {this.state.infoWindow.position.lat}</p>
+              <p>LNG: {this.state.infoWindow.position.lng}</p>
+            </div>
+          </InfoWindow>
+        )}
 
       </GoogleMap>
     )
