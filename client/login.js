@@ -1,4 +1,5 @@
 import React from 'react'
+import { MdArrowBack } from 'react-icons/md'
 
 export default class Login extends React.Component {
     constructor() {
@@ -51,20 +52,19 @@ export default class Login extends React.Component {
 
                 {this.state.logIn && !this.state.signUp && (
                     <div id="loginFormContainer">
-                        <p onClick={() => this.setState({signUp: false, logIn: false})}>BACK</p>
                         <form id="loginForm" onSubmit={this.handleLogin}>
                             <label htmlFor="email">Email</label>
                             <input name="email" type="email" value={this.state.email} onChange={this.handleChange} required></input>
                             <label htmlFor="password">Password</label>
                             <input name="password" type="password" value={this.state.password} onChange={this.handleChange} required></input>
                             <button id="loginFormButton" type="submit">Log In</button>
+                            <div onClick={() => this.setState({signUp: false, logIn: false})}><MdArrowBack /></div>
                         </form>
                     </div>
                 )}
 
                 {!this.state.logIn && this.state.signUp && (
                     <div id="loginFormContainer">
-                        <p onClick={() => this.setState({signUp: false, logIn: false})}>BACK</p>
                         <form id="loginForm" onSubmit={this.handleSignUp}>
                             <label htmlFor="name">Name</label>
                             <input name="name" type="text" value={this.state.name} onChange={this.handleChange} required></input>
@@ -73,6 +73,7 @@ export default class Login extends React.Component {
                             <label htmlFor="password">Password</label>
                             <input name="password" type="password" value={this.state.password} onChange={this.handleChange} required></input>
                             <button id="loginFormButton" type="submit">Sign Up</button>
+                            <div onClick={() => this.setState({signUp: false, logIn: false})}><MdArrowBack /></div>
                         </form>
                     </div>
                 )}

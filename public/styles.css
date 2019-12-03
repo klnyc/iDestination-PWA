@@ -36,21 +36,20 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-top: 300px;
+    padding-top: 100px;
     font-family: var(--font);
 }
 
 #loginForm {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 }
 
 #loginFormButton {
-    font-size: 20px;
+    font-size: 16px;
     color: var(--text);
-    padding-top: 20px;
 }
 
 #main {
