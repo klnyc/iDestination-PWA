@@ -52,6 +52,18 @@ body {
     color: var(--text);
 }
 
+#loginBackButton {
+    padding: 6px;
+    font-size: 20px;
+}
+
+input {
+    margin: 6px;
+    padding: 3px;
+    text-align: center;
+    font-size: 16px;
+}
+
 #main {
     display: flex;
     flex-direction: column;

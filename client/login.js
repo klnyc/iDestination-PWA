@@ -58,7 +58,7 @@ export default class Login extends React.Component {
                             <label htmlFor="password">Password</label>
                             <input name="password" type="password" value={this.state.password} onChange={this.handleChange} required></input>
                             <button id="loginFormButton" type="submit">Log In</button>
-                            <div onClick={() => this.setState({signUp: false, logIn: false})}><MdArrowBack /></div>
+                            <div id="loginBackButton" onClick={() => this.setState({signUp: false, logIn: false})}><MdArrowBack /></div>
                         </form>
                     </div>
                 )}
@@ -73,7 +73,7 @@ export default class Login extends React.Component {
                             <label htmlFor="password">Password</label>
                             <input name="password" type="password" value={this.state.password} onChange={this.handleChange} required></input>
                             <button id="loginFormButton" type="submit">Sign Up</button>
-                            <div onClick={() => this.setState({signUp: false, logIn: false})}><MdArrowBack /></div>
+                            <div id="loginBackButton" onClick={() => this.setState({signUp: false, logIn: false})}><MdArrowBack /></div>
                         </form>
                     </div>
                 )}
