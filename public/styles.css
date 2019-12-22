@@ -60,8 +60,11 @@ body {
 input {
     margin: 6px;
     padding: 3px;
-    text-align: center;
-    font-size: 16px;
+    font-size: 12px;
+}
+
+input::-webkit-input-placeholder {
+    padding-left: 6px;
 }
 
 #main {

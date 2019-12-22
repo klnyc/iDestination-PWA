@@ -4,7 +4,8 @@
   "description": "",
   "main": "client/app.js",
   "scripts": {
-    "start": "npm run build-watch",
+    "start:dev": "npm run build-watch & npm run start-server",
+    "start-server": "webpack-dev-server --content-base public",
     "build-watch": "webpack -w"
   },
   "author": "",
@@ -15,7 +16,8 @@
     "@babel/preset-react": "^7.7.0",
     "babel-loader": "^8.0.6",
     "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10"
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
   },
   "dependencies": {
     "react": "^16.12.0",
