@@ -4,7 +4,7 @@
   "description": "",
   "main": "client/app.js",
   "scripts": {
-    "start:dev": "npm run build-watch & npm run start-server",
+    "start": "npm run build-watch & npm run start-server",
     "start-server": "webpack-dev-server --content-base public",
     "build-watch": "webpack -w"
   },

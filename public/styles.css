@@ -91,7 +91,7 @@ input::-webkit-input-placeholder {
     flex: 6;
 }
 
-#headerIcon {
+.headerIcon {
     flex: 1;
     color: var(--text);
     text-align: center;
@@ -119,6 +119,10 @@ input::-webkit-input-placeholder {
     -webkit-appearance: none;
 }
 
+.infowindow {
+    font-size: 12px;
+}
+
 #nav {
     flex: 1;
     border-top: 1px solid black;
@@ -126,7 +130,7 @@ input::-webkit-input-placeholder {
     display: flex;
 }
 
-#navIcon {
+.navIcon {
     flex: 1;
     color: var(--text);
     justify-content: center;
@@ -137,7 +141,7 @@ input::-webkit-input-placeholder {
     font-family: var(--font);
 }
 
-#navText {
+.navText {
     font-size: 12px;
     padding-top: 2px;
     letter-spacing: 2px;

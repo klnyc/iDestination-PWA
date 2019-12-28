@@ -12,7 +12,7 @@ class Map extends React.Component {
       bounds: null,
       map: {},
       searchBox: {},
-      markers: [{position: NYC}], //connect to database (componentDidMount)
+      markers: [{name: 'Korea Town', position: NYC}], //connect to database (componentDidMount)
       currentMarker: {},
       infoWindow: {}
     }
@@ -41,8 +41,13 @@ class Map extends React.Component {
     const lng = place.geometry.location.lng()
     this.setState({
       center: {lat, lng}, 
-      currentMarker: {position: {lat, lng}}
+      currentMarker: {
+        position: {lat, lng},
+        name: place.name,
+        address: place.formatted_address
+      }
     })
+    console.log(place)
   }
 
   openInfoWindow(marker) {
@@ -92,9 +97,9 @@ class Map extends React.Component {
             position={this.state.infoWindow.position}
             onCloseClick={() => this.setState({infoWindow: {}})}
           >
-            <div>
-              <p>LAT: {this.state.infoWindow.position.lat}</p>
-              <p>LNG: {this.state.infoWindow.position.lng}</p>
+            <div className="infowindow">
+              <p>{this.state.infoWindow.name}</p>
+              <p>{this.state.infoWindow.address}</p>
             </div>
           </InfoWindow>
         )}
