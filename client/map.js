@@ -21,11 +21,16 @@ class Map extends React.Component {
     this.onBoundsChanged = this.onBoundsChanged.bind(this)
     this.onPlacesChanged = this.onPlacesChanged.bind(this)
     this.openInfoWindow = this.openInfoWindow.bind(this)
+    this.addPlace = this.addPlace.bind(this)
   }
 
   componentDidMount() {
     const markers = []
-    firebase.firestore().collection('markers').get().then(snapshot => {
+    firebase
+    .firestore()
+    .collection('markers')
+    .get()
+    .then(snapshot => {
       snapshot.docs.forEach(doc => markers.push(doc.data()))
     })
     this.setState({markers})
@@ -50,16 +55,23 @@ class Map extends React.Component {
     this.setState({
       center: {lat, lng}, 
       currentMarker: {
-        position: {_lat: lat, _long: lng},
+        position: {lat, lng},
         name: place.name,
         address: place.formatted_address
       }
     })
-    console.log(lat, lng)
   }
 
   openInfoWindow(marker) {
     this.setState({infoWindow: marker})
+  }
+
+  addPlace(place) {
+    firebase
+    .firestore()
+    .collection('markers')
+    .add(place)
+    .then(() => this.setState({infoWindow: {}}))
   }
 
   render() {
@@ -88,27 +100,27 @@ class Map extends React.Component {
         {this.state.markers.map((marker, index) =>
           <Marker 
             key={index} 
-            position={{lat: marker.position._lat, lng: marker.position._long}}
+            position={marker.position}
             onClick={() => this.openInfoWindow(marker)}
           />
         )}
 
         {this.state.currentMarker.position && (
           <Marker 
-            position={{lat: this.state.currentMarker.position._lat, lng: this.state.currentMarker.position._long}} 
+            position={this.state.currentMarker.position} 
             onClick={() => this.openInfoWindow(this.state.currentMarker)}
           />
         )}
 
         {this.state.infoWindow.position && (
           <InfoWindow
-            position={{lat: this.state.infoWindow.position._lat, lng: this.state.infoWindow.position._long}}
+            position={this.state.infoWindow.position}
             onCloseClick={() => this.setState({infoWindow: {}})}
           >
             <div className="infowindow">
               <p>{this.state.infoWindow.name}</p>
               <p>{this.state.infoWindow.address}</p>
-              <p>ADD THIS PLACE</p>
+              <p onClick={() => this.addPlace(this.state.currentMarker)}>ADD THIS PLACE</p>
             </div>
           </InfoWindow>
         )}
