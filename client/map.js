@@ -29,11 +29,10 @@ class Map extends React.Component {
     firebase
     .firestore()
     .collection('markers')
-    .get()
-    .then(snapshot => {
+    .onSnapshot(snapshot => {
       snapshot.docs.forEach(doc => markers.push(doc.data()))
+      this.setState({markers})
     })
-    this.setState({markers})
   }
 
   onMapMounted(reference) {
@@ -66,11 +65,11 @@ class Map extends React.Component {
     this.setState({infoWindow: marker})
   }
 
-  addPlace(place) {
+  addPlace(marker) {
     firebase
     .firestore()
     .collection('markers')
-    .add(place)
+    .add(marker)
     .then(() => this.setState({infoWindow: {}}))
   }
 

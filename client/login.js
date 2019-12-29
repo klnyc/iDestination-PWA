@@ -17,9 +17,7 @@ export default class Login extends React.Component {
     }
 
     handleChange(event) {
-        this.setState({
-            [event.target.name]: event.target.value,
-        })
+        this.setState({[event.target.name]: event.target.value})
     }
 
     handleLogin(event) {
