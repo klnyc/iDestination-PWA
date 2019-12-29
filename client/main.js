@@ -8,7 +8,8 @@ export default class Main extends React.Component {
     constructor() {
         super()
         this.state = {
-            isLoggedIn: false
+            isLoggedIn: false,
+            markers: []
         }
     }
 
@@ -27,7 +28,7 @@ export default class Main extends React.Component {
         ?
         <div id="main">
             <Header />
-            <Map />
+            <Map markers={this.state.markers} />
             <Nav />
         </div>
         :
