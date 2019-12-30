@@ -12,10 +12,12 @@ class Map extends React.Component {
       bounds: null,
       map: {},
       searchBox: {},
+      searchInput: '',
       markers: [],
       currentMarker: {},
       infoWindow: {}
     }
+    this.handleChange = this.handleChange.bind(this)
     this.onMapMounted = this.onMapMounted.bind(this)
     this.onSearchBoxMounted = this.onSearchBoxMounted.bind(this)
     this.onBoundsChanged = this.onBoundsChanged.bind(this)
@@ -35,6 +37,10 @@ class Map extends React.Component {
       snapshot.docs.forEach(doc => markers.push(doc.data()))
       this.setState({markers})
     }, (error) => console.log(error.message))
+  }
+
+  handleChange(event) {
+    this.setState({searchInput: event.target.value})
   }
 
   onMapMounted(reference) {
@@ -59,7 +65,8 @@ class Map extends React.Component {
         position: {lat, lng},
         name: place.name,
         address: place.formatted_address
-      }
+      },
+      searchInput: `${place.name} ${place.formatted_address}`
     })
   }
 
@@ -97,9 +104,11 @@ class Map extends React.Component {
             id="searchBox"
             type="text"
             placeholder="Enter Destination"
+            value={this.state.searchInput}
+            onChange={this.handleChange}
           />
         </SearchBox>
-
+        
         {this.state.markers.map((marker, index) =>
           <Marker 
             key={index} 
@@ -120,7 +129,7 @@ class Map extends React.Component {
             position={this.state.infoWindow.position}
             onCloseClick={() => this.setState({infoWindow: {}})}
           >
-            <div className="infowindow">
+            <div className="infoWindow">
               <p>{this.state.infoWindow.name}</p>
               <p>{this.state.infoWindow.address}</p>
               <p onClick={() => this.addPlace(this.state.currentMarker)}>ADD THIS PLACE</p>
