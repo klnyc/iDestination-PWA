@@ -5,8 +5,8 @@ import { compose, withProps } from 'recompose'
 import { GOOGLE_MAPS_API_KEY } from '../secrets'
 
 class Map extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       center: NYC,
       bounds: null,
@@ -28,11 +28,13 @@ class Map extends React.Component {
     const markers = []
     firebase
     .firestore()
+    .collection('users')
+    .doc(this.props.userID)
     .collection('markers')
     .onSnapshot(snapshot => {
       snapshot.docs.forEach(doc => markers.push(doc.data()))
       this.setState({markers})
-    })
+    }, (error) => console.log(error.message))
   }
 
   onMapMounted(reference) {
@@ -68,6 +70,8 @@ class Map extends React.Component {
   addPlace(marker) {
     firebase
     .firestore()
+    .collection('users')
+    .doc(this.props.userID)
     .collection('markers')
     .add(marker)
     .then(() => this.setState({infoWindow: {}}))

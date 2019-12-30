@@ -33,6 +33,15 @@ export default class Login extends React.Component {
         firebase
         .auth()
         .createUserWithEmailAndPassword(this.state.email, this.state.password)
+        .then((credentials) => 
+            firebase
+            .firestore()
+            .collection('users')
+            .doc(credentials.user.uid)
+            .set({
+                name: this.state.name,
+                email: this.state.email
+            }))
         .catch(error => console.log(error.message))
     }
 
