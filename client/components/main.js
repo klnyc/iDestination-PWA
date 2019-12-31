@@ -4,7 +4,7 @@ import Header from './header'
 import Nav from './nav'
 import Map from './map'
 import Login from './login'
-import { login, logout } from '../reducers/loginReducer'
+import { login, logout } from '../store'
 
 class Main extends React.Component {
     componentDidMount() {
@@ -27,8 +27,8 @@ class Main extends React.Component {
 }
 
 const mapState = (state) => ({
-    isLoggedIn: state.login.isLoggedIn,
-    userID: state.login.userID
+    isLoggedIn: state.isLoggedIn,
+    userID: state.userID
 })
 
 const mapDispatch = (dispatch) => ({

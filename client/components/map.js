@@ -4,14 +4,14 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from "reac
 import { SearchBox } from "react-google-maps/lib/components/places/SearchBox"
 import { compose, withProps } from 'recompose'
 import { GOOGLE_MAPS_API_KEY } from '../../secrets'
-import { mountMarkers, mountMap, mountSearchBox, changeBounds, changePlace, openInfoWindow, closeInfoWindow, handleChange } from '../reducers/mapReducer'
+import * as actions from '../store'
 
 class Map extends React.Component {
   constructor() {
     super()
     this.addPlace = this.addPlace.bind(this)
   }
-  
+
   componentDidMount() {
     const markers = []
     firebase
@@ -107,26 +107,26 @@ const mapProperties = {
 }
 
 const mapState = (state) => ({
-  userID: state.login.userID,
-  center: state.map.center,
-  bounds: state.map.bounds,
-  map: state.map.map,
-  searchBox: state.map.searchBox,
-  searchInput: state.map.searchInput,
-  markers: state.map.markers,
-  currentMarker: state.map.currentMarker,
-  infoWindow: state.map.infoWindow
+  userID: state.userID,
+  center: state.center,
+  bounds: state.bounds,
+  map: state.map,
+  searchBox: state.searchBox,
+  searchInput: state.searchInput,
+  markers: state.markers,
+  currentMarker: state.currentMarker,
+  infoWindow: state.infoWindow
 })
 
 const mapDispatch = (dispatch) => ({
-  mountMarkers: (markers) => dispatch(mountMarkers(markers)),
-  mountMap: (map) => dispatch(mountMap(map)),
-  mountSearchBox: (searchBox) => dispatch(mountSearchBox(searchBox)),
-  changeBounds: (bounds) => dispatch(changeBounds(bounds)),
-  changePlace: (place) => dispatch(changePlace(place)),
-  openInfoWindow: (marker) => dispatch(openInfoWindow(marker)),
-  closeInfoWindow: () => dispatch(closeInfoWindow()),
-  handleChange: (event) => dispatch(handleChange(event))
+  mountMarkers: (markers) => dispatch(actions.mountMarkers(markers)),
+  mountMap: (map) => dispatch(actions.mountMap(map)),
+  mountSearchBox: (searchBox) => dispatch(actions.mountSearchBox(searchBox)),
+  changeBounds: (bounds) => dispatch(actions.changeBounds(bounds)),
+  changePlace: (place) => dispatch(actions.changePlace(place)),
+  openInfoWindow: (marker) => dispatch(actions.openInfoWindow(marker)),
+  closeInfoWindow: () => dispatch(actions.closeInfoWindow()),
+  handleChange: (event) => dispatch(actions.handleChange(event))
 })
 
 export default connect(mapState, mapDispatch)(compose(withProps(mapProperties), withScriptjs, withGoogleMap)(Map))

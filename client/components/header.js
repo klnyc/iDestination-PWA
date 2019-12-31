@@ -1,8 +1,7 @@
 import React from 'react'
 import { MdAddCircle } from 'react-icons/md'
 import { IoMdPerson } from 'react-icons/io'
-import store from '../store'
-import { clearSearchBox } from '../reducers/mapReducer'
+import store, { clearSearchBox } from '../store'
 
 export default () => {
     return (
