@@ -33,7 +33,7 @@ class Main extends React.Component {
     }
 }
 
-const mapState = state => {
+const mapState = (state) => {
     return {
         isLoggedIn: state.login.isLoggedIn,
         userID: state.login.userID

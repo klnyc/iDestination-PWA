@@ -1,28 +1,15 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from "react-google-maps"
 import { SearchBox } from "react-google-maps/lib/components/places/SearchBox"
 import { compose, withProps } from 'recompose'
 import { GOOGLE_MAPS_API_KEY } from '../../secrets'
+import store from '../store'
+import { mountMarkers, mountMap, mountSearchBox, changeBounds, changePlace, openInfoWindow, closeInfoWindow, handleChange } from '../reducers/mapReducer'
 
 class Map extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      center: NYC,
-      bounds: null,
-      map: {},
-      searchBox: {},
-      searchInput: '',
-      markers: [],
-      currentMarker: {},
-      infoWindow: {}
-    }
-    this.handleChange = this.handleChange.bind(this)
-    this.onMapMounted = this.onMapMounted.bind(this)
-    this.onSearchBoxMounted = this.onSearchBoxMounted.bind(this)
-    this.onBoundsChanged = this.onBoundsChanged.bind(this)
-    this.onPlacesChanged = this.onPlacesChanged.bind(this)
-    this.openInfoWindow = this.openInfoWindow.bind(this)
+  constructor() {
+    super()
     this.addPlace = this.addPlace.bind(this)
   }
 
@@ -35,43 +22,8 @@ class Map extends React.Component {
     .collection('markers')
     .onSnapshot(snapshot => {
       snapshot.docs.forEach(doc => markers.push(doc.data()))
-      this.setState({markers})
+      store.dispatch(mountMarkers(markers))
     }, (error) => console.log(error.message))
-  }
-
-  handleChange(event) {
-    this.setState({[event.target.name]: event.target.value})
-  }
-
-  onMapMounted(reference) {
-    this.setState({map: reference})
-  }
-
-  onSearchBoxMounted(reference) {
-    this.setState({searchBox: reference})
-  }
-
-  onBoundsChanged() {
-    this.setState({bounds: this.state.map.getBounds()})
-  }
-
-  onPlacesChanged() {
-    const place = this.state.searchBox.getPlaces()[0]
-    const lat = place.geometry.location.lat()
-    const lng = place.geometry.location.lng()
-    this.setState({
-      center: {lat, lng}, 
-      currentMarker: {
-        position: {lat, lng},
-        name: place.name,
-        address: place.formatted_address
-      },
-      searchInput: `${place.name} ${place.formatted_address}`
-    })
-  }
-
-  openInfoWindow(marker) {
-    this.setState({infoWindow: marker})
   }
 
   addPlace(marker) {
@@ -81,59 +33,59 @@ class Map extends React.Component {
     .doc(this.props.userID)
     .collection('markers')
     .add(marker)
-    .then(() => this.setState({infoWindow: {}}))
+    .then(() => store.dispatch(closeInfoWindow()))
   }
 
   render() {
     return (
       <GoogleMap
-        ref={this.onMapMounted}
-        center={this.state.center}
-        onBoundsChanged={this.onBoundsChanged}
+        ref={(map) => store.dispatch(mountMap(map))}
+        center={this.props.center}
+        onBoundsChanged={() => store.dispatch(changeBounds(this.props.map.getBounds()))}
         defaultZoom={15}
         defaultOptions={mapSettings}
       >
 
         <SearchBox
-          ref={this.onSearchBoxMounted}
-          bounds={this.state.bounds}
+          ref={(searchBox) => store.dispatch(mountSearchBox(searchBox))}
+          bounds={this.props.bounds}
           controlPosition={google.maps.ControlPosition.TOP_CENTER}
-          onPlacesChanged={this.onPlacesChanged}
+          onPlacesChanged={() => store.dispatch(changePlace(this.props.searchBox.getPlaces()[0]))}
         >
           <input
             id="searchBox"
             name="searchInput"
             type="text"
             placeholder="Enter Destination"
-            value={this.state.searchInput}
-            onChange={this.handleChange}
+            value={this.props.searchInput}
+            onChange={(event) => store.dispatch(handleChange(event))}
           />
         </SearchBox>
         
-        {this.state.markers.map((marker, index) =>
+        {this.props.markers.map((marker, index) =>
           <Marker 
             key={index} 
             position={marker.position}
-            onClick={() => this.openInfoWindow(marker)}
+            onClick={() => store.dispatch(openInfoWindow(marker))}
           />
         )}
 
-        {this.state.currentMarker.position && (
+        {this.props.currentMarker.position && (
           <Marker 
-            position={this.state.currentMarker.position} 
-            onClick={() => this.openInfoWindow(this.state.currentMarker)}
+            position={this.props.currentMarker.position} 
+            onClick={() => store.dispatch(openInfoWindow(this.props.currentMarker))}
           />
         )}
 
-        {this.state.infoWindow.position && (
+        {this.props.infoWindow.position && (
           <InfoWindow
-            position={this.state.infoWindow.position}
-            onCloseClick={() => this.setState({infoWindow: {}})}
+            position={this.props.infoWindow.position}
+            onCloseClick={() => store.dispatch(closeInfoWindow())}
           >
             <div className="infoWindow">
-              <p>{this.state.infoWindow.name}</p>
-              <p>{this.state.infoWindow.address}</p>
-              <p onClick={() => this.addPlace(this.state.currentMarker)}>ADD THIS PLACE</p>
+              <p>{this.props.infoWindow.name}</p>
+              <p>{this.props.infoWindow.address}</p>
+              <p onClick={() => this.addPlace(this.props.currentMarker)}>ADD THIS PLACE</p>
             </div>
           </InfoWindow>
         )}
@@ -142,8 +94,6 @@ class Map extends React.Component {
     )
   }
 }
-
-const NYC = { lat: 40.7473735256486, lng: -73.98564376909184 }
 
 const mapSettings = {
   disableDefaultUI: true,
@@ -157,4 +107,18 @@ const mapProperties = {
   mapElement: <div style={{ height: `100%` }} />
 }
 
-export default compose(withProps(mapProperties), withScriptjs, withGoogleMap)(Map)
+const mapState = (state) => {
+  return {
+      userID: state.login.userID,
+      center: state.map.center,
+      bounds: state.map.bounds,
+      map: state.map.map,
+      searchBox: state.map.searchBox,
+      searchInput: state.map.searchInput,
+      markers: state.map.markers,
+      currentMarker: state.map.currentMarker,
+      infoWindow: state.map.infoWindow
+  }
+}
+
+export default connect(mapState)(compose(withProps(mapProperties), withScriptjs, withGoogleMap)(Map))
