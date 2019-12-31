@@ -1,21 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import store from '../store'
 import Header from './header'
 import Nav from './nav'
 import Map from './map'
 import Login from './login'
-import { loginAction, logoutAction } from '../reducers/loginReducer'
+import { login, logout } from '../reducers/loginReducer'
 
 class Main extends React.Component {
     componentDidMount() {
-        firebase.auth().onAuthStateChanged(user => {
-            if (user) {
-                store.dispatch(loginAction(user))
-            } else {
-                store.dispatch(logoutAction())
-            }
-        })  
+        firebase.auth().onAuthStateChanged(user => user ? this.props.login(user) : this.props.logout())  
     }
 
     render() {
@@ -33,11 +26,14 @@ class Main extends React.Component {
     }
 }
 
-const mapState = (state) => {
-    return {
-        isLoggedIn: state.login.isLoggedIn,
-        userID: state.login.userID
-    }
-}
+const mapState = (state) => ({
+    isLoggedIn: state.login.isLoggedIn,
+    userID: state.login.userID
+})
 
-export default connect(mapState)(Main)
+const mapDispatch = (dispatch) => ({
+    login: (user) => dispatch(login(user)),
+    logout: () => dispatch(logout())
+})
+
+export default connect(mapState, mapDispatch)(Main)

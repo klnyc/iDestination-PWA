@@ -6,8 +6,8 @@ const initialState = {
 const LOGGED_IN = 'LOGGED_IN'
 const LOGGED_OUT = 'LOGGED_OUT'
 
-export const loginAction = (user) => ({ type: LOGGED_IN, userID: user.uid })
-export const logoutAction = () => ({ type: LOGGED_OUT, userID: '' })
+export const login = (user) => ({ type: LOGGED_IN, userID: user.uid })
+export const logout = () => ({ type: LOGGED_OUT, userID: '' })
 
 export default function loginReducer (state = initialState, action) {
     switch (action.type) {
