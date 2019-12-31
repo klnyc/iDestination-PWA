@@ -2,7 +2,7 @@ import React from 'react'
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from "react-google-maps"
 import { SearchBox } from "react-google-maps/lib/components/places/SearchBox"
 import { compose, withProps } from 'recompose'
-import { GOOGLE_MAPS_API_KEY } from '../secrets'
+import { GOOGLE_MAPS_API_KEY } from '../../secrets'
 
 class Map extends React.Component {
   constructor(props) {
@@ -40,7 +40,7 @@ class Map extends React.Component {
   }
 
   handleChange(event) {
-    this.setState({searchInput: event.target.value})
+    this.setState({[event.target.name]: event.target.value})
   }
 
   onMapMounted(reference) {
@@ -91,7 +91,7 @@ class Map extends React.Component {
         center={this.state.center}
         onBoundsChanged={this.onBoundsChanged}
         defaultZoom={15}
-        defaultOptions={options}
+        defaultOptions={mapSettings}
       >
 
         <SearchBox
@@ -102,6 +102,7 @@ class Map extends React.Component {
         >
           <input
             id="searchBox"
+            name="searchInput"
             type="text"
             placeholder="Enter Destination"
             value={this.state.searchInput}
@@ -142,18 +143,18 @@ class Map extends React.Component {
   }
 }
 
-const NYC = {lat: 40.7473735256486, lng: -73.98564376909184}
+const NYC = { lat: 40.7473735256486, lng: -73.98564376909184 }
 
-const options = {
+const mapSettings = {
   disableDefaultUI: true,
   clickableIcons: false
 }
 
-const properties = {
+const mapProperties = {
   googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`,
   loadingElement: <div style={{ height: `100%` }} />,
   containerElement: <div id="map" />,
   mapElement: <div style={{ height: `100%` }} />
 }
 
-export default compose(withProps(properties), withScriptjs, withGoogleMap)(Map)
+export default compose(withProps(mapProperties), withScriptjs, withGoogleMap)(Map)
