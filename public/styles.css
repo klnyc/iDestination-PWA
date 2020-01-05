@@ -106,9 +106,14 @@ input::-webkit-input-placeholder {
     flex: 12;
 }
 
+#searchBoxContainer {
+    width: 100%;
+    text-align: center;
+}
+
 #searchBox {
     height: 20px;
-    width: 70%;
+    width: calc(100% - 300px);
     visibility: visible;
     margin-top: 10px;
     padding-left: 6px;
@@ -117,6 +122,14 @@ input::-webkit-input-placeholder {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
     text-overflow: ellipsis;
     -webkit-appearance: none;
+}
+
+#clearInputButton {
+    font-size: 16px;
+    position: fixed;
+    top: 60px;
+    right: 150px;
+    opacity: 30%;
 }
 
 .infoWindow {

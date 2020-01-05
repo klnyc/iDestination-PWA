@@ -5,6 +5,7 @@ import { SearchBox } from "react-google-maps/lib/components/places/SearchBox"
 import { compose, withProps } from 'recompose'
 import { GOOGLE_MAPS_API_KEY } from '../../secrets'
 import * as actions from '../store'
+import { IoMdCloseCircle } from 'react-icons/io'
 
 class Map extends React.Component {
   constructor() {
@@ -51,19 +52,22 @@ class Map extends React.Component {
           controlPosition={google.maps.ControlPosition.TOP_CENTER}
           onPlacesChanged={() => this.props.changePlace(this.props.searchBox.getPlaces()[0])}
         >
-          <input
-            id="searchBox"
-            name="searchInput"
-            type="text"
-            placeholder="Enter Destination"
-            value={this.props.searchInput}
-            onChange={(event) => this.props.handleChange(event)}
-          />
+          <div id="searchBoxContainer">
+            <input
+              id="searchBox"
+              name="searchInput"
+              type="text"
+              placeholder="Enter Destination"
+              value={this.props.searchInput}
+              onChange={(event) => this.props.handleChange(event)}
+            />
+            <div id="clearInputButton" onClick={this.props.clearSearchBox}><IoMdCloseCircle /></div>
+          </div>
         </SearchBox>
         
         {this.props.markers.map((marker, index) =>
           <Marker 
-            key={index} 
+            key={index}
             position={marker.position}
             onClick={() => this.props.openInfoWindow(marker)}
           />
@@ -126,7 +130,8 @@ const mapDispatch = (dispatch) => ({
   changePlace: (place) => dispatch(actions.changePlace(place)),
   openInfoWindow: (marker) => dispatch(actions.openInfoWindow(marker)),
   closeInfoWindow: () => dispatch(actions.closeInfoWindow()),
-  handleChange: (event) => dispatch(actions.handleChange(event))
+  handleChange: (event) => dispatch(actions.handleChange(event)),
+  clearSearchBox: () => dispatch(actions.clearSearchBox())
 })
 
 export default connect(mapState, mapDispatch)(compose(withProps(mapProperties), withScriptjs, withGoogleMap)(Map))
