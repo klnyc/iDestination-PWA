@@ -80,6 +80,7 @@ input::-webkit-input-placeholder {
     justify-content: center;
     align-items: center;
     background-color: var(--theme);
+    min-height: 50px;
 }
 
 #title {
@@ -107,13 +108,13 @@ input::-webkit-input-placeholder {
 }
 
 #searchBoxContainer {
-    width: 100%;
+    width: 80%;
     text-align: center;
 }
 
 #searchBox {
     height: 20px;
-    width: calc(100% - 300px);
+    width: 100%;
     visibility: visible;
     margin-top: 10px;
     padding-left: 6px;
@@ -126,9 +127,9 @@ input::-webkit-input-placeholder {
 
 #clearInputButton {
     font-size: 16px;
-    position: fixed;
-    top: 60px;
-    right: 150px;
+    position: absolute;
+    top: 16px;
+    right: -10px;
     opacity: 30%;
 }
 
@@ -141,6 +142,7 @@ input::-webkit-input-placeholder {
     border-top: 1px solid black;
     background-color: var(--theme);
     display: flex;
+    min-height: 50px;
 }
 
 .navIcon {
