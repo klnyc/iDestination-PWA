@@ -51,37 +51,33 @@ export default class Login extends React.Component {
                 <p id="loginTitle">iDestination</p>
 
                 {!this.state.logIn && !this.state.signUp && (
-                    <div id="loginFormContainer">
+                    <div className="loginFormContainer">
                         <p onClick={() => this.setState({signUp: false, logIn: true})}>Log In</p>
                         <p onClick={() => this.setState({signUp: true, logIn: false})}>Sign Up</p>
                     </div>
                 )}
 
                 {this.state.logIn && !this.state.signUp && (
-                    <div id="loginFormContainer">
-                        <form id="loginForm" onSubmit={this.handleLogin}>
-                            <label htmlFor="email">Email</label>
-                            <input name="email" type="email" value={this.state.email} onChange={this.handleChange} required></input>
-                            <label htmlFor="password">Password</label>
-                            <input name="password" type="password" value={this.state.password} onChange={this.handleChange} required></input>
-                            <button id="loginFormButton" type="submit">Log In</button>
-                            <div id="loginBackButton" onClick={() => this.setState({signUp: false, logIn: false})}><MdArrowBack /></div>
-                        </form>
+                    <div className="loginFormContainer">
+                        <p>Email</p>
+                        <input name="email" type="email" value={this.state.email} onChange={this.handleChange} required></input>
+                        <p>Password</p>
+                        <input name="password" type="password" value={this.state.password} onChange={this.handleChange} required></input>
+                        <p id="loginFormButton" onClick={this.handleLogin}>Log In</p>
+                        <div id="loginBackButton" onClick={() => this.setState({signUp: false, logIn: false})}><MdArrowBack /></div>
                     </div>
                 )}
 
                 {!this.state.logIn && this.state.signUp && (
-                    <div id="loginFormContainer">
-                        <form id="loginForm" onSubmit={this.handleSignUp}>
-                            <label htmlFor="name">Name</label>
-                            <input name="name" type="text" value={this.state.name} onChange={this.handleChange} required></input>
-                            <label htmlFor="email">Email</label>
-                            <input name="email" type="email" value={this.state.email} onChange={this.handleChange} required></input>
-                            <label htmlFor="password">Password</label>
-                            <input name="password" type="password" value={this.state.password} onChange={this.handleChange} required></input>
-                            <button id="loginFormButton" type="submit">Sign Up</button>
-                            <div id="loginBackButton" onClick={() => this.setState({signUp: false, logIn: false})}><MdArrowBack /></div>
-                        </form>
+                    <div className="loginFormContainer">
+                        <p>Name</p>
+                        <input name="name" type="text" value={this.state.name} onChange={this.handleChange} required></input>
+                        <p>Email</p>
+                        <input name="email" type="email" value={this.state.email} onChange={this.handleChange} required></input>
+                        <p>Password</p>
+                        <input name="password" type="password" value={this.state.password} onChange={this.handleChange} required></input>
+                        <p id="loginFormButton" onClick={this.handleSignUp}>Sign Up</p>
+                        <div id="loginBackButton" onClick={() => this.setState({signUp: false, logIn: false})}><MdArrowBack /></div>
                     </div>
                 )}
             </div>

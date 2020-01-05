@@ -61,7 +61,12 @@ class Map extends React.Component {
               value={this.props.searchInput}
               onChange={(event) => this.props.handleChange(event)}
             />
-            <div id="clearInputButton" onClick={this.props.clearSearchBox}><IoMdCloseCircle /></div>
+            <div
+              className={this.props.searchInput ? "clearSearchBox clearActive" : "clearSearchBox"}
+              onClick={this.props.clearSearchBox}
+            >
+              <IoMdCloseCircle />
+            </div>
           </div>
         </SearchBox>
         
