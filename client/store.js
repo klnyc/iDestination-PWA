@@ -26,6 +26,7 @@ const OPEN_INFO_WINDOW = 'OPEN_INFO_WINDOW'
 const CLOSE_INFO_WINDOW = 'CLOSE_INFO_WINDOW'
 const HANDLE_CHANGE = 'HANDLE_CHANGE'
 const CLEAR_SEARCH_BOX = 'CLEAR_SEARCH_BOX'
+const CLEAR_CURRENT_MARKER ='CLEAR_CURRENT_MARKER'
 
 export const login = (user) => ({ type: LOGGED_IN, userID: user.uid })
 export const logout = () => ({ type: LOGGED_OUT })
@@ -33,6 +34,7 @@ export const openInfoWindow = (marker) => ({ type: OPEN_INFO_WINDOW, infoWindow:
 export const closeInfoWindow = () => ({ type: CLOSE_INFO_WINDOW })
 export const handleChange = (event) => ({ type: HANDLE_CHANGE, [event.target.name]: event.target.value })
 export const clearSearchBox = () => ({ type: CLEAR_SEARCH_BOX })
+export const clearCurrentMarker = () => ({ type: CLEAR_CURRENT_MARKER })
 export const mountMarkers = (markers) => ({ type: MOUNT_MARKERS, markers })
 export const mountMap = (map) => ({ type: MOUNT_MAP, map })
 export const mountSearchBox = (searchBox) => ({ type: MOUNT_SEARCH_BOX, searchBox })
@@ -93,6 +95,8 @@ function reducer (state = initialState, action) {
             return { ...state, [event.target.name]: action[event.target.name]}
         case CLEAR_SEARCH_BOX:
             return { ...state, searchInput: '' }
+        case CLEAR_CURRENT_MARKER:
+            return { ...state, currentMarker: {} }
         default:
             return state
     }

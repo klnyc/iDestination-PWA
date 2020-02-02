@@ -25,7 +25,7 @@ body {
     font-family: var(--font);
     font-size: 20px;
     letter-spacing: 8px;
-    padding-top: 20px;
+    padding-top: 30px;
     margin: 0px;
 }
 
@@ -117,6 +117,18 @@ body {
 
 .infoWindow {
     font-size: 12px;
+    font-weight: 400;
+    text-align: center;
+    color: blue;
+}
+
+.infoWindowName {
+    font-size: 16px;
+}
+
+.trashIcon {
+    color: var(--theme);
+    text-align: end;
 }
 
 #nav {
