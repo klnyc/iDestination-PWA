@@ -9,8 +9,8 @@ import { IoMdCloseCircle } from 'react-icons/io'
 import { FaTrash } from "react-icons/fa"
 
 class Map extends React.Component {
-  constructor(props) {
-    super(props)
+  constructor() {
+    super()
     this.addPlace = this.addPlace.bind(this)
     this.removePlace = this.removePlace.bind(this)
     this.renderMarkers = this.renderMarkers.bind(this)
@@ -74,13 +74,13 @@ class Map extends React.Component {
       mountMap, center, changeBounds, map, mountSearchBox, bounds, changePlace, searchBox, searchInput, 
       handleChange, clearSearchBox, markers, openInfoWindow, currentMarker, infoWindow, closeInfoWindow 
     } = this.props
-    
+
     return (
       <GoogleMap
         ref={(map) => mountMap(map)}
         center={center}
         onBoundsChanged={() => changeBounds(map.getBounds())}
-        defaultZoom={14}
+        defaultZoom={13}
         defaultOptions={mapSettings}>
 
         <SearchBox
