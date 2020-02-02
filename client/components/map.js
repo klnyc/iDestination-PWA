@@ -9,8 +9,8 @@ import { IoMdCloseCircle } from 'react-icons/io'
 import { FaTrash } from "react-icons/fa"
 
 class Map extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.addPlace = this.addPlace.bind(this)
     this.removePlace = this.removePlace.bind(this)
     this.renderMarkers = this.renderMarkers.bind(this)
@@ -21,33 +21,36 @@ class Map extends React.Component {
   }
 
   renderMarkers() {
+    const { userID, mountMarkers } = this.props
     const markers = []
     firebase
     .firestore()
     .collection('users')
-    .doc(this.props.userID)
+    .doc(userID)
     .collection('markers')
     .onSnapshot(snapshot => {
       snapshot.docs.forEach(doc => markers.push(doc.data()))
-      this.props.mountMarkers(markers)
+      mountMarkers(markers)
     }, (error) => console.log(error.message))
   }
 
   addPlace(marker) {
+    const { userID, clearSearchBox, closeInfoWindow } = this.props
     firebase
     .firestore()
     .collection('users')
-    .doc(this.props.userID)
+    .doc(userID)
     .collection('markers')
     .add(marker)
-    .then(() => {this.props.clearSearchBox(); this.props.closeInfoWindow()})
+    .then(() => {clearSearchBox(); closeInfoWindow()})
   }
 
   removePlace(marker) {
+    const { userID, clearSearchBox, clearCurrentMarker, closeInfoWindow } = this.props
     firebase
     .firestore()
     .collection('users')
-    .doc(this.props.userID)
+    .doc(userID)
     .collection('markers')
     .where('name', '==', `${marker.name}`)
     .get()
@@ -56,76 +59,77 @@ class Map extends React.Component {
         firebase
         .firestore()
         .collection('users')
-        .doc(this.props.userID)
+        .doc(userID)
         .collection('markers')
         .doc(doc.id)
         .delete()
       })
     })
-    .then(() => {
-      this.props.clearSearchBox()
-      this.props.clearCurrentMarker()
-      this.renderMarkers()
-      this.props.closeInfoWindow()
-    })
+    .then(() => this.renderMarkers())
+    .then(() => {clearSearchBox(); clearCurrentMarker(); closeInfoWindow()})
   }
 
   render() {
+    const { 
+      mountMap, center, changeBounds, map, mountSearchBox, bounds, changePlace, searchBox, searchInput, 
+      handleChange, clearSearchBox, markers, openInfoWindow, currentMarker, infoWindow, closeInfoWindow 
+    } = this.props
+    
     return (
       <GoogleMap
-        ref={(map) => this.props.mountMap(map)}
-        center={this.props.center}
-        onBoundsChanged={() => this.props.changeBounds(this.props.map.getBounds())}
-        defaultZoom={15}
+        ref={(map) => mountMap(map)}
+        center={center}
+        onBoundsChanged={() => changeBounds(map.getBounds())}
+        defaultZoom={14}
         defaultOptions={mapSettings}>
 
         <SearchBox
-          ref={(searchBox) => this.props.mountSearchBox(searchBox)}
-          bounds={this.props.bounds}
+          ref={(searchBox) => mountSearchBox(searchBox)}
+          bounds={bounds}
           controlPosition={google.maps.ControlPosition.TOP_CENTER}
-          onPlacesChanged={() => this.props.changePlace(this.props.searchBox.getPlaces()[0])}>
+          onPlacesChanged={() => changePlace(searchBox.getPlaces()[0])}>
           <div id="searchBoxContainer">
             <input
               id="searchBox"
               name="searchInput"
               type="text"
               placeholder="Enter Destination"
-              value={this.props.searchInput}
-              onChange={(event) => this.props.handleChange(event)} />
+              value={searchInput}
+              onChange={(event) => handleChange(event)} />
             <div
-              className={this.props.searchInput ? "clearSearchBox clearActive" : "clearSearchBox"}
-              onClick={this.props.clearSearchBox}>
+              className={searchInput ? "clearSearchBox clearActive" : "clearSearchBox"}
+              onClick={clearSearchBox}>
               <IoMdCloseCircle />
             </div>
           </div>
         </SearchBox>
         
-        {this.props.markers.map((marker, index) =>
+        {markers.map((marker, index) =>
           <Marker 
             key={index}
             position={marker.position}
-            onClick={() => this.props.openInfoWindow(marker)} />
+            onClick={() => openInfoWindow(marker)} />
         )}
 
-        {this.props.currentMarker.position && (
+        {currentMarker.position && (
           <Marker 
-            position={this.props.currentMarker.position} 
-            onClick={() => this.props.openInfoWindow(this.props.currentMarker)} />
+            position={currentMarker.position} 
+            onClick={() => openInfoWindow(currentMarker)} />
         )}
 
-        {this.props.infoWindow.position && (
+        {infoWindow.position && (
           <InfoWindow
-            position={this.props.infoWindow.position}
-            onCloseClick={() => this.props.closeInfoWindow()}>
+            position={infoWindow.position}
+            onCloseClick={() => closeInfoWindow()}>
             <div className="infoWindow">
-              <p className="infoWindowName">{this.props.infoWindow.name}</p>
-              <p>{this.props.infoWindow.address}</p>
+              <p className="infoWindowName">{infoWindow.name}</p>
+              <p>{infoWindow.address}</p>
 
-              {this.props.markers.indexOf(this.props.infoWindow) === -1 &&
-              <p onClick={() => this.addPlace(this.props.currentMarker)}>ADD THIS PLACE</p>}
+              {markers.indexOf(infoWindow) === -1 &&
+              <p onClick={() => this.addPlace(currentMarker)}>ADD THIS PLACE</p>}
 
-              {this.props.markers.includes(this.props.infoWindow) && 
-              <div className="trashIcon" onClick={() => this.removePlace(this.props.infoWindow)}><FaTrash /></div>}
+              {markers.includes(infoWindow) && 
+              <div className="trashIcon" onClick={() => this.removePlace(infoWindow)}><FaTrash /></div>}
 
             </div>
           </InfoWindow>

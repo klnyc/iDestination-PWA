@@ -8,15 +8,17 @@ import { login, logout } from '../store'
 
 class Main extends React.Component {
     componentDidMount() {
-        firebase.auth().onAuthStateChanged(user => user ? this.props.login(user) : this.props.logout())  
+        const { login, logout } = this.props
+        firebase.auth().onAuthStateChanged(user => user ? login(user) : logout())  
     }
 
     render() {
-        return this.props.isLoggedIn
-        ?
+        const { isLoggedIn, userID } = this.props
+
+        return isLoggedIn ?
         <div id="main">
             <Header />
-            <Map userID={this.props.userID} />
+            <Map userID={userID} />
             <Nav />
         </div>
         :

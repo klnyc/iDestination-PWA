@@ -90,7 +90,7 @@ function reducer (state = initialState, action) {
         case OPEN_INFO_WINDOW:
                 return { ...state, infoWindow: action.infoWindow }
         case CLOSE_INFO_WINDOW:
-            return { ...state, infoWindow: {} }
+            return { ...state, infoWindow: {}, currentMarker: {} }
         case HANDLE_CHANGE:
             return { ...state, [event.target.name]: action[event.target.name]}
         case CLEAR_SEARCH_BOX:
