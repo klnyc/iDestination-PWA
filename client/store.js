@@ -1,4 +1,5 @@
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
 
 const NYC = { lat: 40.7473735256486, lng: -73.98564376909184 }
 
@@ -59,6 +60,58 @@ export const changePlace = (place) => {
     }
 }
 
+export const renderMarkers = (userID) => {
+    return (dispatch) => {
+        const markers = []
+        firebase
+        .firestore()
+        .collection('users')
+        .doc(userID)
+        .collection('markers')
+        .onSnapshot(snapshot => {
+        snapshot.docs.forEach(doc => markers.push(doc.data()))
+        dispatch(mountMarkers(markers))
+        }, (error) => console.log(error.message))
+    }
+}
+
+export const addMarker = (userID, marker) => {
+    return (dispatch) => {
+        firebase
+        .firestore()
+        .collection('users')
+        .doc(userID)
+        .collection('markers')
+        .add(marker)
+        .then(() => {dispatch(clearSearchBox()); dispatch(closeInfoWindow())})
+    }
+}
+
+export const removeMarker = (userID, marker) => {
+    return (dispatch) => {
+        firebase
+        .firestore()
+        .collection('users')
+        .doc(userID)
+        .collection('markers')
+        .where('name', '==', `${marker.name}`)
+        .get()
+        .then((snapshot) => {
+            snapshot.forEach((doc) => {
+                firebase
+                .firestore()
+                .collection('users')
+                .doc(userID)
+                .collection('markers')
+                .doc(doc.id)
+                .delete()
+            })
+        })
+        .then(() => dispatch(renderMarkers(userID)))
+        .then(() => {dispatch(clearSearchBox()); dispatch(clearCurrentMarker()); dispatch(closeInfoWindow())})
+    }
+}
+
 function reducer (state = initialState, action) {
     switch (action.type) {
         case LOGGED_IN:
@@ -102,4 +155,4 @@ function reducer (state = initialState, action) {
     }
 }
 
-export default createStore(reducer)
+export default createStore(reducer, applyMiddleware(thunk))

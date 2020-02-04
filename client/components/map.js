@@ -9,71 +9,15 @@ import { IoMdCloseCircle } from 'react-icons/io'
 import { FaTrash } from "react-icons/fa"
 
 class Map extends React.Component {
-  constructor() {
-    super()
-    this.addPlace = this.addPlace.bind(this)
-    this.removePlace = this.removePlace.bind(this)
-    this.renderMarkers = this.renderMarkers.bind(this)
-  }
-
   componentDidMount() {
-    this.renderMarkers()
-  }
-
-  renderMarkers() {
-    const { userID, mountMarkers } = this.props
-    const markers = []
-    firebase
-    .firestore()
-    .collection('users')
-    .doc(userID)
-    .collection('markers')
-    .onSnapshot(snapshot => {
-      snapshot.docs.forEach(doc => markers.push(doc.data()))
-      mountMarkers(markers)
-    }, (error) => console.log(error.message))
-  }
-
-  addPlace(marker) {
-    const { userID, clearSearchBox, closeInfoWindow } = this.props
-    firebase
-    .firestore()
-    .collection('users')
-    .doc(userID)
-    .collection('markers')
-    .add(marker)
-    .then(() => {clearSearchBox(); closeInfoWindow()})
-  }
-
-  removePlace(marker) {
-    const { userID, clearSearchBox, clearCurrentMarker, closeInfoWindow } = this.props
-    firebase
-    .firestore()
-    .collection('users')
-    .doc(userID)
-    .collection('markers')
-    .where('name', '==', `${marker.name}`)
-    .get()
-    .then((snapshot) => {
-      snapshot.forEach((doc) => {
-        firebase
-        .firestore()
-        .collection('users')
-        .doc(userID)
-        .collection('markers')
-        .doc(doc.id)
-        .delete()
-      })
-    })
-    .then(() => this.renderMarkers())
-    .then(() => {clearSearchBox(); clearCurrentMarker(); closeInfoWindow()})
+    this.props.renderMarkers(this.props.userID)
   }
 
   render() {
     const { 
-      mountMap, center, changeBounds, map, mountSearchBox, bounds, changePlace, searchBox, searchInput, 
-      handleChange, clearSearchBox, markers, openInfoWindow, currentMarker, infoWindow, closeInfoWindow 
-    } = this.props
+      mountMap, center, changeBounds, map, mountSearchBox, bounds, changePlace, 
+      searchBox, searchInput, handleChange, clearSearchBox, markers, openInfoWindow, 
+      currentMarker, infoWindow, closeInfoWindow, userID, addMarker, removeMarker } = this.props
 
     return (
       <GoogleMap
@@ -126,10 +70,10 @@ class Map extends React.Component {
               <p>{infoWindow.address}</p>
 
               {markers.indexOf(infoWindow) === -1 &&
-              <p onClick={() => this.addPlace(currentMarker)}>ADD THIS PLACE</p>}
+              <p onClick={() => addMarker(userID, currentMarker)}>ADD THIS PLACE</p>}
 
               {markers.includes(infoWindow) && 
-              <div className="trashIcon" onClick={() => this.removePlace(infoWindow)}><FaTrash /></div>}
+              <div className="trashIcon" onClick={() => removeMarker(userID, infoWindow)}><FaTrash /></div>}
 
             </div>
           </InfoWindow>
@@ -174,7 +118,10 @@ const mapDispatch = (dispatch) => ({
   closeInfoWindow: () => dispatch(actions.closeInfoWindow()),
   handleChange: (event) => dispatch(actions.handleChange(event)),
   clearSearchBox: () => dispatch(actions.clearSearchBox()),
-  clearCurrentMarker: () => dispatch(actions.clearCurrentMarker())
+  clearCurrentMarker: () => dispatch(actions.clearCurrentMarker()),
+  renderMarkers: (userID) => dispatch(actions.renderMarkers(userID)),
+  addMarker: (userID, marker) => dispatch(actions.addMarker(userID, marker)),
+  removeMarker: (userID, marker) => dispatch(actions.removeMarker(userID, marker))
 })
 
 export default connect(mapState, mapDispatch)(compose(withProps(mapProperties), withScriptjs, withGoogleMap)(Map))
