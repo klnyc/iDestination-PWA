@@ -9,7 +9,8 @@ export default class Login extends React.Component {
             password: '',
             name: '',
             signUp: false,
-            logIn: false
+            logIn: false,
+            error: ''
         }
         this.handleLogin = this.handleLogin.bind(this)
         this.handleSignUp = this.handleSignUp.bind(this)
@@ -25,7 +26,7 @@ export default class Login extends React.Component {
         firebase
         .auth()
         .signInWithEmailAndPassword(this.state.email, this.state.password)
-        .catch(error => console.log(error.message))
+        .catch(error => error.message && this.setState({ error: error.message }))
     }
 
     handleSignUp(event) {
@@ -42,14 +43,13 @@ export default class Login extends React.Component {
                 name: this.state.name,
                 email: this.state.email
             }))
-        .catch(error => console.log(error.message))
+        .catch(error => error.message && this.setState({ error: error.message }))
     }
 
     render () {
         return (
             <div id="loginContainer">
-                <p id="loginTitle">iDestination</p>
-
+                
                 {!this.state.logIn && !this.state.signUp && (
                     <div className="loginFormContainer">
                         <p onClick={() => this.setState({signUp: false, logIn: true})}>Log In</p>
@@ -59,28 +59,26 @@ export default class Login extends React.Component {
 
                 {this.state.logIn && !this.state.signUp && (
                     <div className="loginFormContainer">
-                        <p>Email</p>
-                        <input name="email" type="email" value={this.state.email} onChange={this.handleChange} required></input>
-                        <p>Password</p>
-                        <input name="password" type="password" value={this.state.password} onChange={this.handleChange} required></input>
+                        <input name="email" type="email" placeholder="Email" value={this.state.email} onChange={this.handleChange} required></input>
+                        <input name="password" type="password" placeholder="Password" value={this.state.password} onChange={this.handleChange} required></input>
                         <p id="loginFormButton" onClick={this.handleLogin}>Log In</p>
-                        <div id="loginBackButton" onClick={() => this.setState({signUp: false, logIn: false})}><MdArrowBack /></div>
+                        <div id="loginBackButton" onClick={() => this.setState({signUp: false, logIn: false, error: ''})}><MdArrowBack /></div>
                     </div>
                 )}
 
                 {!this.state.logIn && this.state.signUp && (
                     <div className="loginFormContainer">
-                        <p>Name</p>
-                        <input name="name" type="text" value={this.state.name} onChange={this.handleChange} required></input>
-                        <p>Email</p>
-                        <input name="email" type="email" value={this.state.email} onChange={this.handleChange} required></input>
-                        <p>Password</p>
-                        <input name="password" type="password" value={this.state.password} onChange={this.handleChange} required></input>
+                        <input name="name" type="text" placeholder="Name" value={this.state.name} onChange={this.handleChange} required></input>
+                        <input name="email" type="email" placeholder="Email" value={this.state.email} onChange={this.handleChange} required></input>
+                        <input name="password" type="password" placeholder="Password" value={this.state.password} onChange={this.handleChange} required></input>
                         <p id="loginFormButton" onClick={this.handleSignUp}>Sign Up</p>
-                        <div id="loginBackButton" onClick={() => this.setState({signUp: false, logIn: false})}><MdArrowBack /></div>
+                        <div id="loginBackButton" onClick={() => this.setState({signUp: false, logIn: false, error: ''})}><MdArrowBack /></div>
                     </div>
                 )}
+                
+                <div><p>{this.state.error && this.state.error}</p></div>
             </div>
+
         )
     }
 }

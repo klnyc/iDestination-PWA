@@ -14,7 +14,7 @@ class Map extends React.Component {
   }
 
   render() {
-    const { 
+    const {
       mountMap, center, changeBounds, map, mountSearchBox, bounds, changePlace, 
       searchBox, searchInput, handleChange, clearSearchBox, markers, openInfoWindow, 
       currentMarker, infoWindow, closeInfoWindow, userID, addMarker, removeMarker } = this.props

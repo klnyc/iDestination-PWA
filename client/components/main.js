@@ -23,6 +23,7 @@ class Main extends React.Component {
         </div>
         :
         <div id="login">
+            <Header />
             <Login />
         </div>
     }
