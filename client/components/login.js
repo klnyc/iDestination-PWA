@@ -48,17 +48,17 @@ export default class Login extends React.Component {
 
     render () {
         return (
-            <div id="loginContainer">
-                
+            <div id="login">
+
                 {!this.state.logIn && !this.state.signUp && (
-                    <div className="loginFormContainer">
+                    <div className="loginContainer">
                         <p onClick={() => this.setState({signUp: false, logIn: true})}>Log In</p>
                         <p onClick={() => this.setState({signUp: true, logIn: false})}>Sign Up</p>
                     </div>
                 )}
 
                 {this.state.logIn && !this.state.signUp && (
-                    <div className="loginFormContainer">
+                    <div className="loginContainer">
                         <input name="email" type="email" placeholder="Email" value={this.state.email} onChange={this.handleChange} required></input>
                         <input name="password" type="password" placeholder="Password" value={this.state.password} onChange={this.handleChange} required></input>
                         <p id="loginFormButton" onClick={this.handleLogin}>Log In</p>
@@ -67,7 +67,7 @@ export default class Login extends React.Component {
                 )}
 
                 {!this.state.logIn && this.state.signUp && (
-                    <div className="loginFormContainer">
+                    <div className="loginContainer">
                         <input name="name" type="text" placeholder="Name" value={this.state.name} onChange={this.handleChange} required></input>
                         <input name="email" type="email" placeholder="Email" value={this.state.email} onChange={this.handleChange} required></input>
                         <input name="password" type="password" placeholder="Password" value={this.state.password} onChange={this.handleChange} required></input>

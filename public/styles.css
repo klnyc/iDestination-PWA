@@ -1,6 +1,6 @@
 :root {
     --text:white;
-    --theme: rgb(63, 63, 63);
+    --theme: rgb(63, 63, 63, 0.8);
     --font: Arial, Helvetica, sans-serif;
 }
 
@@ -11,47 +11,24 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
-#login {
-    height: 100vh;
-    background-color: var(--theme);
-}
-
-#loginContainer {
-    text-align: center;
-    color: var(--text);
-}
-
-.loginFormContainer {
-    padding-top: 100px;
-    font-family: var(--font);
-}
-
-#loginFormButton {
-    font-size: 16px;
-    color: var(--text);
-}
-
-#loginBackButton {
-    padding: 6px;
-    font-size: 20px;
-}
-
 #main {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
+    min-height: 100vh;
+    position: relative;
 }
 
 #header {
-    flex: 1;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 2;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: var(--theme);
-    min-height: 50px;
+    height: 50px;
 }
 
-#title {
+#headerTitle {
     font-size: 20px;
     font-family: var(--font);
     color: var(--text);
@@ -71,8 +48,30 @@ body {
     align-items: center;
 }
 
+#login {
+    height: 100vh;
+    background-color: var(--theme);
+    text-align: center;
+    color: var(--text);
+}
+
+.loginContainer {
+    padding-top: 100px;
+    font-family: var(--font);
+}
+
+#loginFormButton {
+    font-size: 16px;
+    color: var(--text);
+}
+
+#loginBackButton {
+    padding: 6px;
+    font-size: 20px;
+}
+
 #map {
-    flex: 12;
+    height: 100vh;
 }
 
 #searchBoxContainer {
@@ -83,7 +82,7 @@ body {
     height: 28px;
     width: 100%;
     visibility: visible;
-    margin-top: 10px;
+    margin-top: 56px;
     text-indent: 6px;
     padding-right: 16px;
     border: 1px solid transparent;
@@ -122,26 +121,28 @@ body {
     text-align: end;
 }
 
-#nav {
-    flex: 1;
-    border-top: 1px solid black;
+#footer {
     background-color: var(--theme);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    z-index: 2;
     display: flex;
     min-height: 50px;
 }
 
-.navIcon {
+.footerIcon {
     flex: 1;
     color: var(--text);
-    justify-content: center;
-    align-items: center;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     font-size: 24px;
     font-family: var(--font);
 }
 
-.navText {
+.footerText {
     font-size: 12px;
     padding-top: 2px;
     letter-spacing: 2px;

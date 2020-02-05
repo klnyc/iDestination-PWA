@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Header from './header'
-import Nav from './nav'
+import Footer from './footer'
 import Map from './map'
 import Login from './login'
 import { login, logout } from '../store'
@@ -13,19 +13,13 @@ class Main extends React.Component {
     }
 
     render() {
-        const { isLoggedIn, userID } = this.props
-
-        return isLoggedIn ?
-        <div id="main">
-            <Header />
-            <Map userID={userID} />
-            <Nav />
-        </div>
-        :
-        <div id="login">
-            <Header />
-            <Login />
-        </div>
+        return (
+            <div id="main">
+                <Header />
+                {this.props.isLoggedIn ? <Map /> : <Login />}
+                <Footer />
+            </div>
+        )
     }
 }
 

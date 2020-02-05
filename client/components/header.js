@@ -6,7 +6,7 @@ export default () => {
     return (
         <div id="header">
             <div className="headerIcon"><IoMdPerson /></div>
-            <div id="title">iDestination</div>
+            <div id="headerTitle">iDestination</div>
             <div className="headerIcon" onClick={() => firebase.auth().signOut()}><MdAddCircle /></div>
         </div>
     )
