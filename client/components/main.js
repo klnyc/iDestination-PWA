@@ -13,10 +13,11 @@ class Main extends React.Component {
     }
 
     render() {
+        const { userID } = this.props
         return (
             <div id="main">
-                <Header />
-                {this.props.isLoggedIn ? <Map /> : <Login />}
+                <Header userID={userID}/>
+                {userID ? <Map /> : <Login />}
                 <Footer />
             </div>
         )
@@ -24,7 +25,6 @@ class Main extends React.Component {
 }
 
 const mapState = (state) => ({
-    isLoggedIn: state.isLoggedIn,
     userID: state.userID
 })
 

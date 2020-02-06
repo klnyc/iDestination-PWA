@@ -1,7 +1,7 @@
 import React from 'react'
 import { MdArrowBack } from 'react-icons/md'
 
-export default class Login extends React.Component {
+class Login extends React.Component {
     constructor() {
         super()
         this.state = {
@@ -48,31 +48,31 @@ export default class Login extends React.Component {
 
     render () {
         return (
-            <div id="login">
+            <div className="login">
 
                 {!this.state.logIn && !this.state.signUp && (
-                    <div className="loginContainer">
-                        <p onClick={() => this.setState({signUp: false, logIn: true})}>Log In</p>
-                        <p onClick={() => this.setState({signUp: true, logIn: false})}>Sign Up</p>
+                    <div className="form">
+                        <p className="label" onClick={() => this.setState({signUp: false, logIn: true})}>Log In</p>
+                        <p className="label" onClick={() => this.setState({signUp: true, logIn: false})}>Sign Up</p>
                     </div>
                 )}
 
                 {this.state.logIn && !this.state.signUp && (
-                    <div className="loginContainer">
+                    <div className="form">
                         <input name="email" type="email" placeholder="Email" value={this.state.email} onChange={this.handleChange} required></input>
                         <input name="password" type="password" placeholder="Password" value={this.state.password} onChange={this.handleChange} required></input>
-                        <p id="loginFormButton" onClick={this.handleLogin}>Log In</p>
-                        <div id="loginBackButton" onClick={() => this.setState({signUp: false, logIn: false, error: ''})}><MdArrowBack /></div>
+                        <p className="button" onClick={this.handleLogin}>Log In</p>
+                        <div className="back-button" onClick={() => this.setState({signUp: false, logIn: false, error: ''})}><MdArrowBack /></div>
                     </div>
                 )}
 
                 {!this.state.logIn && this.state.signUp && (
-                    <div className="loginContainer">
+                    <div className="form">
                         <input name="name" type="text" placeholder="Name" value={this.state.name} onChange={this.handleChange} required></input>
                         <input name="email" type="email" placeholder="Email" value={this.state.email} onChange={this.handleChange} required></input>
                         <input name="password" type="password" placeholder="Password" value={this.state.password} onChange={this.handleChange} required></input>
-                        <p id="loginFormButton" onClick={this.handleSignUp}>Sign Up</p>
-                        <div id="loginBackButton" onClick={() => this.setState({signUp: false, logIn: false, error: ''})}><MdArrowBack /></div>
+                        <p className="button" onClick={this.handleSignUp}>Sign Up</p>
+                        <div className="back-button" onClick={() => this.setState({signUp: false, logIn: false, error: ''})}><MdArrowBack /></div>
                     </div>
                 )}
                 
@@ -82,3 +82,5 @@ export default class Login extends React.Component {
         )
     }
 }
+
+export default Login

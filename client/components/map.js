@@ -32,17 +32,14 @@ class Map extends React.Component {
           bounds={bounds}
           controlPosition={google.maps.ControlPosition.TOP_CENTER}
           onPlacesChanged={() => changePlace(searchBox.getPlaces()[0])}>
-          <div id="searchBoxContainer">
+          <div id="searchBox">
             <input
-              id="searchBox"
               name="searchInput"
               type="text"
               placeholder="Enter Destination"
               value={searchInput}
               onChange={(event) => handleChange(event)} />
-            <div
-              className={searchInput ? "clearSearchBox clearActive" : "clearSearchBox"}
-              onClick={clearSearchBox}>
+            <div className={searchInput ? "clear-button active" : "clear-button"} onClick={clearSearchBox}>
               <IoMdCloseCircle />
             </div>
           </div>
@@ -66,14 +63,14 @@ class Map extends React.Component {
             position={infoWindow.position}
             onCloseClick={() => closeInfoWindow()}>
             <div className="infoWindow">
-              <p className="infoWindowName">{infoWindow.name}</p>
+              <p className="name">{infoWindow.name}</p>
               <p>{infoWindow.address}</p>
 
               {markers.indexOf(infoWindow) === -1 &&
               <p onClick={() => addMarker(userID, currentMarker)}>ADD THIS PLACE</p>}
 
               {markers.includes(infoWindow) && 
-              <div className="trashIcon" onClick={() => removeMarker(userID, infoWindow)}><FaTrash /></div>}
+              <div className="icon" onClick={() => removeMarker(userID, infoWindow)}><FaTrash /></div>}
 
             </div>
           </InfoWindow>
@@ -91,9 +88,9 @@ const mapSettings = {
 
 const mapProperties = {
   googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`,
-  loadingElement: <div style={{ height: `100%` }} />,
-  containerElement: <div id="map" />,
-  mapElement: <div style={{ height: `100%` }} />
+  loadingElement: <div className="map-google" />,
+  containerElement: <div className="map" />,
+  mapElement: <div className="map-google" />
 }
 
 const mapState = (state) => ({

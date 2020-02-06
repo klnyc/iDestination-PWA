@@ -4,7 +4,6 @@ import thunk from 'redux-thunk'
 const NYC = { lat: 40.7473735256486, lng: -73.98564376909184 }
 
 const initialState = {
-    isLoggedIn: false,
     userID: '',
     center: NYC,
     bounds: null,
@@ -115,11 +114,10 @@ export const removeMarker = (userID, marker) => {
 function reducer (state = initialState, action) {
     switch (action.type) {
         case LOGGED_IN:
-            return { ...state, isLoggedIn: true, userID: action.userID }
+            return { ...state, userID: action.userID }
         case LOGGED_OUT:
             return {
                 ...state,
-                isLoggedIn: false,
                 userID: '',
                 infoWindow: {},
                 searchInput: ''

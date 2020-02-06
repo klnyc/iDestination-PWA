@@ -1,6 +1,6 @@
 :root {
     --text:white;
-    --theme: rgb(63, 63, 63, 0.8);
+    --theme: rgb(63, 63, 63, 0.88);
     --font: Arial, Helvetica, sans-serif;
 }
 
@@ -16,7 +16,7 @@ body {
     position: relative;
 }
 
-#header {
+.header {
     position: absolute;
     top: 0;
     width: 100%;
@@ -28,7 +28,11 @@ body {
     height: 50px;
 }
 
-#headerTitle {
+.header .not-active {
+    background-color: var(--theme);
+}
+
+.header .title {
     font-size: 20px;
     font-family: var(--font);
     color: var(--text);
@@ -37,7 +41,7 @@ body {
     flex: 6;
 }
 
-.headerIcon {
+.header .icon {
     flex: 1;
     color: var(--text);
     text-align: center;
@@ -48,37 +52,42 @@ body {
     align-items: center;
 }
 
-#login {
+.login {
     height: 100vh;
     background-color: var(--theme);
     text-align: center;
     color: var(--text);
 }
 
-.loginContainer {
+.login .form {
     padding-top: 100px;
     font-family: var(--font);
 }
 
-#loginFormButton {
+.login .form .button {
     font-size: 16px;
     color: var(--text);
 }
 
-#loginBackButton {
+.login .back-button {
     padding: 6px;
     font-size: 20px;
 }
 
-#map {
+.map {
     height: 100vh;
 }
 
-#searchBoxContainer {
-    width: 80%;
+.map-google {
+    height: 100%;
 }
 
 #searchBox {
+    width: 300px;
+    padding-right: 18px;
+}
+
+#searchBox input {
     height: 28px;
     width: 100%;
     visibility: visible;
@@ -93,15 +102,15 @@ body {
     font-size: 12px;
 }
 
-.clearSearchBox {
+#searchBox .clear-button {
     font-size: 16px;
     position: absolute;
-    top: 18px;
-    right: -16px;
+    top: 64px;
+    right: 2px;
     opacity: 0%;
 }
 
-.clearActive {
+#searchBox .clear-button.active {
     opacity: 30%;
 }
 
@@ -112,16 +121,16 @@ body {
     color: var(--theme);
 }
 
-.infoWindowName {
+.infoWindow .name {
     font-size: 16px;
 }
 
-.trashIcon {
+.infoWindow .icon {
     color: var(--theme);
     text-align: end;
 }
 
-#footer {
+.footer {
     background-color: var(--theme);
     position: absolute;
     bottom: 0;
@@ -131,7 +140,7 @@ body {
     min-height: 50px;
 }
 
-.footerIcon {
+.footer .icon {
     flex: 1;
     color: var(--text);
     display: flex;
@@ -142,7 +151,7 @@ body {
     font-family: var(--font);
 }
 
-.footerText {
+.footer .label {
     font-size: 12px;
     padding-top: 2px;
     letter-spacing: 2px;
