@@ -26,7 +26,7 @@ const OPEN_INFO_WINDOW = 'OPEN_INFO_WINDOW'
 const CLOSE_INFO_WINDOW = 'CLOSE_INFO_WINDOW'
 const HANDLE_CHANGE = 'HANDLE_CHANGE'
 const CLEAR_SEARCH_BOX = 'CLEAR_SEARCH_BOX'
-const CLEAR_CURRENT_MARKER ='CLEAR_CURRENT_MARKER'
+const CLEAR_CURRENT_MARKER = 'CLEAR_CURRENT_MARKER'
 
 export const login = (user) => ({ type: LOGGED_IN, userID: user.uid })
 export const logout = () => ({ type: LOGGED_OUT })

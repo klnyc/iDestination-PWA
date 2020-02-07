@@ -47,36 +47,37 @@ class Login extends React.Component {
     }
 
     render () {
+        const { logIn, signUp, email, password, name, error } = this.state
         return (
             <div className="login">
 
-                {!this.state.logIn && !this.state.signUp && (
+                {!logIn && !signUp && (
                     <div className="form">
                         <p className="label" onClick={() => this.setState({signUp: false, logIn: true})}>Log In</p>
                         <p className="label" onClick={() => this.setState({signUp: true, logIn: false})}>Sign Up</p>
                     </div>
                 )}
 
-                {this.state.logIn && !this.state.signUp && (
+                {logIn && !signUp && (
                     <div className="form">
-                        <div className="input"><input name="email" type="email" placeholder="Email" value={this.state.email} onChange={this.handleChange} required></input></div>
-                        <div className="input"><input name="password" type="password" placeholder="Password" value={this.state.password} onChange={this.handleChange} required></input></div>
+                        <div className="input"><input name="email" type="email" placeholder="Email" value={email} onChange={this.handleChange} autocomplete="off" required></input></div>
+                        <div className={password ? "input password" : "input"}><input name="password" type="password" placeholder="Password" value={password} onChange={this.handleChange} autocomplete="off" required></input></div>
                         <p className="button" onClick={this.handleLogin}>Log In</p>
                         <div className="back-button" onClick={() => this.setState({signUp: false, logIn: false, error: ''})}><MdArrowBack /></div>
                     </div>
                 )}
 
-                {!this.state.logIn && this.state.signUp && (
+                {!logIn && signUp && (
                     <div className="form">
-                        <div className="input"><input name="name" type="text" placeholder="Name" value={this.state.name} onChange={this.handleChange} required></input></div>
-                        <div className="input"><input name="email" type="email" placeholder="Email" value={this.state.email} onChange={this.handleChange} required></input></div>
-                        <div className="input"><input name="password" type="password" placeholder="Password" value={this.state.password} onChange={this.handleChange} required></input></div>
+                        <div className="input"><input name="name" type="text" placeholder="Name" value={name} onChange={this.handleChange} autocomplete="off" required></input></div>
+                        <div className="input"><input name="email" type="email" placeholder="Email" value={email} onChange={this.handleChange} autocomplete="off" required></input></div>
+                        <div className={password ? "input password" : "input"}><input name="password" type="password" placeholder="Password" value={password} onChange={this.handleChange} autocomplete="off" required></input></div>
                         <p className="button" onClick={this.handleSignUp}>Sign Up</p>
                         <div className="back-button" onClick={() => this.setState({signUp: false, logIn: false, error: ''})}><MdArrowBack /></div>
                     </div>
                 )}
                 
-                <div><p>{this.state.error && this.state.error}</p></div>
+                <div><p className="error">{error && error}</p></div>
             </div>
 
         )
