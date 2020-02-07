@@ -16,9 +16,9 @@ class Main extends React.Component {
         const { userID } = this.props
         return (
             <div id="main">
-                <Header userID={userID}/>
+                <Header userID={userID} />
                 {userID ? <Map /> : <Login />}
-                <Footer />
+                <Footer userID={userID} />
             </div>
         )
     }

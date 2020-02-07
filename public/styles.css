@@ -28,8 +28,8 @@ body {
     height: 50px;
 }
 
-.header .not-active {
-    background-color: var(--theme);
+.header.not-active {
+    background-color: transparent;
 }
 
 .header .title {
@@ -52,11 +52,15 @@ body {
     align-items: center;
 }
 
+.header .icon.not-active {
+    display: none;
+}
+
 .login {
     height: 100vh;
-    background-color: var(--theme);
     text-align: center;
     color: var(--text);
+    background-image: url('/img/ktown.jpg');
 }
 
 .login .form {
@@ -64,9 +68,37 @@ body {
     font-family: var(--font);
 }
 
+.login .form .label {
+    height: 40px;
+}
+
 .login .form .button {
     font-size: 16px;
     color: var(--text);
+}
+
+.login .input {
+    height: 40px;
+}
+
+.login input {
+    background-color: transparent;
+    color: var(--text);
+    border: none;
+    border-bottom: 1px solid white;
+    font-size: 16px;
+    text-align: center;
+    padding: 6px;
+}
+
+.login input::-webkit-input-placeholder {
+    color: white;
+    text-align: center;
+    opacity: 60%;
+}
+
+.login input:focus {
+    outline: none;
 }
 
 .login .back-button {
@@ -138,6 +170,10 @@ body {
     z-index: 2;
     display: flex;
     min-height: 50px;
+}
+
+.footer.not-active {
+    display: none;
 }
 
 .footer .icon {

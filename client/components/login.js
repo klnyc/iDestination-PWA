@@ -59,8 +59,8 @@ class Login extends React.Component {
 
                 {this.state.logIn && !this.state.signUp && (
                     <div className="form">
-                        <input name="email" type="email" placeholder="Email" value={this.state.email} onChange={this.handleChange} required></input>
-                        <input name="password" type="password" placeholder="Password" value={this.state.password} onChange={this.handleChange} required></input>
+                        <div className="input"><input name="email" type="email" placeholder="Email" value={this.state.email} onChange={this.handleChange} required></input></div>
+                        <div className="input"><input name="password" type="password" placeholder="Password" value={this.state.password} onChange={this.handleChange} required></input></div>
                         <p className="button" onClick={this.handleLogin}>Log In</p>
                         <div className="back-button" onClick={() => this.setState({signUp: false, logIn: false, error: ''})}><MdArrowBack /></div>
                     </div>
@@ -68,9 +68,9 @@ class Login extends React.Component {
 
                 {!this.state.logIn && this.state.signUp && (
                     <div className="form">
-                        <input name="name" type="text" placeholder="Name" value={this.state.name} onChange={this.handleChange} required></input>
-                        <input name="email" type="email" placeholder="Email" value={this.state.email} onChange={this.handleChange} required></input>
-                        <input name="password" type="password" placeholder="Password" value={this.state.password} onChange={this.handleChange} required></input>
+                        <div className="input"><input name="name" type="text" placeholder="Name" value={this.state.name} onChange={this.handleChange} required></input></div>
+                        <div className="input"><input name="email" type="email" placeholder="Email" value={this.state.email} onChange={this.handleChange} required></input></div>
+                        <div className="input"><input name="password" type="password" placeholder="Password" value={this.state.password} onChange={this.handleChange} required></input></div>
                         <p className="button" onClick={this.handleSignUp}>Sign Up</p>
                         <div className="back-button" onClick={() => this.setState({signUp: false, logIn: false, error: ''})}><MdArrowBack /></div>
                     </div>
