@@ -77,7 +77,7 @@ class Login extends React.Component {
                     </div>
                 )}
                 
-                <div><p className="error">{error && error}</p></div>
+                <div><p className="error">{error}</p></div>
             </div>
 
         )

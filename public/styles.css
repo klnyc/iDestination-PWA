@@ -61,11 +61,14 @@ body {
     text-align: center;
     color: var(--text);
     background-image: url('/img/ktown.jpg');
+    background-size: cover;
 }
 
 .login .form {
     padding-top: 100px;
+    padding-bottom: 400px;
     font-family: var(--font);
+    background-image: linear-gradient(black, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4), transparent);
 }
 
 .login .form .label {
@@ -95,6 +98,11 @@ body {
     padding: 6px;
 }
 
+.login input::-webkit-input-placeholder {
+    color: var(--text);
+    opacity: 0.6;
+}
+
 .login input:focus {
     outline: none;
 }
@@ -107,7 +115,10 @@ body {
 .login .error {
     font-family: var(--font);
     color: red;
-    padding: 16px;
+    font-size: 12px;
+    position: absolute;
+    width: 100%;
+    top: 60px;
 }
 
 .map {
