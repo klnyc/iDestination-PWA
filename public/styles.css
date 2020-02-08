@@ -106,7 +106,8 @@ body {
 
 .login .error {
     font-family: var(--font);
-    color: var(--text);
+    color: red;
+    padding: 16px;
 }
 
 .map {

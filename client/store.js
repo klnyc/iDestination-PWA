@@ -4,7 +4,7 @@ import thunk from 'redux-thunk'
 const NYC = { lat: 40.7473735256486, lng: -73.98564376909184 }
 
 const initialState = {
-    userID: '',
+    user: {},
     center: NYC,
     bounds: null,
     map: {},
@@ -15,7 +15,7 @@ const initialState = {
     infoWindow: {}
 }
 
-const LOGGED_IN = 'LOGGED_IN'
+const SET_USER_DATA = "SET_USER_DATA"
 const LOGGED_OUT = 'LOGGED_OUT'
 const MOUNT_MARKERS = 'MOUNT_MARKERS'
 const MOUNT_MAP = 'MOUNT_MAP'
@@ -28,7 +28,7 @@ const HANDLE_CHANGE = 'HANDLE_CHANGE'
 const CLEAR_SEARCH_BOX = 'CLEAR_SEARCH_BOX'
 const CLEAR_CURRENT_MARKER = 'CLEAR_CURRENT_MARKER'
 
-export const login = (user) => ({ type: LOGGED_IN, userID: user.uid })
+export const setUserData = (user, id) => ({ type: SET_USER_DATA, user, id })
 export const logout = () => ({ type: LOGGED_OUT })
 export const openInfoWindow = (marker) => ({ type: OPEN_INFO_WINDOW, infoWindow: marker })
 export const closeInfoWindow = () => ({ type: CLOSE_INFO_WINDOW })
@@ -59,13 +59,23 @@ export const changePlace = (place) => {
     }
 }
 
-export const renderMarkers = (userID) => {
+export const login = (user) => {
+    return (dispatch) => {
+        firebase
+        .firestore()
+        .collection('users')
+        .doc(user.uid).get()
+        .then((data) => dispatch(setUserData(data.data(), user.uid)))
+    }
+}
+
+export const renderMarkers = (id) => {
     return (dispatch) => {
         const markers = []
         firebase
         .firestore()
         .collection('users')
-        .doc(userID)
+        .doc(id)
         .collection('markers')
         .onSnapshot(snapshot => {
         snapshot.docs.forEach(doc => markers.push(doc.data()))
@@ -74,24 +84,24 @@ export const renderMarkers = (userID) => {
     }
 }
 
-export const addMarker = (userID, marker) => {
+export const addMarker = (id, marker) => {
     return (dispatch) => {
         firebase
         .firestore()
         .collection('users')
-        .doc(userID)
+        .doc(id)
         .collection('markers')
         .add(marker)
         .then(() => {dispatch(clearSearchBox()); dispatch(closeInfoWindow())})
     }
 }
 
-export const removeMarker = (userID, marker) => {
+export const removeMarker = (id, marker) => {
     return (dispatch) => {
         firebase
         .firestore()
         .collection('users')
-        .doc(userID)
+        .doc(id)
         .collection('markers')
         .where('name', '==', `${marker.name}`)
         .get()
@@ -100,25 +110,25 @@ export const removeMarker = (userID, marker) => {
                 firebase
                 .firestore()
                 .collection('users')
-                .doc(userID)
+                .doc(id)
                 .collection('markers')
                 .doc(doc.id)
                 .delete()
             })
         })
-        .then(() => dispatch(renderMarkers(userID)))
+        .then(() => dispatch(renderMarkers(id)))
         .then(() => {dispatch(clearSearchBox()); dispatch(clearCurrentMarker()); dispatch(closeInfoWindow())})
     }
 }
 
 function reducer (state = initialState, action) {
     switch (action.type) {
-        case LOGGED_IN:
-            return { ...state, userID: action.userID }
+        case SET_USER_DATA:
+            return { ...state, user: { ...action.user, id: action.id } }
         case LOGGED_OUT:
             return {
                 ...state,
-                userID: '',
+                user: {},
                 infoWindow: {},
                 searchInput: ''
             }

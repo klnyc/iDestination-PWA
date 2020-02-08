@@ -9,28 +9,28 @@ import { login, logout } from '../store'
 class Main extends React.Component {
     componentDidMount() {
         const { login, logout } = this.props
-        firebase.auth().onAuthStateChanged(user => user ? login(user) : logout())  
+        firebase.auth().onAuthStateChanged(user => user ? login(user): logout())
     }
 
     render() {
-        const { userID } = this.props
+        const { user } = this.props
         return (
             <div id="main">
-                <Header userID={userID} />
-                {userID ? <Map /> : <Login />}
-                <Footer userID={userID} />
+                <Header user={user} />
+                {user.id ? <Map /> : <Login />}
+                <Footer user={user} />
             </div>
         )
     }
 }
 
 const mapState = (state) => ({
-    userID: state.userID
+    user: state.user
 })
 
 const mapDispatch = (dispatch) => ({
     login: (user) => dispatch(login(user)),
-    logout: () => dispatch(logout())
+    logout: () => dispatch(logout()),
 })
 
 export default connect(mapState, mapDispatch)(Main)

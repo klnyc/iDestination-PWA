@@ -10,14 +10,14 @@ import { FaTrash } from "react-icons/fa"
 
 class Map extends React.Component {
   componentDidMount() {
-    this.props.renderMarkers(this.props.userID)
+    this.props.renderMarkers(this.props.user.id)
   }
 
   render() {
     const {
       mountMap, center, changeBounds, map, mountSearchBox, bounds, changePlace, 
       searchBox, searchInput, handleChange, clearSearchBox, markers, openInfoWindow, 
-      currentMarker, infoWindow, closeInfoWindow, userID, addMarker, removeMarker } = this.props
+      currentMarker, infoWindow, closeInfoWindow, user, addMarker, removeMarker } = this.props
 
     return (
       <GoogleMap
@@ -67,10 +67,10 @@ class Map extends React.Component {
               <p>{infoWindow.address}</p>
 
               {markers.indexOf(infoWindow) === -1 &&
-              <p onClick={() => addMarker(userID, currentMarker)}>ADD THIS PLACE</p>}
+              <p onClick={() => addMarker(user.id, currentMarker)}>ADD THIS PLACE</p>}
 
               {markers.includes(infoWindow) && 
-              <div className="icon" onClick={() => removeMarker(userID, infoWindow)}><FaTrash /></div>}
+              <div className="icon" onClick={() => removeMarker(user.id, infoWindow)}><FaTrash /></div>}
 
             </div>
           </InfoWindow>
@@ -94,7 +94,7 @@ const mapProperties = {
 }
 
 const mapState = (state) => ({
-  userID: state.userID,
+  user: state.user,
   center: state.center,
   bounds: state.bounds,
   map: state.map,
@@ -116,9 +116,9 @@ const mapDispatch = (dispatch) => ({
   handleChange: (event) => dispatch(actions.handleChange(event)),
   clearSearchBox: () => dispatch(actions.clearSearchBox()),
   clearCurrentMarker: () => dispatch(actions.clearCurrentMarker()),
-  renderMarkers: (userID) => dispatch(actions.renderMarkers(userID)),
-  addMarker: (userID, marker) => dispatch(actions.addMarker(userID, marker)),
-  removeMarker: (userID, marker) => dispatch(actions.removeMarker(userID, marker))
+  renderMarkers: (id) => dispatch(actions.renderMarkers(id)),
+  addMarker: (id, marker) => dispatch(actions.addMarker(id, marker)),
+  removeMarker: (id, marker) => dispatch(actions.removeMarker(id, marker))
 })
 
 export default connect(mapState, mapDispatch)(compose(withProps(mapProperties), withScriptjs, withGoogleMap)(Map))
