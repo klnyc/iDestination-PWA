@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Drawer = () => {
+const Drawer = ({ user, drawer }) => {
     return (
-        <div className="drawer">
-
+        <div className={drawer ? "drawer" : "drawer not-active"}>
+            <div className="welcome">Welcome<br />{user.name}!</div>
         </div>
     )
 }

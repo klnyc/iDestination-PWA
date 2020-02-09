@@ -12,11 +12,13 @@ const initialState = {
     searchInput: '',
     markers: [],
     currentMarker: {},
-    infoWindow: {}
+    infoWindow: {},
+    drawer: false
 }
 
 const SET_USER_DATA = "SET_USER_DATA"
 const LOGGED_OUT = 'LOGGED_OUT'
+const TOGGLE_DRAWER = "TOGGLE_DRAWER"
 const MOUNT_MARKERS = 'MOUNT_MARKERS'
 const MOUNT_MAP = 'MOUNT_MAP'
 const MOUNT_SEARCH_BOX = 'MOUNT_SEARCH_BOX'
@@ -30,6 +32,7 @@ const CLEAR_CURRENT_MARKER = 'CLEAR_CURRENT_MARKER'
 
 export const setUserData = (user, id) => ({ type: SET_USER_DATA, user, id })
 export const logout = () => ({ type: LOGGED_OUT })
+export const toggleDrawer = (drawer) => ({ type: TOGGLE_DRAWER, drawer })
 export const openInfoWindow = (marker) => ({ type: OPEN_INFO_WINDOW, infoWindow: marker })
 export const closeInfoWindow = () => ({ type: CLOSE_INFO_WINDOW })
 export const handleChange = (event) => ({ type: HANDLE_CHANGE, [event.target.name]: event.target.value })
@@ -132,6 +135,8 @@ function reducer (state = initialState, action) {
                 infoWindow: {},
                 searchInput: ''
             }
+        case TOGGLE_DRAWER:
+            return { ...state, drawer: !action.drawer }
         case MOUNT_MARKERS:
             return { ...state, markers: action.markers }
         case MOUNT_MAP:
