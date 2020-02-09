@@ -155,11 +155,11 @@ body {
     position: absolute;
     top: 64px;
     right: 2px;
-    opacity: 0%;
+    opacity: 0;
 }
 
 #searchBox .clear-button.active {
-    opacity: 30%;
+    opacity: 0.3;
 }
 
 .infoWindow {
