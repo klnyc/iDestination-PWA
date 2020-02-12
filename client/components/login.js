@@ -50,6 +50,7 @@ class Login extends React.Component {
         const { logIn, signUp, email, password, name, error } = this.state
         return (
             <div className="login">
+                <div className="error"><span>{error}</span></div>
 
                 {!logIn && !signUp && (
                     <div className="form">
@@ -76,8 +77,6 @@ class Login extends React.Component {
                         <div className="back-button" onClick={() => this.setState({signUp: false, logIn: false, error: ''})}><MdArrowBack /></div>
                     </div>
                 )}
-                
-                <div><p className="error">{error}</p></div>
             </div>
 
         )

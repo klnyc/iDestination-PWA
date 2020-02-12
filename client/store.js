@@ -133,7 +133,8 @@ function reducer (state = initialState, action) {
                 ...state,
                 user: {},
                 infoWindow: {},
-                searchInput: ''
+                searchInput: '',
+                drawer: false
             }
         case TOGGLE_DRAWER:
             return { ...state, drawer: !action.drawer }

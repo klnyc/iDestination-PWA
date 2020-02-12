@@ -64,6 +64,16 @@ body {
     background-size: cover;
 }
 
+.login .error {
+    font-family: var(--font);
+    color: red;
+    font-size: 12px;
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    top: 60px;
+}
+
 .login .form {
     padding-top: 100px;
     padding-bottom: 400px;
@@ -111,15 +121,6 @@ body {
 .login .back-button {
     padding: 6px;
     font-size: 20px;
-}
-
-.login .error {
-    font-family: var(--font);
-    color: red;
-    font-size: 12px;
-    position: absolute;
-    width: 100%;
-    top: 60px;
 }
 
 .map {
@@ -185,7 +186,7 @@ body {
     width: 100%;
     z-index: 2;
     display: flex;
-    min-height: 50px;
+    height: 50px;
 }
 
 .footer.not-active {
@@ -229,4 +230,10 @@ body {
     font-size: 16px;
     text-align: center;
     padding: 6px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: 1px solid var(--text);
+    border-bottom: 1px solid var(--text);
+    width: 80%;
+    margin: auto;
 }
