@@ -32,7 +32,7 @@ body {
     background-color: transparent;
 }
 
-.header .title {
+.header-title {
     font-size: 1.2rem;
     font-family: var(--font);
     color: var(--text);
@@ -41,7 +41,7 @@ body {
     flex: 6;
 }
 
-.header .icon {
+.header-icon {
     flex: 1;
     color: var(--text);
     text-align: center;
@@ -52,7 +52,7 @@ body {
     align-items: center;
 }
 
-.header .icon.not-active {
+.header-icon.not-active {
     display: none;
 }
 
@@ -64,7 +64,7 @@ body {
     background-size: cover;
 }
 
-.login .error {
+.login-error {
     font-family: var(--font);
     color: red;
     font-size: 0.8rem;
@@ -74,27 +74,32 @@ body {
     top: 3.6rem;
 }
 
-.login .form {
+.login-form {
     padding-top: 6rem;
     padding-bottom: 24rem;
     font-family: var(--font);
     background-image: linear-gradient(black, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4), transparent);
 }
 
-.login .form .label {
+.login-label {
     height: 2.6rem;
 }
 
-.login .form .button {
+.login-button {
     color: var(--text);
     font-size: 1rem;
 }
 
-.login .input {
+.login-button-back {
+    padding: 0.4rem;
+    font-size: 1.4rem;
+}
+
+.login-input {
     height: 2.6rem;
 }
 
-.login .input.password input {
+.login-input.password input {
     letter-spacing: 0.6rem;
 }
 
@@ -116,11 +121,6 @@ body {
 
 .login input:focus {
     outline: none;
-}
-
-.login .back-button {
-    padding: 0.4rem;
-    font-size: 1.4rem;
 }
 
 .map {
@@ -151,7 +151,7 @@ body {
     font-size: 0.8rem;
 }
 
-#searchBox .clear-button {
+#searchBox .clear-input {
     font-size: 1rem;
     position: absolute;
     top: 4rem;
@@ -159,7 +159,7 @@ body {
     opacity: 0;
 }
 
-#searchBox .clear-button.active {
+#searchBox .clear-input.active {
     opacity: 0.3;
 }
 
@@ -170,13 +170,21 @@ body {
     color: var(--theme);
 }
 
-.infoWindow .name {
+.infoWindow-name {
     font-size: 1rem;
 }
 
-.infoWindow .icon {
-    color: var(--theme);
-    text-align: end;
+.infoWindow-address {
+    padding: 0.8rem 0;
+}
+
+.infoWindow-footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.infoWindow-add {
+    padding: 0.3rem;
 }
 
 .footer {
@@ -193,7 +201,7 @@ body {
     display: none;
 }
 
-.footer .icon {
+.footer-icon {
     flex: 1;
     color: var(--text);
     display: flex;
@@ -204,7 +212,7 @@ body {
     font-family: var(--font);
 }
 
-.footer .label {
+.footer-label {
     font-size: 0.8rem;
     padding-top: 0.125rem;
     letter-spacing: 0.125rem;

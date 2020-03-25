@@ -5,8 +5,8 @@ import { GiFire } from "react-icons/gi"
 const Footer = ({ user }) => {
     return (
         <div className={user.id ? "footer" : "footer not-active"}>
-            <div className="icon"><GiFire /><div className="label">Experiences</div></div>
-            <div className="icon"><MdStar /><div className="label">Wishlist</div></div>
+            <div className="footer-icon"><GiFire /><div className="footer-label">Experiences</div></div>
+            <div className="footer-icon"><MdStar /><div className="footer-label">Wishlist</div></div>
         </div>
     )
 }

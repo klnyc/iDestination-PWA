@@ -1,12 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from "react-google-maps"
+import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
 import { SearchBox } from "react-google-maps/lib/components/places/SearchBox"
 import { compose, withProps } from 'recompose'
 import { GOOGLE_MAPS_API_KEY } from '../../secrets'
-import * as actions from '../store'
 import { IoMdCloseCircle } from 'react-icons/io'
-import { FaTrash } from "react-icons/fa"
+import * as actions from '../store'
+import Window from './Window'
 
 class Map extends React.Component {
   componentDidMount() {
@@ -17,7 +17,7 @@ class Map extends React.Component {
     const {
       mountMap, center, changeBounds, map, mountSearchBox, bounds, changePlace, 
       searchBox, searchInput, handleChange, clearSearchBox, markers, openInfoWindow, 
-      currentMarker, infoWindow, closeInfoWindow, user, addMarker, removeMarker } = this.props
+      currentMarker, infoWindow } = this.props
 
     return (
       <GoogleMap
@@ -39,19 +39,22 @@ class Map extends React.Component {
               placeholder="Enter Destination"
               value={searchInput}
               onChange={(event) => handleChange(event)} />
-            <div className={searchInput ? "clear-button active" : "clear-button"} onClick={clearSearchBox}>
-              <IoMdCloseCircle />
-            </div>
+            <div className={searchInput ? "clear-input active" : "clear-input"} onClick={clearSearchBox}><IoMdCloseCircle /></div>
           </div>
         </SearchBox>
         
-        {markers.map((marker, index) =>
-          <Marker 
-            key={index}
-            position={marker.position}
-            onClick={() => openInfoWindow(marker)}
-            // icon={{url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"}} 
-          />
+        {markers.map((marker, index) => {
+            return marker.wishlist
+            ? <Marker
+              key={index}
+              position={marker.position}
+              onClick={() => openInfoWindow(marker)} />
+            : <Marker
+              key={index}
+              position={marker.position}
+              onClick={() => openInfoWindow(marker)} 
+              icon={{url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"}} />
+          }
         )}
 
         {currentMarker.position && (
@@ -60,26 +63,7 @@ class Map extends React.Component {
             onClick={() => openInfoWindow(currentMarker)} />
         )}
 
-        {infoWindow.position && (
-          <InfoWindow
-            position={infoWindow.position}
-            onCloseClick={() => closeInfoWindow()}>
-            <div className="infoWindow">
-              <p className="name">{infoWindow.name}</p>
-              <p>{infoWindow.address}</p>
-
-              {markers.indexOf(infoWindow) === -1 &&
-              <div>
-                <p onClick={() => addMarker(user.id, currentMarker, 'experiences')}>Add Experience</p>
-                <p onClick={() => addMarker(user.id, currentMarker, 'wishlist')}>Add Wish</p>
-              </div>}
-
-              {markers.includes(infoWindow) && 
-              <div className="icon" onClick={() => removeMarker(user.id, infoWindow)}><FaTrash /></div>}
-
-            </div>
-          </InfoWindow>
-        )}
+        {infoWindow.position && <Window />}
 
       </GoogleMap>
     )
@@ -117,13 +101,9 @@ const mapDispatch = (dispatch) => ({
   changeBounds: (bounds) => dispatch(actions.changeBounds(bounds)),
   changePlace: (place) => dispatch(actions.changePlace(place)),
   openInfoWindow: (marker) => dispatch(actions.openInfoWindow(marker)),
-  closeInfoWindow: () => dispatch(actions.closeInfoWindow()),
   handleChange: (event) => dispatch(actions.handleChange(event)),
   clearSearchBox: () => dispatch(actions.clearSearchBox()),
-  clearCurrentMarker: () => dispatch(actions.clearCurrentMarker()),
-  renderMarkers: (id) => dispatch(actions.renderMarkers(id)),
-  addMarker: (id, marker, category) => dispatch(actions.addMarker(id, marker, category)),
-  removeMarker: (id, marker) => dispatch(actions.removeMarker(id, marker))
+  renderMarkers: (id) => dispatch(actions.renderMarkers(id))
 })
 
 export default connect(mapState, mapDispatch)(compose(withProps(mapProperties), withScriptjs, withGoogleMap)(Map))

@@ -1,10 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Header from './header'
-import Footer from './footer'
-import Map from './map'
-import Login from './login'
-import Drawer from './drawer'
+import Header from './Header'
+import Footer from './Footer'
+import Map from './Map'
+import Login from './Login'
+import Drawer from './Drawer'
 import { login, logout, toggleDrawer } from '../store'
 
 class Main extends React.Component {
