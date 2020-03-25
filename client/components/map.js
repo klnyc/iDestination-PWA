@@ -49,7 +49,9 @@ class Map extends React.Component {
           <Marker 
             key={index}
             position={marker.position}
-            onClick={() => openInfoWindow(marker)} />
+            onClick={() => openInfoWindow(marker)}
+            // icon={{url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"}} 
+          />
         )}
 
         {currentMarker.position && (
@@ -67,7 +69,10 @@ class Map extends React.Component {
               <p>{infoWindow.address}</p>
 
               {markers.indexOf(infoWindow) === -1 &&
-              <p onClick={() => addMarker(user.id, currentMarker)}>ADD THIS PLACE</p>}
+              <div>
+                <p onClick={() => addMarker(user.id, currentMarker, 'experiences')}>Add Experience</p>
+                <p onClick={() => addMarker(user.id, currentMarker, 'wishlist')}>Add Wish</p>
+              </div>}
 
               {markers.includes(infoWindow) && 
               <div className="icon" onClick={() => removeMarker(user.id, infoWindow)}><FaTrash /></div>}
@@ -117,7 +122,7 @@ const mapDispatch = (dispatch) => ({
   clearSearchBox: () => dispatch(actions.clearSearchBox()),
   clearCurrentMarker: () => dispatch(actions.clearCurrentMarker()),
   renderMarkers: (id) => dispatch(actions.renderMarkers(id)),
-  addMarker: (id, marker) => dispatch(actions.addMarker(id, marker)),
+  addMarker: (id, marker, category) => dispatch(actions.addMarker(id, marker, category)),
   removeMarker: (id, marker) => dispatch(actions.removeMarker(id, marker))
 })
 

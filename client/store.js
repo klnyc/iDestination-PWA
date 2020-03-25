@@ -17,21 +17,21 @@ const initialState = {
 }
 
 const SET_USER_DATA = "SET_USER_DATA"
-const LOGGED_OUT = 'LOGGED_OUT'
+const LOG_OUT = 'LOG_OUT'
 const TOGGLE_DRAWER = "TOGGLE_DRAWER"
-const MOUNT_MARKERS = 'MOUNT_MARKERS'
-const MOUNT_MAP = 'MOUNT_MAP'
-const MOUNT_SEARCH_BOX = 'MOUNT_SEARCH_BOX'
-const CHANGE_BOUNDS = 'CHANGE_BOUNDS'
-const CHANGE_PLACE = 'CHANGE_PLACE'
 const OPEN_INFO_WINDOW = 'OPEN_INFO_WINDOW'
 const CLOSE_INFO_WINDOW = 'CLOSE_INFO_WINDOW'
 const HANDLE_CHANGE = 'HANDLE_CHANGE'
 const CLEAR_SEARCH_BOX = 'CLEAR_SEARCH_BOX'
 const CLEAR_CURRENT_MARKER = 'CLEAR_CURRENT_MARKER'
+const MOUNT_MARKERS = 'MOUNT_MARKERS'
+const MOUNT_MAP = 'MOUNT_MAP'
+const MOUNT_SEARCH_BOX = 'MOUNT_SEARCH_BOX'
+const CHANGE_BOUNDS = 'CHANGE_BOUNDS'
+const CHANGE_PLACE = 'CHANGE_PLACE'
 
 export const setUserData = (user, id) => ({ type: SET_USER_DATA, user, id })
-export const logout = () => ({ type: LOGGED_OUT })
+export const logout = () => ({ type: LOG_OUT })
 export const toggleDrawer = (drawer) => ({ type: TOGGLE_DRAWER, drawer })
 export const openInfoWindow = (marker) => ({ type: OPEN_INFO_WINDOW, infoWindow: marker })
 export const closeInfoWindow = () => ({ type: CLOSE_INFO_WINDOW })
@@ -52,12 +52,16 @@ export const changePlace = (place) => {
         currentMarker: {
             position: { lat, lng },
             name: place.name,
-            address: place.formatted_address
+            address: place.formatted_address,
+            experiences: false,
+            wishlist: false
         },
         infoWindow: {
             position: { lat, lng },
             name: place.name,
-            address: place.formatted_address
+            address: place.formatted_address,
+            experiences: false,
+            wishlist: false
         }
     }
 }
@@ -87,7 +91,9 @@ export const renderMarkers = (id) => {
     }
 }
 
-export const addMarker = (id, marker) => {
+export const addMarker = (id, marker, category) => {
+    if (category === 'experiences') {marker = { ...marker, experiences: true }}
+    if (category === 'wishlist') {marker = { ...marker, wishlist: true }}
     return (dispatch) => {
         firebase
         .firestore()
@@ -128,16 +134,20 @@ function reducer (state = initialState, action) {
     switch (action.type) {
         case SET_USER_DATA:
             return { ...state, user: { ...action.user, id: action.id } }
-        case LOGGED_OUT:
-            return {
-                ...state,
-                user: {},
-                infoWindow: {},
-                searchInput: '',
-                drawer: false
-            }
+        case LOG_OUT:
+            return { ...state, user: {}, infoWindow: {}, searchInput: '', drawer: false }
         case TOGGLE_DRAWER:
             return { ...state, drawer: !action.drawer }
+        case OPEN_INFO_WINDOW:
+            return { ...state, infoWindow: action.infoWindow }
+        case CLOSE_INFO_WINDOW:
+            return { ...state, infoWindow: {}, currentMarker: {} }
+        case HANDLE_CHANGE:
+            return { ...state, [event.target.name]: action[event.target.name]}
+        case CLEAR_SEARCH_BOX:
+            return { ...state, searchInput: '' }
+        case CLEAR_CURRENT_MARKER:
+            return { ...state, currentMarker: {} }
         case MOUNT_MARKERS:
             return { ...state, markers: action.markers }
         case MOUNT_MAP:
@@ -147,23 +157,7 @@ function reducer (state = initialState, action) {
         case CHANGE_BOUNDS:
             return { ...state, bounds: action.bounds }
         case CHANGE_PLACE:
-            return { 
-                ...state,
-                center: action.center,
-                currentMarker: action.currentMarker,
-                searchInput: action.searchInput,
-                infoWindow: action.infoWindow
-            }
-        case OPEN_INFO_WINDOW:
-                return { ...state, infoWindow: action.infoWindow }
-        case CLOSE_INFO_WINDOW:
-            return { ...state, infoWindow: {}, currentMarker: {} }
-        case HANDLE_CHANGE:
-            return { ...state, [event.target.name]: action[event.target.name]}
-        case CLEAR_SEARCH_BOX:
-            return { ...state, searchInput: '' }
-        case CLEAR_CURRENT_MARKER:
-            return { ...state, currentMarker: {} }
+            return { ...state, center: action.center, currentMarker: action.currentMarker, searchInput: action.searchInput, infoWindow: action.infoWindow }
         default:
             return state
     }
