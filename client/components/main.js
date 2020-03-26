@@ -14,11 +14,11 @@ class Main extends React.Component {
     }
 
     render() {
-        const { user, toggleDrawer, drawer } = this.props
+        const { user } = this.props
         return (
             <div id="main">
-                <Drawer user={user} drawer={drawer} />
-                <Header user={user} toggleDrawer={toggleDrawer} drawer={drawer} />
+                <Drawer />
+                <Header />
                 {user.id ? <Map /> : <Login />}
                 <Footer user={user} />
             </div>
@@ -27,14 +27,12 @@ class Main extends React.Component {
 }
 
 const mapState = (state) => ({
-    user: state.user,
-    drawer: state.drawer
+    user: state.user
 })
 
 const mapDispatch = (dispatch) => ({
     login: (user) => dispatch(login(user)),
-    logout: () => dispatch(logout()),
-    toggleDrawer: (drawer) => dispatch(toggleDrawer(drawer))
+    logout: () => dispatch(logout())
 })
 
 export default connect(mapState, mapDispatch)(Main)
