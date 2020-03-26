@@ -17,7 +17,7 @@ class Map extends React.Component {
     const {
       mountMap, center, changeBounds, map, mountSearchBox, bounds, changePlace, 
       searchBox, searchInput, handleChange, clearSearchBox, markers, openInfoWindow, 
-      currentMarker, infoWindow } = this.props
+      currentMarker, infoWindow, toggleOffPanels } = this.props
 
     return (
       <GoogleMap
@@ -32,7 +32,7 @@ class Map extends React.Component {
           bounds={bounds}
           controlPosition={google.maps.ControlPosition.TOP_CENTER}
           onPlacesChanged={() => changePlace(searchBox.getPlaces()[0])}>
-          <div id="searchBox">
+          <div id="searchBox" onClick={() => toggleOffPanels()}>
             <input
               name="searchInput"
               type="text"
@@ -103,7 +103,8 @@ const mapDispatch = (dispatch) => ({
   openInfoWindow: (marker) => dispatch(actions.openInfoWindow(marker)),
   handleChange: (event) => dispatch(actions.handleChange(event)),
   clearSearchBox: () => dispatch(actions.clearSearchBox()),
-  renderMarkers: (id) => dispatch(actions.renderMarkers(id))
+  renderMarkers: (id) => dispatch(actions.renderMarkers(id)),
+  toggleOffPanels: () => dispatch(actions.toggleOffPanels())
 })
 
 export default connect(mapState, mapDispatch)(compose(withProps(mapProperties), withScriptjs, withGoogleMap)(Map))

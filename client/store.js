@@ -14,13 +14,15 @@ const initialState = {
     currentMarker: {},
     infoWindow: {},
     drawer: false,
-    panel: false
+    panel: { experiences: false, wishlist: false }
 }
 
 const SET_USER_DATA = "SET_USER_DATA"
 const LOG_OUT = 'LOG_OUT'
 const TOGGLE_DRAWER = "TOGGLE_DRAWER"
-const TOGGLE_PANEL = "TOGGLE_PANEL"
+const TOGGLE_PANEL_EXPERIENCES = "TOGGLE_PANEL_EXPERIENCES"
+const TOGGLE_PANEL_WISHLIST = "TOGGLE_PANEL_WISHLIST"
+const TOGGLE_OFF_PANELS = "TOGGLE_OFF_PANELS"
 const OPEN_INFO_WINDOW = 'OPEN_INFO_WINDOW'
 const CLOSE_INFO_WINDOW = 'CLOSE_INFO_WINDOW'
 const HANDLE_CHANGE = 'HANDLE_CHANGE'
@@ -35,7 +37,9 @@ const CHANGE_PLACE = 'CHANGE_PLACE'
 export const setUserData = (user, id) => ({ type: SET_USER_DATA, user, id })
 export const logout = () => ({ type: LOG_OUT })
 export const toggleDrawer = (drawer) => ({ type: TOGGLE_DRAWER, drawer })
-export const togglePanel = (panel) => ({ type: TOGGLE_PANEL, panel})
+export const togglePanelExperiences = (panel) => ({ type: TOGGLE_PANEL_EXPERIENCES, panel })
+export const togglePanelWishlist = (panel) => ({ type: TOGGLE_PANEL_WISHLIST, panel })
+export const toggleOffPanels = () => ({ type: TOGGLE_OFF_PANELS })
 export const openInfoWindow = (marker) => ({ type: OPEN_INFO_WINDOW, infoWindow: marker })
 export const closeInfoWindow = () => ({ type: CLOSE_INFO_WINDOW })
 export const handleChange = (event) => ({ type: HANDLE_CHANGE, [event.target.name]: event.target.value })
@@ -141,14 +145,18 @@ function reducer (state = initialState, action) {
             return { ...state, user: {}, infoWindow: {}, searchInput: '', drawer: false }
         case TOGGLE_DRAWER:
             return { ...state, drawer: !action.drawer }
-        case TOGGLE_PANEL:
-            return { ...state, panel: !action.panel }
+        case TOGGLE_PANEL_EXPERIENCES:
+            return { ...state, panel: { experiences: !action.panel, wishlist: false } }
+        case TOGGLE_PANEL_WISHLIST:
+            return { ...state, panel: { experiences: false, wishlist: !action.panel } }
+        case TOGGLE_OFF_PANELS:
+            return { ...state, drawer: false, panel: { experiences: false, wishlist: false } }
         case OPEN_INFO_WINDOW:
             return { ...state, infoWindow: action.infoWindow }
         case CLOSE_INFO_WINDOW:
             return { ...state, infoWindow: {}, currentMarker: {} }
         case HANDLE_CHANGE:
-            return { ...state, [event.target.name]: action[event.target.name]}
+            return { ...state, [event.target.name]: action[event.target.name] }
         case CLEAR_SEARCH_BOX:
             return { ...state, searchInput: '' }
         case CLEAR_CURRENT_MARKER:

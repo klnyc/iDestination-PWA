@@ -1,5 +1,6 @@
 :root {
     --text:white;
+    --border: white;
     --theme: rgb(63, 63, 63, 0.88);
 }
 
@@ -9,6 +10,7 @@
 
 body {
   margin: 0;
+  color: var(--text);
   font-family: Arial, Helvetica, sans-serif;
   -webkit-user-select: none;
   -webkit-touch-callout: none;
@@ -38,7 +40,6 @@ body {
 
 .header-title {
     font-size: 1.2rem;
-    color: var(--text);
     letter-spacing: 0.6rem;
     text-align: center;
     flex: 6;
@@ -46,7 +47,6 @@ body {
 
 .header-icon {
     flex: 1;
-    color: var(--text);
     text-align: center;
     font-size: 1.4rem;
     display: flex;
@@ -58,7 +58,6 @@ body {
 .login {
     height: 100vh;
     text-align: center;
-    color: var(--text);
     background-image: url('/img/ktown.jpg');
     background-size: cover;
 }
@@ -83,7 +82,6 @@ body {
 }
 
 .login-button {
-    color: var(--text);
     font-size: 1rem;
 }
 
@@ -104,7 +102,7 @@ body {
     background-color: transparent;
     color: var(--text);
     border: none;
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid var(--border);
     text-align: center;
     font-size: 1rem;
     padding: 0.4rem;
@@ -112,8 +110,8 @@ body {
 }
 
 .login input::-webkit-input-placeholder {
-    color: var(--text);
     opacity: 0.6;
+    color: var(--text);
 }
 
 .login input:focus {
@@ -164,7 +162,7 @@ body {
     font-size: 0.8rem;
     font-weight: 400;
     text-align: center;
-    color: var(--theme);
+    color: black;
 }
 
 .infoWindow-name {
@@ -196,7 +194,6 @@ body {
 
 .footer-icon {
     flex: 1;
-    color: var(--text);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -216,11 +213,11 @@ body {
     background-color: var(--theme);
     z-index: 2;
     width: 40%;
-    top: 3rem;
-    bottom: 3rem;
-    color: var(--text);
-    border-top: 0.06rem solid var(--text);
-    border-bottom: 0.06rem solid var(--text);
+    top: 3.4rem;
+    bottom: 3.4rem;
+    left: 0.3rem;
+    border: 0.06rem solid var(--border);
+    box-shadow: 0.08rem 0.08rem 0.6rem 0.06rem black;
     padding: 0.6rem;
 }
 
@@ -239,7 +236,7 @@ body {
     padding: .12rem 0;
     padding-bottom: 1rem;
     margin-bottom: 1rem;
-    border-bottom: 0.06rem lightgray solid;
+    border-bottom: 0.06rem solid lightgray;
 }
 
 .drawer-link {
@@ -249,11 +246,26 @@ body {
 
 .panel {
     position: absolute;
-    top: 3.2rem;
-    bottom: 3.2rem;
-    right: .2rem;
-    left: 0.2rem;
-    border: 1px solid black;
+    top: 6rem;
+    bottom: 3.4rem;
+    right: 1.8rem;
+    left: 2rem;
+    border: 0.06rem solid var(--border);
     z-index: 3;
     background-color: var(--theme);
+    box-shadow: 0.08rem 0.08rem 0.6rem 0.06rem black;
+    padding: 0.6rem;
+}
+
+.panel-title {
+    text-align: center;
+    border-bottom: 0.06rem solid lightgray;
+    padding: 0.2rem 0 0.8rem;
+    margin-bottom: 0.8rem;
+    letter-spacing: 0.2rem;
+}
+
+.panel-name {
+    font-size: 0.88rem;
+    padding: 0.2rem 0;
 }
