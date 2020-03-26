@@ -5,7 +5,8 @@ import Footer from './Footer'
 import Map from './Map'
 import Login from './Login'
 import Drawer from './Drawer'
-import { login, logout, toggleDrawer } from '../store'
+import Panel from './Panel'
+import { login, logout } from '../store'
 
 class Main extends React.Component {
     componentDidMount() {
@@ -20,7 +21,8 @@ class Main extends React.Component {
                 <Drawer />
                 <Header />
                 {user.id ? <Map /> : <Login />}
-                <Footer user={user} />
+                <Panel />
+                <Footer />
             </div>
         )
     }

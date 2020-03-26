@@ -13,12 +13,14 @@ const initialState = {
     markers: [],
     currentMarker: {},
     infoWindow: {},
-    drawer: false
+    drawer: false,
+    panel: false
 }
 
 const SET_USER_DATA = "SET_USER_DATA"
 const LOG_OUT = 'LOG_OUT'
 const TOGGLE_DRAWER = "TOGGLE_DRAWER"
+const TOGGLE_PANEL = "TOGGLE_PANEL"
 const OPEN_INFO_WINDOW = 'OPEN_INFO_WINDOW'
 const CLOSE_INFO_WINDOW = 'CLOSE_INFO_WINDOW'
 const HANDLE_CHANGE = 'HANDLE_CHANGE'
@@ -33,6 +35,7 @@ const CHANGE_PLACE = 'CHANGE_PLACE'
 export const setUserData = (user, id) => ({ type: SET_USER_DATA, user, id })
 export const logout = () => ({ type: LOG_OUT })
 export const toggleDrawer = (drawer) => ({ type: TOGGLE_DRAWER, drawer })
+export const togglePanel = (panel) => ({ type: TOGGLE_PANEL, panel})
 export const openInfoWindow = (marker) => ({ type: OPEN_INFO_WINDOW, infoWindow: marker })
 export const closeInfoWindow = () => ({ type: CLOSE_INFO_WINDOW })
 export const handleChange = (event) => ({ type: HANDLE_CHANGE, [event.target.name]: event.target.value })
@@ -138,6 +141,8 @@ function reducer (state = initialState, action) {
             return { ...state, user: {}, infoWindow: {}, searchInput: '', drawer: false }
         case TOGGLE_DRAWER:
             return { ...state, drawer: !action.drawer }
+        case TOGGLE_PANEL:
+            return { ...state, panel: !action.panel }
         case OPEN_INFO_WINDOW:
             return { ...state, infoWindow: action.infoWindow }
         case CLOSE_INFO_WINDOW:

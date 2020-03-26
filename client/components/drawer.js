@@ -5,7 +5,7 @@ class Drawer extends React.Component {
     render() {
         const { user, drawer } = this.props
         return (
-            <div className={drawer ? "drawer" : "drawer not-active"}>
+            <div className={drawer ? "drawer" : "invisible"}>
                 <div className="drawer-name">{user.name}</div>
                 <div className="drawer-email">{user.email}</div>
                 <div className="drawer-link" onClick={() => firebase.auth().signOut()}>Sign Out</div>
