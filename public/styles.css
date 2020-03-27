@@ -156,6 +156,7 @@ body {
 
 #searchBox .clear-input.active {
     opacity: 0.3;
+    color: black;
 }
 
 .infoWindow {
@@ -167,10 +168,11 @@ body {
 
 .infoWindow-name {
     font-size: 1rem;
+    margin-bottom: 0.4rem;
 }
 
 .infoWindow-address {
-    padding: 0.8rem 0;
+    padding: 0.1rem 0;
 }
 
 .infoWindow-footer {
@@ -178,8 +180,12 @@ body {
     justify-content: space-between;
 }
 
+.infoWindow-add-container {
+    margin-top: 0.6rem;
+}
+
 .infoWindow-add {
-    padding: 0.3rem;
+    padding: 0.1rem 0;
 }
 
 .footer {

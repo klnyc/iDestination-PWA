@@ -32,10 +32,11 @@ class Window extends React.Component {
             <InfoWindow position={infoWindow.position} onCloseClick={() => closeInfoWindow()}>
                 <div className="infoWindow">
                     <div className="infoWindow-name">{infoWindow.name}</div>
-                    <div className="infoWindow-address">{infoWindow.address}</div>
+                    <div className="infoWindow-address">{infoWindow.street}</div>
+                    <div className="infoWindow-address">{infoWindow.city}</div>
 
                     {markers.indexOf(infoWindow) === -1 &&
-                    <div>
+                    <div className="infoWindow-add-container">
                         <div className="infoWindow-add" onClick={() => addMarker(user.id, currentMarker, 'experiences')}>Add Experience</div>
                         <div className="infoWindow-add" onClick={() => addMarker(user.id, currentMarker, 'wishlist')}>Add Wish</div>
                     </div>}

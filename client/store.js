@@ -54,21 +54,37 @@ export const changeBounds = (bounds) => ({ type: CHANGE_BOUNDS, bounds })
 export const changePlace = (place) => {
     const lat = place.geometry.location.lat()
     const lng = place.geometry.location.lng()
+
+    const convertAddress = (place) => {
+        const addressComponents = place.address_components
+        const findComponent = (type) => addressComponents.find(component => component.types.includes(type))
+        const streetNumber = findComponent('street_number') ? findComponent('street_number').short_name : null
+        const streetName = findComponent('route') ? findComponent('route').long_name : null
+        const subpremise = findComponent('subpremise') ? findComponent('subpremise').short_name.toUpperCase() : null
+        const city = findComponent('administrative_area_level_1') ? findComponent('administrative_area_level_1').long_name : null
+        const street = [streetNumber, streetName].filter(x => x).join(' ') + (subpremise ? `, ${subpremise}` : '')
+        return { street, city }
+    }
+
+    const address = convertAddress(place)
+
     return {
         type: CHANGE_PLACE,
-        searchInput: `${place.name} ${place.formatted_address}`,
+        searchInput: `${place.name} ${address.street} ${address.city}`,
         center: { lat, lng },
         currentMarker: {
             position: { lat, lng },
             name: place.name,
-            address: place.formatted_address,
+            street: address.street,
+            city: address.city,
             experiences: false,
             wishlist: false
         },
         infoWindow: {
             position: { lat, lng },
             name: place.name,
-            address: place.formatted_address,
+            street: address.street,
+            city: address.city,
             experiences: false,
             wishlist: false
         }
