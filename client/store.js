@@ -23,6 +23,7 @@ const TOGGLE_DRAWER = "TOGGLE_DRAWER"
 const TOGGLE_PANEL_EXPERIENCES = "TOGGLE_PANEL_EXPERIENCES"
 const TOGGLE_PANEL_WISHLIST = "TOGGLE_PANEL_WISHLIST"
 const TOGGLE_OFF_PANELS = "TOGGLE_OFF_PANELS"
+const GO_TO_MARKER = "GO_TO_MARKER"
 const OPEN_INFO_WINDOW = 'OPEN_INFO_WINDOW'
 const CLOSE_INFO_WINDOW = 'CLOSE_INFO_WINDOW'
 const HANDLE_CHANGE = 'HANDLE_CHANGE'
@@ -40,6 +41,7 @@ export const toggleDrawer = (drawer) => ({ type: TOGGLE_DRAWER, drawer })
 export const togglePanelExperiences = (panel) => ({ type: TOGGLE_PANEL_EXPERIENCES, panel })
 export const togglePanelWishlist = (panel) => ({ type: TOGGLE_PANEL_WISHLIST, panel })
 export const toggleOffPanels = () => ({ type: TOGGLE_OFF_PANELS })
+export const goToMarker = (marker) => ({ type: GO_TO_MARKER, marker })
 export const openInfoWindow = (marker) => ({ type: OPEN_INFO_WINDOW, infoWindow: marker })
 export const closeInfoWindow = () => ({ type: CLOSE_INFO_WINDOW })
 export const handleChange = (event) => ({ type: HANDLE_CHANGE, [event.target.name]: event.target.value })
@@ -92,8 +94,8 @@ export const renderMarkers = (id) => {
         .doc(id)
         .collection('markers')
         .onSnapshot(snapshot => {
-        snapshot.docs.forEach(doc => markers.push(doc.data()))
-        dispatch(mountMarkers(markers))
+            snapshot.docs.forEach(doc => markers.push(doc.data()))
+            dispatch(mountMarkers(markers))
         }, (error) => console.log(error.message))
     }
 }
@@ -108,6 +110,7 @@ export const addMarker = (id, marker, category) => {
         .doc(id)
         .collection('markers')
         .add(marker)
+        .then(() => dispatch(renderMarkers(id)))
         .then(() => {dispatch(clearSearchBox()); dispatch(closeInfoWindow())})
     }
 }
@@ -151,6 +154,8 @@ function reducer (state = initialState, action) {
             return { ...state, panel: { experiences: false, wishlist: !action.panel } }
         case TOGGLE_OFF_PANELS:
             return { ...state, drawer: false, panel: { experiences: false, wishlist: false } }
+        case GO_TO_MARKER:
+            return { ...state, infoWindow: action.marker, center: action.marker.position }
         case OPEN_INFO_WINDOW:
             return { ...state, infoWindow: action.infoWindow }
         case CLOSE_INFO_WINDOW:

@@ -1,21 +1,31 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { goToMarker, toggleOffPanels } from '../store'
 
 class Panel extends React.Component {
+    constructor() {
+        super()
+        this.renderMarkerDetails = this.renderMarkerDetails.bind(this)
+    }
+
+    renderMarkerDetails(marker, index) {
+        const { goToMarker, toggleOffPanels } = this.props
+        return (
+            <div key={index} className="panel-name" onClick={() => {goToMarker(marker); toggleOffPanels()}}>
+                {marker.name}
+            </div>
+        )
+    }
+
     render() {
         const { panel, markers } = this.props
         const experiences = markers.filter(marker => marker.experiences)
         const wishlist = markers.filter(marker => marker.wishlist)
+        const panelMarkers = panel.experiences ? experiences : wishlist
         return (
             <div className={(panel.experiences || panel.wishlist) ? "panel" : "invisible"}>
                 <div className="panel-title">{panel.experiences ? "Experiences" : "Wishlist"}</div>
-                <div>
-                    {markers
-                    .filter(marker => {
-                        return panel.experiences ? marker.experiences : panel.wishlist
-                    })
-                    .map(marker => <div className="panel-name">{marker.name}</div>)}
-                </div>
+                <div>{panelMarkers.map((marker, index) => this.renderMarkerDetails(marker, index))}</div>
             </div>
         )
     }
@@ -27,7 +37,8 @@ const mapState = (state) => ({
 })
 
 const mapDispatch = (dispatch) => ({
-    
+    goToMarker: (marker) => dispatch(goToMarker(marker)),
+    toggleOffPanels: () => dispatch(toggleOffPanels())
 })
 
-export default connect(mapState, null)(Panel)
+export default connect(mapState, mapDispatch)(Panel)

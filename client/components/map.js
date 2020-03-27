@@ -1,12 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
+import { withScriptjs, withGoogleMap, GoogleMap } from "react-google-maps"
 import { SearchBox } from "react-google-maps/lib/components/places/SearchBox"
 import { compose, withProps } from 'recompose'
 import { GOOGLE_MAPS_API_KEY } from '../../secrets'
 import { IoMdCloseCircle } from 'react-icons/io'
 import * as actions from '../store'
 import Window from './Window'
+import Markers from './Markers'
 
 class Map extends React.Component {
   componentDidMount() {
@@ -16,8 +17,7 @@ class Map extends React.Component {
   render() {
     const {
       mountMap, center, changeBounds, map, mountSearchBox, bounds, changePlace, 
-      searchBox, searchInput, handleChange, clearSearchBox, markers, openInfoWindow, 
-      currentMarker, infoWindow, toggleOffPanels } = this.props
+      searchBox, searchInput, handleChange, clearSearchBox, infoWindow, toggleOffPanels } = this.props
 
     return (
       <GoogleMap
@@ -43,26 +43,7 @@ class Map extends React.Component {
           </div>
         </SearchBox>
         
-        {markers.map((marker, index) => {
-            return marker.wishlist
-            ? <Marker
-              key={index}
-              position={marker.position}
-              onClick={() => openInfoWindow(marker)} />
-            : <Marker
-              key={index}
-              position={marker.position}
-              onClick={() => openInfoWindow(marker)} 
-              icon={{url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"}} />
-          }
-        )}
-
-        {currentMarker.position && (
-          <Marker 
-            position={currentMarker.position} 
-            onClick={() => openInfoWindow(currentMarker)} />
-        )}
-
+        <Markers />
         {infoWindow.position && <Window />}
 
       </GoogleMap>
@@ -89,18 +70,14 @@ const mapState = (state) => ({
   map: state.map,
   searchBox: state.searchBox,
   searchInput: state.searchInput,
-  markers: state.markers,
-  currentMarker: state.currentMarker,
   infoWindow: state.infoWindow
 })
 
 const mapDispatch = (dispatch) => ({
-  mountMarkers: (markers) => dispatch(actions.mountMarkers(markers)),
   mountMap: (map) => dispatch(actions.mountMap(map)),
   mountSearchBox: (searchBox) => dispatch(actions.mountSearchBox(searchBox)),
   changeBounds: (bounds) => dispatch(actions.changeBounds(bounds)),
   changePlace: (place) => dispatch(actions.changePlace(place)),
-  openInfoWindow: (marker) => dispatch(actions.openInfoWindow(marker)),
   handleChange: (event) => dispatch(actions.handleChange(event)),
   clearSearchBox: () => dispatch(actions.clearSearchBox()),
   renderMarkers: (id) => dispatch(actions.renderMarkers(id)),
