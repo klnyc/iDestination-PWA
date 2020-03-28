@@ -56,16 +56,19 @@ export const changePlace = (place) => {
     const lng = place.geometry.location.lng()
 
     const convertAddress = (place) => {
-        const addressComponents = place.address_components
-        const findComponent = (type) => addressComponents.find(component => component.types.includes(type))
-        const streetNumber = findComponent('street_number') ? findComponent('street_number').short_name : null
+        const findComponent = (type) => place.address_components.find(component => component.types.includes(type))
+        const streetNumber = findComponent('street_number') ? findComponent('street_number').long_name : null
         const streetName = findComponent('route') ? findComponent('route').long_name : null
         const subpremise = findComponent('subpremise') ? findComponent('subpremise').short_name.toUpperCase() : null
-        const city = findComponent('administrative_area_level_1') ? findComponent('administrative_area_level_1').long_name : null
+        const locality = findComponent('locality') ? findComponent('locality').long_name : null
+        const area = findComponent('administrative_area_level_1') ? findComponent('administrative_area_level_1').long_name : null
+        const country = findComponent('country') ? findComponent('country').long_name : null
         const street = [streetNumber, streetName].filter(x => x).join(' ') + (subpremise ? `, ${subpremise}` : '')
-        return { street, city }
+        const location = [locality, area, country].filter(x => x).join(', ')
+        const city = locality ? locality : (area ? area : null)
+        return { street, location, city }
     }
-
+    console.log(place)
     const address = convertAddress(place)
 
     return {
@@ -76,6 +79,7 @@ export const changePlace = (place) => {
             position: { lat, lng },
             name: place.name,
             street: address.street,
+            location: address.location,
             city: address.city,
             experiences: false,
             wishlist: false
@@ -84,6 +88,7 @@ export const changePlace = (place) => {
             position: { lat, lng },
             name: place.name,
             street: address.street,
+            location: address.location,
             city: address.city,
             experiences: false,
             wishlist: false

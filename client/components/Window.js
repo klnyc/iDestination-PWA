@@ -33,7 +33,7 @@ class Window extends React.Component {
                 <div className="infoWindow">
                     <div className="infoWindow-name">{infoWindow.name}</div>
                     <div className="infoWindow-address">{infoWindow.street}</div>
-                    <div className="infoWindow-address">{infoWindow.city}</div>
+                    <div className="infoWindow-address">{infoWindow.location}</div>
 
                     {markers.indexOf(infoWindow) === -1 &&
                     <div className="infoWindow-add-container">

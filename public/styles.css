@@ -178,6 +178,7 @@ body {
 .infoWindow-footer {
     display: flex;
     justify-content: space-between;
+    margin-top: 0.4rem;
 }
 
 .infoWindow-add-container {
@@ -218,7 +219,7 @@ body {
     box-sizing: border-box;
     background-color: var(--theme);
     z-index: 2;
-    width: 40%;
+    width: 8.8rem;
     top: 3.4rem;
     bottom: 3.4rem;
     left: 0.3rem;
@@ -250,6 +251,14 @@ body {
     padding: 0.6rem 0;
 }
 
+.drawer-copyright {
+    font-size: 0.6rem;
+    font-style: italic;
+    position: absolute;
+    bottom: 0.2rem;
+    left: 1.62rem;
+}
+
 .panel {
     position: absolute;
     top: 6rem;
@@ -271,7 +280,28 @@ body {
     letter-spacing: 0.2rem;
 }
 
-.panel-name {
+.panel-line {
     font-size: 0.68rem;
     padding: 0.2rem 0;
+    display: flex;
+}
+
+.panel-column {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.panel-column.name {
+    flex: 6;
+}
+
+.panel-column.city {
+    flex: 2;
+    margin: 0 0.4rem;
+}
+
+.panel-column.date {
+    flex: 2;
+    text-align: right;
 }

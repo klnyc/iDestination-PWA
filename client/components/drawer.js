@@ -9,6 +9,7 @@ class Drawer extends React.Component {
                 <div className="drawer-name">{user.name}</div>
                 <div className="drawer-email">{user.email}</div>
                 <div className="drawer-link" onClick={() => firebase.auth().signOut()}>Sign Out</div>
+                <div className="drawer-copyright">© 2019 iDestination<br/>All Rights Reserved.</div>
             </div>
         )
     }
