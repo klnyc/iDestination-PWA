@@ -52,9 +52,6 @@ export const mountMap = (map) => ({ type: MOUNT_MAP, map })
 export const mountSearchBox = (searchBox) => ({ type: MOUNT_SEARCH_BOX, searchBox })
 export const changeBounds = (bounds) => ({ type: CHANGE_BOUNDS, bounds })
 export const changePlace = (place) => {
-    const lat = place.geometry.location.lat()
-    const lng = place.geometry.location.lng()
-
     const convertAddress = (place) => {
         const findComponent = (type) => place.address_components.find(component => component.types.includes(type))
         const streetNumber = findComponent('street_number') ? findComponent('street_number').long_name : null
@@ -68,8 +65,12 @@ export const changePlace = (place) => {
         const city = locality ? locality : (area ? area : null)
         return { street, location, city }
     }
-    console.log(place)
+
     const address = convertAddress(place)
+    const lat = place.geometry.location.lat()
+    const lng = place.geometry.location.lng()
+    const today = new Date()
+    const date = (today.getMonth() + 1) + '/' + today.getDate() + '/' + today.getFullYear()
 
     return {
         type: CHANGE_PLACE,
@@ -82,7 +83,8 @@ export const changePlace = (place) => {
             location: address.location,
             city: address.city,
             experiences: false,
-            wishlist: false
+            wishlist: false,
+            date
         },
         infoWindow: {
             position: { lat, lng },
@@ -91,7 +93,8 @@ export const changePlace = (place) => {
             location: address.location,
             city: address.city,
             experiences: false,
-            wishlist: false
+            wishlist: false,
+            date
         }
     }
 }
