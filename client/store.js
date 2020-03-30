@@ -122,11 +122,10 @@ export const renderMarkers = (id) => {
 }
 
 export const addMarker = (id, marker, date, category) => {
-    const dateSegments = date.split('-')
-    const year = dateSegments[0]
-    const month = dateSegments[1]
-    const day = dateSegments[2]
-    const formattedDate = month + '/' + day + '/' + year
+    let { month, day, year } = date
+    month = month.length === 1 ? `0${month}` : month
+    day = day.length === 1 ? `0${day}` : day
+    const formattedDate = (month && day && year) ? `${month}/${day}/${year}` : ''
     if (category === 'experiences') {marker = { ...marker, date: formattedDate, experiences: true }}
     if (category === 'wishlist') {marker = { ...marker, date: formattedDate, wishlist: true }}
     return (dispatch) => {
