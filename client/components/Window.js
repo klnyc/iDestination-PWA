@@ -31,9 +31,9 @@ class Window extends React.Component {
     renderInfoWindowFooter() {
         const { user, infoWindow, removeMarker } = this.props
         let categoryIcons
-        if (infoWindow.experiences && infoWindow.wishlist) {categoryIcons = <div><GiFire /><MdStar /></div>}
-        else if (infoWindow.experiences) {categoryIcons = <div><GiFire /></div>}
-        else if (infoWindow.wishlist) {categoryIcons = <div><MdStar /></div>}
+        if (infoWindow.experiences && infoWindow.wishlist) categoryIcons = <div><GiFire /><MdStar /></div>
+        else if (infoWindow.experiences) categoryIcons = <div><GiFire /></div>
+        else if (infoWindow.wishlist) categoryIcons = <div><MdStar /></div>
         return (
           <div className="infoWindow-footer">
             {categoryIcons}
