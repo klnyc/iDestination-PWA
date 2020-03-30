@@ -138,12 +138,16 @@ body {
     margin-top: 3.4rem;
     text-indent: 0.4rem;
     padding-right: 1rem;
-    border: 1px solid transparent;
+    border: 0.06rem solid transparent;
     border-radius: 0.25rem;
     box-shadow: 0 0.125rem 0.4rem rgba(0, 0, 0, 0.6);
     text-overflow: ellipsis;
     -webkit-appearance: none;
     font-size: 0.8rem;
+}
+
+#searchBox input:focus {
+    outline: 0.06rem solid transparent;
 }
 
 #searchBox .clear-input {
@@ -164,6 +168,7 @@ body {
     font-weight: 400;
     text-align: center;
     color: black;
+    padding-left: 0.32rem;
 }
 
 .infoWindow-name {
@@ -175,18 +180,31 @@ body {
     padding: 0.1rem 0;
 }
 
+.infoWindow-add-container input {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    padding-left: 1.8rem;
+    margin: 0.6rem 0;
+    width: 10.8rem;
+}
+
+.infoWindow-add-container input:focus {
+    outline: 0.06rem solid lightgray;
+}
+
+.infoWindow-add-button {
+    padding: 0.1rem 0;
+}
+
+.infoWindow-date {
+    margin-top: 0.4rem;
+    font-size: 0.68rem;
+}
+
 .infoWindow-footer {
     display: flex;
     justify-content: space-between;
     margin-top: 0.4rem;
-}
-
-.infoWindow-add-container {
-    margin-top: 0.6rem;
-}
-
-.infoWindow-add {
-    padding: 0.1rem 0;
 }
 
 .footer {

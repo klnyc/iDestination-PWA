@@ -9,7 +9,23 @@ import { addMarker, removeMarker, closeInfoWindow } from '../store'
 class Window extends React.Component {
     constructor() {
         super()
+        this.state = { date: '' }
         this.renderInfoWindowFooter = this.renderInfoWindowFooter.bind(this)
+        this.handleChange = this.handleChange.bind(this)
+    }
+
+    componentDidMount() {
+        const today = new Date()
+        let month = (today.getMonth() + 1)
+        let day = today.getDate()
+        month = month < 10 ? ('0' + month) : month
+        day = day < 10 ? ('0' + day) : day
+        const date = today.getFullYear() + '-' + month + '-' + day
+        this.setState({ date })
+    }
+
+    handleChange(event) {
+        this.setState({[event.target.name]: event.target.value})
     }
 
     renderInfoWindowFooter() {
@@ -27,7 +43,8 @@ class Window extends React.Component {
     }
 
     render() {
-        const { infoWindow, user, currentMarker, markers, closeInfoWindow, addMarker } = this.props
+        const { date } = this.state
+        const { infoWindow, user, currentMarker, markers, closeInfoWindow, addMarker } = this.props;console.log(infoWindow)
         return (
             <InfoWindow position={infoWindow.position} onCloseClick={() => closeInfoWindow()}>
                 <div className="infoWindow">
@@ -37,12 +54,16 @@ class Window extends React.Component {
 
                     {markers.indexOf(infoWindow) === -1 &&
                     <div className="infoWindow-add-container">
-                        <div className="infoWindow-add" onClick={() => addMarker(user.id, currentMarker, 'experiences')}>Add Experience</div>
-                        <div className="infoWindow-add" onClick={() => addMarker(user.id, currentMarker, 'wishlist')}>Add Wish</div>
+                        <input name="date" type="date" value={date} onChange={this.handleChange} />
+                        <div className="infoWindow-add-button" onClick={() => addMarker(user.id, currentMarker, date, 'experiences')}>Add Experience</div>
+                        <div className="infoWindow-add-button" onClick={() => addMarker(user.id, currentMarker, date, 'wishlist')}>Add Wish</div>
                     </div>}
 
-                    {markers.includes(infoWindow) && this.renderInfoWindowFooter()}
-
+                    {markers.includes(infoWindow) && 
+                    <div>
+                        <div className="infoWindow-date"> {infoWindow.date}</div>
+                        {this.renderInfoWindowFooter()}
+                    </div>}
                 </div>
             </InfoWindow>
         )
@@ -57,7 +78,7 @@ const mapState = (state) => ({
 })
 
 const mapDispatch = (dispatch) => ({
-    addMarker: (id, marker, category) => dispatch(addMarker(id, marker, category)),
+    addMarker: (id, marker, date, category) => dispatch(addMarker(id, marker, date, category)),
     removeMarker: (id, marker) => dispatch(removeMarker(id, marker)),
     closeInfoWindow: () => dispatch(closeInfoWindow())
 })

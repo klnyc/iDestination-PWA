@@ -63,18 +63,17 @@ export const changePlace = (place) => {
         const street = [streetNumber, streetName].filter(x => x).join(' ') + (subpremise ? `, ${subpremise}` : '')
         const location = [locality, area, country].filter(x => x).join(', ')
         const city = locality ? locality : (area ? area : null)
-        return { street, location, city }
+        const input = [street, city].filter(x => x).join(' ')
+        return { street, location, city, input }
     }
 
     const address = convertAddress(place)
     const lat = place.geometry.location.lat()
     const lng = place.geometry.location.lng()
-    const today = new Date()
-    const date = (today.getMonth() + 1) + '/' + today.getDate() + '/' + today.getFullYear()
 
     return {
         type: CHANGE_PLACE,
-        searchInput: `${place.name} ${address.street} ${address.city}`,
+        searchInput: `${place.name} ${address.input}`,
         center: { lat, lng },
         currentMarker: {
             position: { lat, lng },
@@ -83,8 +82,7 @@ export const changePlace = (place) => {
             location: address.location,
             city: address.city,
             experiences: false,
-            wishlist: false,
-            date
+            wishlist: false
         },
         infoWindow: {
             position: { lat, lng },
@@ -93,8 +91,7 @@ export const changePlace = (place) => {
             location: address.location,
             city: address.city,
             experiences: false,
-            wishlist: false,
-            date
+            wishlist: false
         }
     }
 }
@@ -124,9 +121,14 @@ export const renderMarkers = (id) => {
     }
 }
 
-export const addMarker = (id, marker, category) => {
-    if (category === 'experiences') {marker = { ...marker, experiences: true }}
-    if (category === 'wishlist') {marker = { ...marker, wishlist: true }}
+export const addMarker = (id, marker, date, category) => {
+    const dateSegments = date.split('-')
+    const year = dateSegments[0]
+    const month = dateSegments[1]
+    const day = dateSegments[2]
+    const formattedDate = month + '/' + day + '/' + year
+    if (category === 'experiences') {marker = { ...marker, date: formattedDate, experiences: true }}
+    if (category === 'wishlist') {marker = { ...marker, date: formattedDate, wishlist: true }}
     return (dispatch) => {
         firebase
         .firestore()
