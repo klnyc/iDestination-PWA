@@ -22,7 +22,7 @@ const LOG_OUT = 'LOG_OUT'
 const TOGGLE_DRAWER = "TOGGLE_DRAWER"
 const TOGGLE_PANEL_EXPERIENCES = "TOGGLE_PANEL_EXPERIENCES"
 const TOGGLE_PANEL_WISHLIST = "TOGGLE_PANEL_WISHLIST"
-const TOGGLE_OFF_PANELS = "TOGGLE_OFF_PANELS"
+const TOGGLE_OFF_ALL = "TOGGLE_OFF_ALL"
 const GO_TO_MARKER = "GO_TO_MARKER"
 const OPEN_INFO_WINDOW = 'OPEN_INFO_WINDOW'
 const CLOSE_INFO_WINDOW = 'CLOSE_INFO_WINDOW'
@@ -40,7 +40,7 @@ export const logout = () => ({ type: LOG_OUT })
 export const toggleDrawer = (drawer) => ({ type: TOGGLE_DRAWER, drawer })
 export const togglePanelExperiences = (panel) => ({ type: TOGGLE_PANEL_EXPERIENCES, panel })
 export const togglePanelWishlist = (panel) => ({ type: TOGGLE_PANEL_WISHLIST, panel })
-export const toggleOffPanels = () => ({ type: TOGGLE_OFF_PANELS })
+export const toggleOffAll = () => ({ type: TOGGLE_OFF_ALL })
 export const goToMarker = (marker) => ({ type: GO_TO_MARKER, marker })
 export const openInfoWindow = (marker) => ({ type: OPEN_INFO_WINDOW, infoWindow: marker })
 export const closeInfoWindow = () => ({ type: CLOSE_INFO_WINDOW })
@@ -122,12 +122,15 @@ export const renderMarkers = (id) => {
 }
 
 export const addMarker = (id, marker, date, category) => {
-    let { month, day, year } = date
-    month = month.length === 1 ? `0${month}` : month
-    day = day.length === 1 ? `0${day}` : day
-    const formattedDate = (month && day && year) ? `${month}/${day}/${year}` : ''
-    if (category === 'experiences') {marker = { ...marker, date: formattedDate, experiences: true }}
-    if (category === 'wishlist') {marker = { ...marker, date: formattedDate, wishlist: true }}
+    const formatDate = (date) => {
+        let { month, day, year } = date
+        month = month.length === 1 ? `0${month}` : month
+        day = day.length === 1 ? `0${day}` : day
+        return (month && day && year) ? `${month}/${day}/${year}` : ''
+    }
+    
+    if (category === 'experiences') {marker = { ...marker, date: formatDate(date), experiences: true }}
+    if (category === 'wishlist') {marker = { ...marker, date: formatDate(date), wishlist: true }}
     return (dispatch) => {
         firebase
         .firestore()
@@ -177,7 +180,7 @@ function reducer (state = initialState, action) {
             return { ...state, panel: { experiences: !action.panel, wishlist: false } }
         case TOGGLE_PANEL_WISHLIST:
             return { ...state, panel: { experiences: false, wishlist: !action.panel } }
-        case TOGGLE_OFF_PANELS:
+        case TOGGLE_OFF_ALL:
             return { ...state, drawer: false, panel: { experiences: false, wishlist: false } }
         case GO_TO_MARKER:
             return { ...state, infoWindow: action.marker, center: action.marker.position }

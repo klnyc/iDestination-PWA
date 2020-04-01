@@ -17,7 +17,7 @@ class Map extends React.Component {
   render() {
     const {
       mountMap, center, changeBounds, map, mountSearchBox, bounds, changePlace, 
-      searchBox, searchInput, handleChange, clearSearchBox, infoWindow, toggleOffPanels } = this.props
+      searchBox, searchInput, handleChange, clearSearchBox, infoWindow, toggleOffAll } = this.props
 
     return (
       <GoogleMap
@@ -25,14 +25,15 @@ class Map extends React.Component {
         center={center}
         onBoundsChanged={() => changeBounds(map.getBounds())}
         defaultZoom={13}
-        defaultOptions={mapSettings}>
+        defaultOptions={mapSettings}
+        onClick={() => toggleOffAll()}>
 
         <SearchBox
           ref={(searchBox) => mountSearchBox(searchBox)}
           bounds={bounds}
           controlPosition={google.maps.ControlPosition.TOP_CENTER}
           onPlacesChanged={() => changePlace(searchBox.getPlaces()[0])}>
-          <div id="searchBox" onClick={() => toggleOffPanels()}>
+          <div id="searchBox" onClick={() => toggleOffAll()}>
             <input
               name="searchInput"
               type="text"
@@ -81,7 +82,7 @@ const mapDispatch = (dispatch) => ({
   handleChange: (event) => dispatch(actions.handleChange(event)),
   clearSearchBox: () => dispatch(actions.clearSearchBox()),
   renderMarkers: (id) => dispatch(actions.renderMarkers(id)),
-  toggleOffPanels: () => dispatch(actions.toggleOffPanels())
+  toggleOffAll: () => dispatch(actions.toggleOffAll())
 })
 
 export default connect(mapState, mapDispatch)(compose(withProps(mapProperties), withScriptjs, withGoogleMap)(Map))

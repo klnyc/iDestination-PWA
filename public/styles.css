@@ -180,30 +180,33 @@ body {
     padding: 0.1rem 0;
 }
 
-.infoWindow-add-container {
-    width: 8rem;
-    margin: 0 auto;
+.infoWindow-button-container {
+    display: flex;
 }
 
-.infoWindow-add-button {
-    padding: 0.1rem 0;
+.infoWindow-button {
+    padding: 0.2rem 0.4rem;
+    margin: 0 0.4rem;
+    border: .06rem solid black;
+    border-radius: 0.26rem;
+    background-color: lightgray;
 }
 
-.infoWindow-date {
-    margin-top: 0.4rem;
-    font-size: 0.68rem;
-}
-
-.infoWindow-footer {
+.infoWindow-date-container {
     display: flex;
     justify-content: space-between;
     margin-top: 0.4rem;
+}
+
+.infoWindow-date {
+    font-size: 0.68rem;
 }
 
 .datepicker {
     display: flex;
-    justify-content: space-between;
-    margin: 0.4rem 0;
+    justify-content: space-evenly;
+    margin: 0.8rem auto;
+    width: 8rem;
 }
 
 .datepicker input {
@@ -216,9 +219,14 @@ body {
     outline: none;
 }
 
+.datepicker input::-webkit-inner-spin-button {
+    display: none;
+}
+
 .datepicker-error {
     color: red;
     font-size: .68rem;
+    margin-bottom: 0.8rem;
 }
 
 .footer {

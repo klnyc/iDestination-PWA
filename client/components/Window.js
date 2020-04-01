@@ -15,7 +15,7 @@ class Window extends React.Component {
             year: '',
             error: ''
         }
-        this.renderInfoWindowFooter = this.renderInfoWindowFooter.bind(this)
+        this.renderInfoWindowDate = this.renderInfoWindowDate.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.renderDatePicker = this.renderDatePicker.bind(this)
         this.submitPlace = this.submitPlace.bind(this)
@@ -25,15 +25,16 @@ class Window extends React.Component {
         this.setState({ [event.target.name]: event.target.value })
     }
 
-    renderInfoWindowFooter() {
+    renderInfoWindowDate() {
         const { user, infoWindow, removeMarker } = this.props
         let categoryIcons
         if (infoWindow.experiences && infoWindow.wishlist) categoryIcons = <div><GiFire /><MdStar /></div>
         else if (infoWindow.experiences) categoryIcons = <div><GiFire /></div>
         else if (infoWindow.wishlist) categoryIcons = <div><MdStar /></div>
         return (
-          <div className="infoWindow-footer">
+          <div className="infoWindow-date-container">
             {categoryIcons}
+            <div className="infoWindow-date">{infoWindow.date}</div>
             <div className="infoWindow-icon-trash" onClick={() => removeMarker(user.id, infoWindow)}><FaTrash /></div>
           </div>
         )
@@ -76,17 +77,15 @@ class Window extends React.Component {
                     <div className="infoWindow-address">{infoWindow.location}</div>
 
                     {markers.indexOf(infoWindow) === -1 &&
-                    <div className="infoWindow-add-container">
+                    <Fragment>
                         {this.renderDatePicker()}
-                        <div className="infoWindow-add-button" onClick={() => this.submitPlace('experiences')}>Add Experience</div>
-                        <div className="infoWindow-add-button" onClick={() => this.submitPlace('wishlist')}>Add Wish</div>
-                    </div>}
+                        <div className="infoWindow-button-container">
+                            <div className="infoWindow-button" onClick={() => this.submitPlace('experiences')}>Add Experience</div>
+                            <div className="infoWindow-button" onClick={() => this.submitPlace('wishlist')}>Add Wish</div>
+                        </div>
+                    </Fragment>}
 
-                    {markers.includes(infoWindow) && 
-                    <div>
-                        <div className="infoWindow-date">{infoWindow.date}</div>
-                        {this.renderInfoWindowFooter()}
-                    </div>}
+                    {markers.includes(infoWindow) && this.renderInfoWindowDate()}                 
                 </div>
             </InfoWindow>
         )
