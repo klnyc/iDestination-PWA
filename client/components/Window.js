@@ -15,6 +15,7 @@ class Window extends React.Component {
             year: '',
             error: ''
         }
+        this.renderInfoWindowIcons = this.renderInfoWindowIcons.bind(this)
         this.renderInfoWindowDate = this.renderInfoWindowDate.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.renderDatePicker = this.renderDatePicker.bind(this)
@@ -25,15 +26,18 @@ class Window extends React.Component {
         this.setState({ [event.target.name]: event.target.value })
     }
 
+    renderInfoWindowIcons() {
+        const { infoWindow } = this.props
+        if (infoWindow.experiences && infoWindow.wishlist) return <div><GiFire /><MdStar /></div>
+        if (infoWindow.experiences) return <div><GiFire /></div>
+        if (infoWindow.wishlist) return <div><MdStar /></div>
+    }
+
     renderInfoWindowDate() {
         const { user, infoWindow, removeMarker } = this.props
-        let categoryIcons
-        if (infoWindow.experiences && infoWindow.wishlist) categoryIcons = <div><GiFire /><MdStar /></div>
-        else if (infoWindow.experiences) categoryIcons = <div><GiFire /></div>
-        else if (infoWindow.wishlist) categoryIcons = <div><MdStar /></div>
         return (
           <div className="infoWindow-date-container">
-            {categoryIcons}
+            {this.renderInfoWindowIcons()}
             <div className="infoWindow-date">{infoWindow.date}</div>
             <div className="infoWindow-icon-trash" onClick={() => removeMarker(user.id, infoWindow)}><FaTrash /></div>
           </div>
@@ -80,8 +84,8 @@ class Window extends React.Component {
                     <Fragment>
                         {this.renderDatePicker()}
                         <div className="infoWindow-button-container">
-                            <div className="infoWindow-button" onClick={() => this.submitPlace('experiences')}>Add Experience</div>
-                            <div className="infoWindow-button" onClick={() => this.submitPlace('wishlist')}>Add Wish</div>
+                            <div className="infoWindow-button experiences" onClick={() => this.submitPlace('experiences')}>Add Experience</div>
+                            <div className="infoWindow-button wishlist" onClick={() => this.submitPlace('wishlist')}>Add Wish</div>
                         </div>
                     </Fragment>}
 

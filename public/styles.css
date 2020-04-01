@@ -189,8 +189,10 @@ body {
     margin: 0 0.4rem;
     border: .06rem solid black;
     border-radius: 0.26rem;
-    background-color: lightgray;
 }
+
+.infoWindow-button.experiences { background-color: lightsteelblue }
+.infoWindow-button.wishlist { background-color: palevioletred }
 
 .infoWindow-date-container {
     display: flex;
