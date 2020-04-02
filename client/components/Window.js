@@ -49,8 +49,8 @@ class Window extends React.Component {
         return (
             <Fragment>
                 <div className="datepicker">
-                    <input name="month" type="number" placeholder="MM" value={month} onChange={this.handleChange} />-
-                    <input name="day" type="number" placeholder="DD" value={day} onChange={this.handleChange} />-
+                    <input name="month" type="number" placeholder="MM" value={month} onChange={this.handleChange} />
+                    <input name="day" type="number" placeholder="DD" value={day} onChange={this.handleChange} />
                     <input name="year" type="number" placeholder="YYYY" value={year} onChange={this.handleChange} />
                 </div>
                 {error && <div className="datepicker-error">{error}</div>}
@@ -72,7 +72,7 @@ class Window extends React.Component {
     }
 
     render() {
-        const { infoWindow, markers, closeInfoWindow } = this.props;
+        const { infoWindow, markers, closeInfoWindow, home } = this.props;
         return (
             <InfoWindow position={infoWindow.position} onCloseClick={() => closeInfoWindow()}>
                 <div className="infoWindow">
@@ -80,7 +80,7 @@ class Window extends React.Component {
                     <div className="infoWindow-address">{infoWindow.street}</div>
                     <div className="infoWindow-address">{infoWindow.location}</div>
 
-                    {markers.indexOf(infoWindow) === -1 &&
+                    {!home && markers.indexOf(infoWindow) === -1 &&
                     <Fragment>
                         {this.renderDatePicker()}
                         <div className="infoWindow-button-container">
@@ -89,7 +89,8 @@ class Window extends React.Component {
                         </div>
                     </Fragment>}
 
-                    {markers.includes(infoWindow) && this.renderInfoWindowDate()}                 
+                    {!home && markers.includes(infoWindow) && this.renderInfoWindowDate()}
+                    {home && <div className="infoWindow-button home">Set Home</div>}                 
                 </div>
             </InfoWindow>
         )
@@ -100,7 +101,8 @@ const mapState = (state) => ({
     user: state.user,
     markers: state.markers,
     currentMarker: state.currentMarker,
-    infoWindow: state.infoWindow
+    infoWindow: state.infoWindow,
+    home: state.home
 })
 
 const mapDispatch = (dispatch) => ({

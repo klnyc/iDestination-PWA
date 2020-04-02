@@ -15,7 +15,8 @@ const initialState = {
     infoWindow: {},
     drawer: false,
     panel: { experiences: false, wishlist: false },
-    category: { experiences: true, wishlist: true }
+    category: { experiences: true, wishlist: true },
+    home: false
 }
 
 const SET_USER_DATA = "SET_USER_DATA"
@@ -23,10 +24,11 @@ const LOG_OUT = 'LOG_OUT'
 const TOGGLE_DRAWER = "TOGGLE_DRAWER"
 const TOGGLE_PANEL_EXPERIENCES = "TOGGLE_PANEL_EXPERIENCES"
 const TOGGLE_PANEL_WISHLIST = "TOGGLE_PANEL_WISHLIST"
-const TOGGLE_OFF_ALL = "TOGGLE_OFF_ALL"
+const TOGGLE_OFF_PANEL_DRAWER = "TOGGLE_OFF_PANEL_DRAWER"
 const TOGGLE_CATEGORY_ALL = "TOGGLE_CATEGORY_ALL"
 const TOGGLE_CATEGORY_EXPERIENCES = "TOGGLE_CATEGORY_EXPERIENCES"
 const TOGGLE_CATEGORY_WISHLIST = "TOGGLE_CATEGORY_WISHLIST"
+const TOGGLE_HOME = "TOGGLE_HOME"
 const GO_TO_MARKER = "GO_TO_MARKER"
 const OPEN_INFO_WINDOW = 'OPEN_INFO_WINDOW'
 const CLOSE_INFO_WINDOW = 'CLOSE_INFO_WINDOW'
@@ -44,7 +46,7 @@ export const logout = () => ({ type: LOG_OUT })
 export const toggleDrawer = (drawer) => ({ type: TOGGLE_DRAWER, drawer })
 export const togglePanelExperiences = (panel) => ({ type: TOGGLE_PANEL_EXPERIENCES, panel })
 export const togglePanelWishlist = (panel) => ({ type: TOGGLE_PANEL_WISHLIST, panel })
-export const toggleOffAll = () => ({ type: TOGGLE_OFF_ALL })
+export const toggleOffPanelDrawer = () => ({ type: TOGGLE_OFF_PANEL_DRAWER })
 export const toggleCategory = (category) => {
     switch(category) {
         case "all":
@@ -57,6 +59,7 @@ export const toggleCategory = (category) => {
             return { type: TOGGLE_CATEGORY_ALL }
     }
 }
+export const toggleHome = (home) => ({ type: TOGGLE_HOME, home })
 export const goToMarker = (marker) => ({ type: GO_TO_MARKER, marker })
 export const openInfoWindow = (marker) => ({ type: OPEN_INFO_WINDOW, infoWindow: marker })
 export const closeInfoWindow = () => ({ type: CLOSE_INFO_WINDOW })
@@ -196,7 +199,7 @@ function reducer (state = initialState, action) {
             return { ...state, panel: { experiences: !action.panel, wishlist: false } }
         case TOGGLE_PANEL_WISHLIST:
             return { ...state, panel: { experiences: false, wishlist: !action.panel } }
-        case TOGGLE_OFF_ALL:
+        case TOGGLE_OFF_PANEL_DRAWER:
             return { ...state, drawer: false, panel: { experiences: false, wishlist: false } }
         case TOGGLE_CATEGORY_ALL:
             return { ...state, category: { experiences: true, wishlist: true } }
@@ -204,12 +207,14 @@ function reducer (state = initialState, action) {
             return { ...state, category: { experiences: true, wishlist: false } }
         case TOGGLE_CATEGORY_WISHLIST:
             return { ...state, category: { experiences: false, wishlist: true } }
+        case TOGGLE_HOME:
+            return { ...state, home: !action.home, drawer: false, panel: { experiences: false, wishlist: false }, infoWindow: {}, searchInput: '' }
         case GO_TO_MARKER:
             return { ...state, infoWindow: action.marker, center: action.marker.position }
         case OPEN_INFO_WINDOW:
             return { ...state, infoWindow: action.infoWindow }
         case CLOSE_INFO_WINDOW:
-            return { ...state, infoWindow: {} }
+            return { ...state, infoWindow: {}, home: false }
         case HANDLE_CHANGE:
             return { ...state, [event.target.name]: action[event.target.name] }
         case CLEAR_SEARCH_BOX:

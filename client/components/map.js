@@ -4,7 +4,7 @@ import { withScriptjs, withGoogleMap, GoogleMap } from "react-google-maps"
 import { SearchBox } from "react-google-maps/lib/components/places/SearchBox"
 import { compose, withProps } from 'recompose'
 import { GOOGLE_MAPS_API_KEY } from '../../secrets'
-import { IoMdCloseCircle } from 'react-icons/io'
+import { IoMdCloseCircle, IoMdArrowRoundUp } from 'react-icons/io'
 import * as actions from '../store'
 import Window from './Window'
 import Markers from './Markers'
@@ -16,8 +16,8 @@ class Map extends React.Component {
 
   render() {
     const {
-      mountMap, center, changeBounds, map, mountSearchBox, bounds, changePlace, 
-      searchBox, searchInput, handleChange, clearSearchBox, infoWindow, toggleOffAll } = this.props
+      mountMap, center, changeBounds, map, mountSearchBox, bounds, changePlace, searchBox, searchInput, 
+      handleChange, clearSearchBox, infoWindow, toggleOffPanelDrawer, home} = this.props
 
     return (
       <GoogleMap
@@ -26,14 +26,15 @@ class Map extends React.Component {
         onBoundsChanged={() => changeBounds(map.getBounds())}
         defaultZoom={13}
         defaultOptions={mapSettings}
-        onClick={() => toggleOffAll()}>
+        onClick={() => toggleOffPanelDrawer()}>
 
         <SearchBox
+          className="container"
           ref={(searchBox) => mountSearchBox(searchBox)}
           bounds={bounds}
           controlPosition={google.maps.ControlPosition.TOP_CENTER}
           onPlacesChanged={() => changePlace(searchBox.getPlaces()[0])}>
-          <div id="searchBox" onClick={() => toggleOffAll()}>
+          <div id="searchBox" onClick={() => toggleOffPanelDrawer()}>
             <input
               name="searchInput"
               type="text"
@@ -41,6 +42,7 @@ class Map extends React.Component {
               value={searchInput}
               onChange={(event) => handleChange(event)} />
             <div className={searchInput ? "clear-input active" : "clear-input"} onClick={clearSearchBox}><IoMdCloseCircle /></div>
+            {home && !searchInput && <div className="home-popup"><span><IoMdArrowRoundUp /></span>Enter Home Address<span><IoMdArrowRoundUp /></span></div>}
           </div>
         </SearchBox>
         
@@ -71,7 +73,8 @@ const mapState = (state) => ({
   map: state.map,
   searchBox: state.searchBox,
   searchInput: state.searchInput,
-  infoWindow: state.infoWindow
+  infoWindow: state.infoWindow,
+  home: state.home
 })
 
 const mapDispatch = (dispatch) => ({
@@ -82,7 +85,7 @@ const mapDispatch = (dispatch) => ({
   handleChange: (event) => dispatch(actions.handleChange(event)),
   clearSearchBox: () => dispatch(actions.clearSearchBox()),
   renderMarkers: (id) => dispatch(actions.renderMarkers(id)),
-  toggleOffAll: () => dispatch(actions.toggleOffAll())
+  toggleOffPanelDrawer: () => dispatch(actions.toggleOffPanelDrawer())
 })
 
 export default connect(mapState, mapDispatch)(compose(withProps(mapProperties), withScriptjs, withGoogleMap)(Map))
