@@ -25,7 +25,7 @@ class Markers extends React.Component {
                     strokeWeight: 1,
                     labelOrigin: { x: 0.48, y: -30 }
                 }} />
-        )
+        ) 
     }
 
     render() {
