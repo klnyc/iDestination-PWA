@@ -37,11 +37,7 @@ class Markers extends React.Component {
                     : this.renderMarker(marker, index, 'palevioletred')
                 )}
 
-                {currentMarker.position && (
-                    <Marker
-                        position={currentMarker.position} 
-                        onClick={() => openInfoWindow(currentMarker)} />
-                )}
+                {currentMarker.position && this.renderMarker(currentMarker, null, 'red')}
             </Fragment>
         )
     }

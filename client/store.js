@@ -139,7 +139,7 @@ export const addMarker = (id, marker, date, category) => {
         .collection('markers')
         .add(marker)
         .then(() => dispatch(renderMarkers(id)))
-        .then(() => {dispatch(clearSearchBox()); dispatch(closeInfoWindow())})
+        .then(() => {dispatch(clearSearchBox()); dispatch(closeInfoWindow()); dispatch(clearCurrentMarker())})
     }
 }
 
@@ -187,7 +187,7 @@ function reducer (state = initialState, action) {
         case OPEN_INFO_WINDOW:
             return { ...state, infoWindow: action.infoWindow }
         case CLOSE_INFO_WINDOW:
-            return { ...state, infoWindow: {}, currentMarker: {} }
+            return { ...state, infoWindow: {} }
         case HANDLE_CHANGE:
             return { ...state, [event.target.name]: action[event.target.name] }
         case CLEAR_SEARCH_BOX:
