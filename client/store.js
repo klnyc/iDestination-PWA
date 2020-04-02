@@ -14,7 +14,8 @@ const initialState = {
     currentMarker: {},
     infoWindow: {},
     drawer: false,
-    panel: { experiences: false, wishlist: false }
+    panel: { experiences: false, wishlist: false },
+    category: { experiences: true, wishlist: true }
 }
 
 const SET_USER_DATA = "SET_USER_DATA"
@@ -23,6 +24,9 @@ const TOGGLE_DRAWER = "TOGGLE_DRAWER"
 const TOGGLE_PANEL_EXPERIENCES = "TOGGLE_PANEL_EXPERIENCES"
 const TOGGLE_PANEL_WISHLIST = "TOGGLE_PANEL_WISHLIST"
 const TOGGLE_OFF_ALL = "TOGGLE_OFF_ALL"
+const TOGGLE_CATEGORY_ALL = "TOGGLE_CATEGORY_ALL"
+const TOGGLE_CATEGORY_EXPERIENCES = "TOGGLE_CATEGORY_EXPERIENCES"
+const TOGGLE_CATEGORY_WISHLIST = "TOGGLE_CATEGORY_WISHLIST"
 const GO_TO_MARKER = "GO_TO_MARKER"
 const OPEN_INFO_WINDOW = 'OPEN_INFO_WINDOW'
 const CLOSE_INFO_WINDOW = 'CLOSE_INFO_WINDOW'
@@ -41,6 +45,18 @@ export const toggleDrawer = (drawer) => ({ type: TOGGLE_DRAWER, drawer })
 export const togglePanelExperiences = (panel) => ({ type: TOGGLE_PANEL_EXPERIENCES, panel })
 export const togglePanelWishlist = (panel) => ({ type: TOGGLE_PANEL_WISHLIST, panel })
 export const toggleOffAll = () => ({ type: TOGGLE_OFF_ALL })
+export const toggleCategory = (category) => {
+    switch(category) {
+        case "all":
+            return { type: TOGGLE_CATEGORY_ALL }
+        case "experiences":
+            return { type: TOGGLE_CATEGORY_EXPERIENCES }
+        case "wishlist":
+            return { type: TOGGLE_CATEGORY_WISHLIST }
+        default:
+            return { type: TOGGLE_CATEGORY_ALL }
+    }
+}
 export const goToMarker = (marker) => ({ type: GO_TO_MARKER, marker })
 export const openInfoWindow = (marker) => ({ type: OPEN_INFO_WINDOW, infoWindow: marker })
 export const closeInfoWindow = () => ({ type: CLOSE_INFO_WINDOW })
@@ -182,6 +198,12 @@ function reducer (state = initialState, action) {
             return { ...state, panel: { experiences: false, wishlist: !action.panel } }
         case TOGGLE_OFF_ALL:
             return { ...state, drawer: false, panel: { experiences: false, wishlist: false } }
+        case TOGGLE_CATEGORY_ALL:
+            return { ...state, category: { experiences: true, wishlist: true } }
+        case TOGGLE_CATEGORY_EXPERIENCES:
+            return { ...state, category: { experiences: true, wishlist: false } }
+        case TOGGLE_CATEGORY_WISHLIST:
+            return { ...state, category: { experiences: false, wishlist: true } }
         case GO_TO_MARKER:
             return { ...state, infoWindow: action.marker, center: action.marker.position }
         case OPEN_INFO_WINDOW:

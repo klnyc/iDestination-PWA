@@ -29,13 +29,21 @@ class Markers extends React.Component {
     }
 
     render() {
-        const { markers, currentMarker } = this.props
+        const { markers, currentMarker, category } = this.props
         return (
             <Fragment>
-                {markers.map((marker, index) => marker.experiences
-                    ? this.renderMarker(marker, index, 'lightsteelblue')
-                    : this.renderMarker(marker, index, 'palevioletred')
-                )}
+                {(category.experiences && category.wishlist) &&
+                markers.map((marker, index) => marker.experiences
+                ? this.renderMarker(marker, index, 'lightsteelblue')
+                : this.renderMarker(marker, index, 'palevioletred'))}
+
+                {(category.experiences && !category.wishlist) && markers
+                .filter(marker => marker.experiences)
+                .map((marker, index) => this.renderMarker(marker, index, 'lightsteelblue'))}
+
+                {(!category.experiences && category.wishlist) && markers
+                .filter(marker => marker.wishlist)
+                .map((marker, index) => this.renderMarker(marker, index, 'palevioletred'))}
 
                 {currentMarker.position && this.renderMarker(currentMarker, null, 'red')}
             </Fragment>
@@ -45,7 +53,8 @@ class Markers extends React.Component {
 
 const mapState = (state) => ({
     markers: state.markers,
-    currentMarker: state.currentMarker
+    currentMarker: state.currentMarker,
+    category: state.category
 })
 
 const mapDispatch = (dispatch) => ({

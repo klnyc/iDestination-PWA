@@ -290,7 +290,17 @@ body {
 
 .drawer-link {
     font-size: 0.88rem;
-    padding: 0.6rem 0;
+    margin: 1rem 0;
+}
+
+.drawer-minor {
+    font-size: 0.72rem;
+    margin: 0.6rem 0;
+}
+
+.drawer-minor span {
+    margin-left: 0.4rem;
+    color: red;
 }
 
 .drawer-copyright {
