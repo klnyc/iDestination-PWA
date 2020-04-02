@@ -6,14 +6,10 @@ import { openInfoWindow } from '../store'
 class Markers extends React.Component {
     constructor() {
         super()
-        this.state = {
-            experiences: { color: 'lightsteelblue' },
-            wishlist: { color: 'palevioletred'}
-        }
         this.renderMarker = this.renderMarker.bind(this)
     }
 
-    renderMarker(marker, index, category) {
+    renderMarker(marker, index, color) {
         const { openInfoWindow } = this.props
         return (
             <Marker
@@ -23,7 +19,7 @@ class Markers extends React.Component {
                 label={{ text: '●', color: 'black' }}
                 icon={{
                     path: 'M 0,0 C -2,-20 -10,-22 -10,-30 A 10,10 0 1,1 10,-30 C 10,-22 2,-20 0,0 z',
-                    fillColor: category.color,
+                    fillColor: color,
                     fillOpacity: 1,
                     strokeColor: 'black',
                     strokeWeight: 1,
@@ -37,8 +33,8 @@ class Markers extends React.Component {
         return (
             <Fragment>
                 {markers.map((marker, index) => marker.experiences
-                    ? this.renderMarker(marker, index, this.state.experiences)
-                    : this.renderMarker(marker, index, this.state.wishlist)
+                    ? this.renderMarker(marker, index, 'lightsteelblue')
+                    : this.renderMarker(marker, index, 'palevioletred')
                 )}
 
                 {currentMarker.position && (
