@@ -80,7 +80,7 @@ class Window extends React.Component {
                     <div className="infoWindow-address">{infoWindow.street}</div>
                     <div className="infoWindow-address">{infoWindow.location}</div>
 
-                    {!home && markers.indexOf(infoWindow) === -1 &&
+                    {!home && (infoWindow !== user.home) && markers.indexOf(infoWindow) === -1 &&
                     <Fragment>
                         {this.renderDatePicker()}
                         <div className="infoWindow-button-container">
@@ -89,8 +89,9 @@ class Window extends React.Component {
                         </div>
                     </Fragment>}
 
-                    {!home && markers.includes(infoWindow) && this.renderInfoWindowDate()}
-                    {home && <div className="infoWindow-button home" onClick={() => setHome(user.id, infoWindow)}>Set Home</div>}                 
+                    {!home && (infoWindow !== user.home) && markers.includes(infoWindow) && this.renderInfoWindowDate()}
+                    {home && (infoWindow !== user.home) && <div className="infoWindow-button home" onClick={() => setHome(user.id, infoWindow)}>Set Home</div>}  
+                    {(infoWindow === user.home) && <div className="infoWindow-button home">Home</div>}               
                 </div>
             </InfoWindow>
         )
