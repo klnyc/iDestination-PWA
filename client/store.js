@@ -1,11 +1,9 @@
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 
-const NYC = { lat: 40.7473735256486, lng: -73.98564376909184 }
-
 const initialState = {
     user: {},
-    center: NYC,
+    center: {},
     bounds: null,
     map: {},
     searchBox: {},
@@ -20,6 +18,7 @@ const initialState = {
 }
 
 const SET_USER_DATA = "SET_USER_DATA"
+const SET_CENTER = "SET_CENTER"
 const LOG_OUT = 'LOG_OUT'
 const TOGGLE_DRAWER = "TOGGLE_DRAWER"
 const TOGGLE_PANEL_EXPERIENCES = "TOGGLE_PANEL_EXPERIENCES"
@@ -42,6 +41,7 @@ const CHANGE_BOUNDS = 'CHANGE_BOUNDS'
 const CHANGE_PLACE = 'CHANGE_PLACE'
 
 export const setUserData = (user) => ({ type: SET_USER_DATA, user })
+export const setCenter = (coordinates) => ({ type: SET_CENTER, coordinates })
 export const logout = () => ({ type: LOG_OUT })
 export const toggleDrawer = (drawer) => ({ type: TOGGLE_DRAWER, drawer })
 export const togglePanelExperiences = (panel) => ({ type: TOGGLE_PANEL_EXPERIENCES, panel })
@@ -122,7 +122,11 @@ export const login = (user) => {
         .collection('users')
         .doc(user.uid)
         .get()
-        .then((data) => dispatch(setUserData(data.data())))
+        .then((data) => {
+            const NYC = { lat: 40.7473735256486, lng: -73.98564376909184 }
+            dispatch(setUserData(data.data()))
+            data.data().home ? dispatch(setCenter(data.data().home.position)) : dispatch(setCenter(NYC))
+        })
     }
 }
 
@@ -210,6 +214,8 @@ function reducer (state = initialState, action) {
     switch (action.type) {
         case SET_USER_DATA:
             return { ...state, user: action.user, currentMarker: {}, infoWindow: {}, home: false }
+        case SET_CENTER:
+            return { ...state, center: action.coordinates }
         case LOG_OUT:
             return { ...state, user: {}, currentMarker: {}, infoWindow: {}, searchInput: '', drawer: false, home: false }
         case TOGGLE_DRAWER:

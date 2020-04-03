@@ -1,17 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { MdAddCircle } from 'react-icons/md'
-import { IoMdPerson } from 'react-icons/io'
-import { toggleDrawer } from '../store'
+import { IoMdPerson, IoMdHome } from 'react-icons/io'
+import { toggleDrawer, goToMarker } from '../store'
 
 class Header extends React.Component {
     render() {
-        const { user, toggleDrawer, drawer } = this.props
+        const { user, toggleDrawer, drawer, goToMarker } = this.props
         return (
             <div className={user.id ? "header" : "header header-login"}>
                 <div className={user.id ? "header-icon" : "invisible"} onClick={() => toggleDrawer(drawer)}><IoMdPerson /></div>
                 <div className="header-title">iDestination</div>
-                <div className={user.id ? "header-icon" : "invisible"}><MdAddCircle /></div>
+                <div className={user.id ? "header-icon" : "invisible"} onClick={() => goToMarker(user.home)}><IoMdHome /></div>
             </div>
         )
     }
@@ -23,7 +22,8 @@ const mapState = (state) => ({
 })
 
 const mapDispatch = (dispatch) => ({
-    toggleDrawer: (drawer) => dispatch(toggleDrawer(drawer))
+    toggleDrawer: (drawer) => dispatch(toggleDrawer(drawer)),
+    goToMarker: (marker) => dispatch(goToMarker(marker))
 })
 
 export default connect(mapState, mapDispatch)(Header)
