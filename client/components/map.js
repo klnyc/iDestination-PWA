@@ -17,7 +17,7 @@ class Map extends React.Component {
   render() {
     const {
       mountMap, center, changeBounds, map, mountSearchBox, bounds, changePlace, searchBox, searchInput, 
-      handleChange, clearSearchBox, infoWindow, toggleOffPanelDrawer, home} = this.props
+      handleChange, clearSearchBox, infoWindow, toggleOffPanelDrawer, home } = this.props
 
     return (
       <GoogleMap

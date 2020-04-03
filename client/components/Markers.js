@@ -9,7 +9,7 @@ class Markers extends React.Component {
         this.renderMarker = this.renderMarker.bind(this)
     }
 
-    renderMarker(marker, index, color) {
+    renderMarker(marker, color, index) {
         const { openInfoWindow } = this.props
         return (
             <Marker
@@ -29,23 +29,24 @@ class Markers extends React.Component {
     }
 
     render() {
-        const { markers, currentMarker, category } = this.props
+        const { markers, currentMarker, category, user } = this.props
         return (
             <Fragment>
                 {(category.experiences && category.wishlist) &&
                 markers.map((marker, index) => marker.experiences
-                ? this.renderMarker(marker, index, 'lightsteelblue')
-                : this.renderMarker(marker, index, 'palevioletred'))}
+                ? this.renderMarker(marker, 'lightsteelblue', index)
+                : this.renderMarker(marker, 'palevioletred', index))}
 
                 {(category.experiences && !category.wishlist) && markers
                 .filter(marker => marker.experiences)
-                .map((marker, index) => this.renderMarker(marker, index, 'lightsteelblue'))}
+                .map((marker, index) => this.renderMarker(marker, 'lightsteelblue', index))}
 
                 {(!category.experiences && category.wishlist) && markers
                 .filter(marker => marker.wishlist)
-                .map((marker, index) => this.renderMarker(marker, index, 'palevioletred'))}
+                .map((marker, index) => this.renderMarker(marker, 'palevioletred', index))}
 
-                {currentMarker.position && this.renderMarker(currentMarker, null, 'red')}
+                {currentMarker.position && this.renderMarker(currentMarker, 'red')}
+                {user.home && this.renderMarker(user.home, 'blue')}
             </Fragment>
         )
     }
@@ -54,7 +55,8 @@ class Markers extends React.Component {
 const mapState = (state) => ({
     markers: state.markers,
     currentMarker: state.currentMarker,
-    category: state.category
+    category: state.category,
+    user: state.user
 })
 
 const mapDispatch = (dispatch) => ({

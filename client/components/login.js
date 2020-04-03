@@ -39,10 +39,7 @@ class Login extends React.Component {
             .firestore()
             .collection('users')
             .doc(credentials.user.uid)
-            .set({
-                name: this.state.name,
-                email: this.state.email
-            }))
+            .set({ name: this.state.name, email: this.state.email, id: credentials.user.uid }))
         .catch(error => error.message && this.setState({ error: error.message }))
     }
 

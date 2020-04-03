@@ -4,7 +4,7 @@ import { InfoWindow } from "react-google-maps"
 import { FaTrash } from "react-icons/fa"
 import { MdStar } from 'react-icons/md'
 import { GiFire } from 'react-icons/gi'
-import { addMarker, removeMarker, closeInfoWindow } from '../store'
+import { addMarker, removeMarker, closeInfoWindow, setHome } from '../store'
 
 class Window extends React.Component {
     constructor() {
@@ -72,7 +72,7 @@ class Window extends React.Component {
     }
 
     render() {
-        const { infoWindow, markers, closeInfoWindow, home } = this.props;
+        const { infoWindow, markers, closeInfoWindow, home, setHome, user } = this.props;
         return (
             <InfoWindow position={infoWindow.position} onCloseClick={() => closeInfoWindow()}>
                 <div className="infoWindow">
@@ -90,7 +90,7 @@ class Window extends React.Component {
                     </Fragment>}
 
                     {!home && markers.includes(infoWindow) && this.renderInfoWindowDate()}
-                    {home && <div className="infoWindow-button home">Set Home</div>}                 
+                    {home && <div className="infoWindow-button home" onClick={() => setHome(user.id, infoWindow)}>Set Home</div>}                 
                 </div>
             </InfoWindow>
         )
@@ -108,7 +108,8 @@ const mapState = (state) => ({
 const mapDispatch = (dispatch) => ({
     addMarker: (id, marker, date, category) => dispatch(addMarker(id, marker, date, category)),
     removeMarker: (id, marker) => dispatch(removeMarker(id, marker)),
-    closeInfoWindow: () => dispatch(closeInfoWindow())
+    closeInfoWindow: () => dispatch(closeInfoWindow()),
+    setHome: (id, marker) => dispatch(setHome(id, marker))
 })
 
 export default connect(mapState, mapDispatch)(Window)

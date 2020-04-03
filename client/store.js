@@ -41,7 +41,7 @@ const MOUNT_SEARCH_BOX = 'MOUNT_SEARCH_BOX'
 const CHANGE_BOUNDS = 'CHANGE_BOUNDS'
 const CHANGE_PLACE = 'CHANGE_PLACE'
 
-export const setUserData = (user, id) => ({ type: SET_USER_DATA, user, id })
+export const setUserData = (user) => ({ type: SET_USER_DATA, user })
 export const logout = () => ({ type: LOG_OUT })
 export const toggleDrawer = (drawer) => ({ type: TOGGLE_DRAWER, drawer })
 export const togglePanelExperiences = (panel) => ({ type: TOGGLE_PANEL_EXPERIENCES, panel })
@@ -120,8 +120,9 @@ export const login = (user) => {
         firebase
         .firestore()
         .collection('users')
-        .doc(user.uid).get()
-        .then((data) => dispatch(setUserData(data.data(), user.uid)))
+        .doc(user.uid)
+        .get()
+        .then((data) => dispatch(setUserData(data.data())))
     }
 }
 
@@ -158,7 +159,7 @@ export const addMarker = (id, marker, date, category) => {
         .collection('markers')
         .add(marker)
         .then(() => dispatch(renderMarkers(id)))
-        .then(() => {dispatch(clearSearchBox()); dispatch(closeInfoWindow()); dispatch(clearCurrentMarker())})
+        .then(() => { dispatch(clearSearchBox()); dispatch(closeInfoWindow()); dispatch(clearCurrentMarker()) })
     }
 }
 
@@ -183,18 +184,36 @@ export const removeMarker = (id, marker) => {
             })
         })
         .then(() => dispatch(renderMarkers(id)))
-        .then(() => {dispatch(clearSearchBox()); dispatch(clearCurrentMarker()); dispatch(closeInfoWindow())})
+        .then(() => { dispatch(clearSearchBox()); dispatch(clearCurrentMarker()); dispatch(closeInfoWindow()) })
+    }
+}
+
+export const setHome = (id, marker) => {
+    return (dispatch) => {
+        firebase
+        .firestore()
+        .collection('users')
+        .doc(id)
+        .set({ home: marker }, { merge: true })
+        .then(() => {
+            firebase
+            .firestore()
+            .collection('users')
+            .doc(id)
+            .get()
+            .then((data) => dispatch(setUserData(data.data())))
+        })
     }
 }
 
 function reducer (state = initialState, action) {
     switch (action.type) {
         case SET_USER_DATA:
-            return { ...state, user: { ...action.user, id: action.id } }
+            return { ...state, user: action.user, currentMarker: {}, infoWindow: {}, home: false }
         case LOG_OUT:
-            return { ...state, user: {}, infoWindow: {}, searchInput: '', drawer: false }
+            return { ...state, user: {}, currentMarker: {}, infoWindow: {}, searchInput: '', drawer: false, home: false }
         case TOGGLE_DRAWER:
-            return { ...state, drawer: !action.drawer }
+            return { ...state, drawer: !action.drawer, panel: { experiences: false, wishlist: false } }
         case TOGGLE_PANEL_EXPERIENCES:
             return { ...state, panel: { experiences: !action.panel, wishlist: false } }
         case TOGGLE_PANEL_WISHLIST:
@@ -208,7 +227,7 @@ function reducer (state = initialState, action) {
         case TOGGLE_CATEGORY_WISHLIST:
             return { ...state, category: { experiences: false, wishlist: true } }
         case TOGGLE_HOME:
-            return { ...state, home: !action.home, drawer: false, panel: { experiences: false, wishlist: false }, infoWindow: {}, searchInput: '' }
+            return { ...state, home: !action.home, drawer: false, panel: { experiences: false, wishlist: false }, currentMarker: {}, infoWindow: {}, searchInput: '' }
         case GO_TO_MARKER:
             return { ...state, infoWindow: action.marker, center: action.marker.position }
         case OPEN_INFO_WINDOW:
