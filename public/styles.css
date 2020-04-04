@@ -8,6 +8,10 @@
     display: none;
 }
 
+.link:hover {
+    cursor: pointer;
+}
+
 body {
   margin: 0;
   color: var(--text);
@@ -321,6 +325,10 @@ body {
     margin: 0.6rem 0;
 }
 
+.drawer-link:hover {
+    cursor: pointer;
+}
+
 .drawer-link span {
     margin-left: 0.4rem;
     color: red;
@@ -337,9 +345,10 @@ body {
 .panel {
     position: absolute;
     top: 6rem;
-    bottom: 3.4rem;
     right: 1.8rem;
     left: 2rem;
+    height: 31rem;
+    overflow: scroll;
     z-index: 3;
     border: 0.06rem solid var(--border);
     background-color: var(--theme);

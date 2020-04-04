@@ -21,7 +21,7 @@ class Drawer extends React.Component {
                 </div>
                 <div className="drawer-section">Home</div>
                 <div className="drawer-link" onClick={() => toggleHome(home)}>Edit</div>
-                <div className="drawer-section" onClick={() => firebase.auth().signOut()}>Sign Out</div>
+                <div className="drawer-section link" onClick={() => firebase.auth().signOut()}>Sign Out</div>
                 <div className="drawer-copyright">© 2019 iDestination<br/>All Rights Reserved.</div>
             </div>
         )
