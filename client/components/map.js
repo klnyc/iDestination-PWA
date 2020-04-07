@@ -56,7 +56,14 @@ class Map extends React.Component {
 
 const mapSettings = {
   disableDefaultUI: true,
-  clickableIcons: false
+  clickableIcons: false,
+  styles: [
+    { "featureType": "all", "stylers": [{ "saturation": 0 }, { "hue": "#e7ecf0" }] },
+    { "featureType": "road", "stylers": [{ "saturation": -70 }] },
+    { "featureType": "transit", "stylers": [{ "visibility": "on" }] },
+    { "featureType": "poi", "stylers": [{ "visibility": "off" }] },
+    { "featureType": "water", "stylers": [{ "visibility": "simplified" }, { "saturation": -60 }] }
+  ]
 }
 
 const mapProperties = {
