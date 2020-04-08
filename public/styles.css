@@ -82,11 +82,19 @@ body {
 }
 
 .login-label {
-    height: 2.6rem;
+    margin: 1rem 0 2rem 0
+}
+
+.login-label:hover {
+    cursor: pointer;
 }
 
 .login-button {
     font-size: 1rem;
+}
+
+.login-button:hover {
+    cursor: pointer;
 }
 
 .login-button-back {
@@ -347,7 +355,7 @@ body {
     top: 6rem;
     right: 1.8rem;
     left: 2rem;
-    height: 31rem;
+    height: calc(100% - 10.68rem);
     overflow: scroll;
     z-index: 3;
     border: 0.06rem solid var(--border);

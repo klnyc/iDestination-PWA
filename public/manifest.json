@@ -3,7 +3,7 @@
     "short_name": "iDestination",
     "start_url": "./index.html",
     "display": "standalone",
-    "background_color": "red",
+    "background_color": "blue",
     "theme_color": "blue",
     "orientation": "portrait-primary",
     "icons": [
