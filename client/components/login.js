@@ -15,6 +15,7 @@ class Login extends React.Component {
         this.handleLogin = this.handleLogin.bind(this)
         this.handleSignUp = this.handleSignUp.bind(this)
         this.handleChange = this.handleChange.bind(this)
+        this.renderBackButton = this.renderBackButton.bind(this)
     }
 
     handleChange(event) {
@@ -43,6 +44,12 @@ class Login extends React.Component {
         .catch(error => error.message && this.setState({ error: error.message }))
     }
 
+    renderBackButton() {
+        return (
+            <div className="login-button-back"><MdArrowBack onClick={() => this.setState({ signUp: false, logIn: false, error: '' })} /></div>
+        )
+    }
+
     render () {
         const { logIn, signUp, email, password, name, error } = this.state
         return (
@@ -51,8 +58,8 @@ class Login extends React.Component {
 
                 {!logIn && !signUp && (
                     <div className="login-form">
-                        <p className="login-label" onClick={() => this.setState({ signUp: false, logIn: true })}>Log In</p>
-                        <p className="login-label" onClick={() => this.setState({ signUp: true, logIn: false })}>Sign Up</p>
+                        <div className="login-label" onClick={() => this.setState({ signUp: false, logIn: true })}>Log In</div>
+                        <div className="login-label" onClick={() => this.setState({ signUp: true, logIn: false })}>Sign Up</div>
                     </div>
                 )}
 
@@ -60,8 +67,8 @@ class Login extends React.Component {
                     <div className="login-form">
                         <div className="login-input"><input name="email" type="email" placeholder="Email" value={email} onChange={this.handleChange} autoComplete="off" required></input></div>
                         <div className={password ? "login-input password" : "login-input"}><input name="password" type="password" placeholder="Password" value={password} onChange={this.handleChange} autoComplete="off" required></input></div>
-                        <p className="login-button" onClick={this.handleLogin}>Log In</p>
-                        <div className="login-button-back" onClick={() => this.setState({ signUp: false, logIn: false, error: '' })}><MdArrowBack className="link" /></div>
+                        <div className="login-button" onClick={this.handleLogin}>Log In</div>
+                        {this.renderBackButton()}
                     </div>
                 )}
 
@@ -70,8 +77,8 @@ class Login extends React.Component {
                         <div className="login-input"><input name="name" type="text" placeholder="Name" value={name} onChange={this.handleChange} autoComplete="off" required></input></div>
                         <div className="login-input"><input name="email" type="email" placeholder="Email" value={email} onChange={this.handleChange} autoComplete="off" required></input></div>
                         <div className={password ? "login-input password" : "login-input"}><input name="password" type="password" placeholder="Password" value={password} onChange={this.handleChange} autoComplete="off" required></input></div>
-                        <p className="login-button" onClick={this.handleSignUp}>Sign Up</p>
-                        <div className="login-button-back" onClick={() => this.setState({ signUp: false, logIn: false, error: '' })}><MdArrowBack className="link" /></div>
+                        <div className="login-button" onClick={this.handleSignUp}>Sign Up</div>
+                        {this.renderBackButton()}
                     </div>
                 )}
             </div>

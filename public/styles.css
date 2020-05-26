@@ -4,14 +4,6 @@
     --theme: rgb(63, 63, 63, 0.88);
 }
 
-.invisible {
-    display: none;
-}
-
-.link:hover {
-    cursor: pointer;
-}
-
 body {
   margin: 0;
   color: var(--text);
@@ -82,24 +74,23 @@ body {
 }
 
 .login-label {
-    margin: 1rem 0 2rem 0
-}
-
-.login-label:hover {
+    margin: 1rem auto 2rem;
     cursor: pointer;
+    width: 4rem;
 }
 
 .login-button {
     font-size: 1rem;
-}
-
-.login-button:hover {
+    width: 3.6rem;
+    margin: 1rem auto;
+    width: 4rem;
     cursor: pointer;
 }
 
 .login-button-back {
     padding: 0.4rem;
     font-size: 1.4rem;
+    cursor: pointer;
 }
 
 .login-input {
@@ -317,7 +308,7 @@ body {
     overflow: hidden;
     font-size: 0.82rem;
     font-style: italic;
-    padding: .12rem 0;
+    padding: 0.12rem 0;
     padding-bottom: 1rem;
     margin-bottom: 1rem;
     border-bottom: 0.06rem solid lightgray;
@@ -331,10 +322,6 @@ body {
 .drawer-link {
     font-size: 0.72rem;
     margin: 0.6rem 0;
-}
-
-.drawer-link:hover {
-    cursor: pointer;
 }
 
 .drawer-link span {
@@ -400,4 +387,17 @@ body {
 .panel-column.date {
     flex: 2;
     text-align: center;
+}
+
+.invisible {
+    display: none;
+}
+
+.plain-link:hover {
+    cursor: pointer;
+}
+
+.color-link:hover {
+    cursor: pointer;
+    color: #c4d7e6;
 }

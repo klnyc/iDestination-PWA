@@ -19,9 +19,9 @@ class Header extends React.Component {
         const { user, toggleDrawer, drawer } = this.props
         return (
             <div className={user.id ? "header" : "header header-login"}>
-                <div className={user.id ? "header-icon" : "invisible"}><IoMdPerson className="link" onClick={() => toggleDrawer(drawer)} /></div>
+                <div className={user.id ? "header-icon" : "invisible"}><IoMdPerson className="plain-link" onClick={() => toggleDrawer(drawer)} /></div>
                 <div className="header-title">iDestination</div>
-                <div className={user.id ? "header-icon" : "invisible"}><IoMdHome className="link" onClick={this.goHome} /></div>
+                <div className={user.id ? "header-icon" : "invisible"}><IoMdHome className="plain-link" onClick={this.goHome} /></div>
             </div>
         )
     }

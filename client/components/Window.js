@@ -29,8 +29,8 @@ class Window extends React.Component {
     renderInfoWindowIcons() {
         const { infoWindow } = this.props
         if (infoWindow.experiences && infoWindow.wishlist) return <div><GiFire /><MdStar /></div>
-        if (infoWindow.experiences) return <div><GiFire /></div>
-        if (infoWindow.wishlist) return <div><MdStar /></div>
+        if (infoWindow.experiences) return <div><GiFire style={{ color: 'lightsteelblue' }} /></div>
+        if (infoWindow.wishlist) return <div><MdStar style={{ color: 'palevioletred' }} /></div>
     }
 
     renderInfoWindowDate() {
@@ -39,7 +39,7 @@ class Window extends React.Component {
           <div className="infoWindow-date-container">
             {this.renderInfoWindowIcons()}
             <div className="infoWindow-date">{infoWindow.date}</div>
-            <div className="infoWindow-icon-trash" onClick={() => removeMarker(user.id, infoWindow)}><FaTrash /></div>
+            <div className="infoWindow-icon-trash plain-link" onClick={() => removeMarker(user.id, infoWindow)}><FaTrash style={{ color: 'gray' }} /></div>
           </div>
         )
     }

@@ -10,18 +10,18 @@ class Drawer extends React.Component {
                 <div className="drawer-name">{user.name}</div>
                 <div className="drawer-email">{user.email}</div>
                 <div className="drawer-section">Display</div>
-                <div className="drawer-link" onClick={() => toggleCategory('all')}>
+                <div className="drawer-link color-link" onClick={() => toggleCategory('all')}>
                     All{(category.experiences && category.wishlist) ? <span>●</span> : ''}
                 </div>
-                <div className="drawer-link" onClick={() => toggleCategory('experiences')}>
+                <div className="drawer-link color-link" onClick={() => toggleCategory('experiences')}>
                     Experiences{(category.experiences && !category.wishlist) ? <span>●</span> : ''}
                 </div>
-                <div className="drawer-link" onClick={() => toggleCategory('wishlist')}>
+                <div className="drawer-link color-link" onClick={() => toggleCategory('wishlist')}>
                     Wishlist{(!category.experiences && category.wishlist) ? <span>●</span> : ''}
                 </div>
                 <div className="drawer-section">Home</div>
-                <div className="drawer-link" onClick={() => toggleHome(home)}>Edit</div>
-                <div className="drawer-section link" onClick={() => firebase.auth().signOut()}>Sign Out</div>
+                <div className="drawer-link color-link" onClick={() => toggleHome(home)}>Edit</div>
+                <div className="drawer-section color-link" onClick={() => firebase.auth().signOut()}>Sign Out</div>
                 <div className="drawer-copyright">© 2019 iDestination<br/>All Rights Reserved</div>
             </div>
         )
