@@ -297,7 +297,7 @@ body {
 }
 
 .drawer-name {
-    padding: 0.32rem 0;
+    padding-bottom: 0.32rem;
     text-overflow: ellipsis;
     overflow: hidden;
     font-weight: bold;
@@ -308,20 +308,20 @@ body {
     overflow: hidden;
     font-size: 0.82rem;
     font-style: italic;
-    padding: 0.12rem 0;
-    padding-bottom: 1rem;
-    margin-bottom: 1rem;
-    border-bottom: 0.06rem solid lightgray;
 }
 
 .drawer-section {
-    font-size: 0.88rem;
-    margin: 1rem 0;
+    padding: 1rem 0;
+    border-bottom: 0.06rem solid lightgray;
+}
+
+.drawer-section.signout {
+    border: none
 }
 
 .drawer-link {
     font-size: 0.72rem;
-    margin: 0.6rem 0;
+    padding-top: 0.6rem;
 }
 
 .drawer-link span {
