@@ -30,10 +30,6 @@ body {
     height: 3rem;
 }
 
-.header-login {
-    background-color: transparent;
-}
-
 .header-title {
     font-size: 1.2rem;
     letter-spacing: 0.6rem;
@@ -51,10 +47,20 @@ body {
     align-items: center;
 }
 
+.header-login {
+    background-color: #000000;
+}
+
+.header-login-link {
+    font-size: 1rem;
+    cursor: pointer;
+}
+
 .login {
     height: 100vh;
     text-align: center;
-    background-image: url('/img/ktown.jpg');
+    /* background-image: url('/img/ktown.jpg'); */
+    background-image: url('/img/fultoncenter.jpg');
     background-size: cover;
 }
 
@@ -389,9 +395,7 @@ body {
     text-align: center;
 }
 
-.invisible {
-    display: none;
-}
+.invisible { display: none }
 
 .plain-link:hover {
     cursor: pointer;
