@@ -59,16 +59,33 @@ body {
 .home {
     height: 100vh;
     /* background-image: url('/img/ktown.jpg'); */
-    background-image: linear-gradient(black, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4), transparent), url('/img/fultoncenter.jpg');
+    background-image: linear-gradient(black, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/img/fultoncenter.jpg');
     background-size: cover;
     background-position: center center;
+}
+
+.home-description {
+    padding-top: 8rem;
+    text-align: center;
+}
+
+.home-title {
+    font-size: 2rem;
+    padding: 1rem;
+}
+
+.home-text-container {
+    padding: 1rem;
+}
+
+.home-text {
+    padding: 0.1rem;
 }
 
 .login {
     position: absolute;
     top: 3.6rem;
     right: 0.6rem;
-    /* height: 12rem; */
     text-align: center;
 }
 
