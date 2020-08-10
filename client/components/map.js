@@ -42,7 +42,7 @@ class Map extends React.Component {
               value={searchInput}
               onChange={(event) => handleChange(event)} />
             <div className={searchInput ? "clear-input active" : "clear-input"} onClick={clearSearchBox}><IoMdCloseCircle /></div>
-            {home && !searchInput && <div className="home-popup"><span><IoMdArrowRoundUp /></span>Enter Home Address<span><IoMdArrowRoundUp /></span></div>}
+            {home && !searchInput && <div className="set-home-popup"><span><IoMdArrowRoundUp /></span>Enter Home Address<span><IoMdArrowRoundUp /></span></div>}
           </div>
         </SearchBox>
         

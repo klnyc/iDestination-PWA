@@ -2,13 +2,22 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { IoMdPerson, IoMdHome } from 'react-icons/io'
 import { toggleDrawer, goToMarker, setCenter } from '../store'
+import Login from './Login'
 
 class Header extends React.Component {
     constructor() {
         super()
+        this.state = {
+            showLogin: false
+        }
+        this.showLoginForm = this.showLoginForm.bind(this)
         this.goHome = this.goHome.bind(this)
         this.renderLoginHeader = this.renderLoginHeader.bind(this)
         this.renderMapHeader = this.renderMapHeader.bind(this)
+    }
+
+    showLoginForm() {
+        this.setState({ showLogin: true })
     }
 
     goHome() {
@@ -18,12 +27,13 @@ class Header extends React.Component {
     }
 
     renderLoginHeader() {
-        const { toggleDrawer, drawer } = this.props
+        const { showLogin } = this.state
         return (
             <div className="header header-login">
                 <div className="header-icon"><img src="img/logo.png" width="40" height="40"></img></div>
                 <div className="header-title">iDestination</div>
-                <div className="header-icon"><div className="header-login-link">Login</div></div>
+                <div className="header-icon"><div className="header-login-link" onClick={this.showLoginForm}>Login</div></div>
+                {showLogin && <Login />}
             </div>
         )
     }

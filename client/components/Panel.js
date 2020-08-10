@@ -33,7 +33,7 @@ class Panel extends React.Component {
         const wishlist = markers.filter(marker => marker.wishlist)
         const panelMarkers = panel.experiences ? experiences : wishlist
         return (
-            <div className={(panel.experiences || panel.wishlist) ? "panel" : "invisible"}>
+            <div className={(panel.experiences || panel.wishlist) ? "panel card" : "invisible"}>
                 <div className="panel-title">{panel.experiences ? "Experiences" : "Wishlist"}</div>
                 {this.sortMarkers(panelMarkers).map((marker, index) => this.renderMarkerDetails(marker, index))}
             </div>
