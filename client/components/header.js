@@ -43,9 +43,7 @@ class Header extends React.Component {
 
     render() {
         const { user } = this.props
-        return (
-            user.id ? this.renderMapHeader() : this.renderLoginHeader()
-        )
+        return user.id ? this.renderMapHeader() : this.renderLoginHeader()
     }
 }
 

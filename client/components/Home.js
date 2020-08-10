@@ -7,7 +7,14 @@ class Home extends React.Component {
         const { closeLogIn } = this.props
         return (
             <div className="home" onClick={() => closeLogIn()}>
-                
+                <div className="home-description">
+                    <div className="home-title">Travel journal. Travel planner. All in one.</div>
+                    <div className="home-text-container">
+                        <div className="home-text">Easily view all the places that you've visited in the past</div>
+                        <div className="home-text">and all the places you wish to visit in the future.</div>
+                        <div className="home-text">Keep track of your adventures and plan your next vacation.</div>
+                    </div>
+                </div>
             </div>
         )
     }
@@ -18,8 +25,3 @@ const mapDispatch = (dispatch) => ({
 })
 
 export default connect(null, mapDispatch)(Home)
-
-// iDestination is the Travel journal and travel planner, all in one.
-// Easily view all the places that you've visited in the past 
-// and all the places you wish to visit in the future.
-// Keep track of your adventures and plan your next vacation.
