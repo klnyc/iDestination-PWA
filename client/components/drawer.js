@@ -7,7 +7,7 @@ class Drawer extends React.Component {
         const { user, drawer, category, toggleCategory, home, toggleHome } = this.props
         return (
             <div className={drawer ? "drawer card" : "invisible"}>
-                <div className="drawer-section">
+                <div className="drawer-section first-section">
                     <div className="drawer-name">{user.name}</div>
                     <div className="drawer-email">{user.email}</div>
                 </div>
@@ -26,9 +26,7 @@ class Drawer extends React.Component {
                 <div className="drawer-section">
                     <div className="drawer-title">Home</div>
                     <div className="drawer-link color-link" onClick={() => toggleHome(home)}>Edit</div>
-                </div>
-                <div className="drawer-section signout">
-                    <div className="drawer-title color-link" onClick={() => firebase.auth().signOut()}>Sign Out</div>
+                    <div className="drawer-link color-link" onClick={() => firebase.auth().signOut()}>Sign Out</div>
                 </div>
                 <div className="drawer-copyright">© 2019 iDestination<br/>All Rights Reserved</div>
             </div>

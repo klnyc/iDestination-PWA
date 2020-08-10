@@ -48,7 +48,7 @@ body {
 }
 
 .header-login {
-    background-color: #000000;
+    background-color:black;
 }
 
 .header-login-link {
@@ -56,9 +56,12 @@ body {
     cursor: pointer;
 }
 
+.header-login-link:hover {
+    color: #5a4495
+}
+
 .home {
     height: 100vh;
-    /* background-image: url('/img/ktown.jpg'); */
     background-image: linear-gradient(black, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/img/fultoncenter.jpg');
     background-size: cover;
     background-position: center center;
@@ -97,6 +100,11 @@ body {
     font-size: 0.8rem;
     cursor: pointer;
     padding: 0.4rem;
+    margin: auto 2rem;
+}
+
+.login-signup-link:hover {
+    text-decoration: underline;
 }
 
 .login-input.password input {
@@ -124,9 +132,17 @@ body {
 }
 
 .login-button {
-    margin: 0.8rem auto;
+    margin: 0.6rem auto;
     width: 3.6rem;
     cursor: pointer;
+    padding: 0.2rem 0.4rem;
+    border: 0.06rem solid white;
+    border-radius: 0.26rem;
+    background-color: black;
+}
+
+.login-button:hover {
+    border: 0.06rem solid #5a4495;
 }
 
 .login-button-back {
@@ -190,11 +206,7 @@ body {
 .set-home-popup {
     text-align: center;
     z-index: 2;
-    border: 0.06rem solid var(--border);
-    background-color: var(--theme);
-    box-shadow: 0.08rem 0.08rem 0.6rem 0.06rem black;
-    margin: 12.8rem -1rem 16rem;
-    padding: 1.2rem 0;
+    margin: 1rem -1.2rem 1rem 0;
 }
 
 .set-home-popup span {
@@ -237,6 +249,11 @@ body {
     background-color: lightgray;
     margin: 0.4rem auto 0;
     width: 6rem;
+}
+
+.infoWindow-button.user-home.set-home-active:hover {
+    cursor: pointer;
+    background-color: silver;
 }
 
 .infoWindow-date-container {
@@ -302,13 +319,6 @@ body {
     letter-spacing: 0.125rem;
 }
 
-.card {
-    background-color: var(--theme);
-    border: 0.06rem solid var(--border);
-    box-shadow: 0.08rem 0.08rem 0.6rem 0.06rem black;
-    padding: 0.6rem;
-}
-
 .drawer {
     position: absolute;
     box-sizing: border-box;
@@ -335,10 +345,10 @@ body {
 
 .drawer-section {
     padding: 1rem 0;
-    border-bottom: 0.06rem solid lightgray;
+    border-top: 0.06rem solid lightgray;
 }
 
-.drawer-section.signout {
+.drawer-section.first-section {
     border: none
 }
 
@@ -406,6 +416,13 @@ body {
 .panel-column.date {
     flex: 2;
     text-align: center;
+}
+
+.card {
+    background-color: var(--theme);
+    border: 0.06rem solid var(--border);
+    box-shadow: 0.08rem 0.08rem 0.6rem 0.06rem black;
+    padding: 0.6rem;
 }
 
 .invisible { display: none }

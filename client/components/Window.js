@@ -90,7 +90,7 @@ class Window extends React.Component {
                     </Fragment>}
 
                     {!home && (infoWindow !== user.home) && markers.includes(infoWindow) && this.renderInfoWindowDate()}
-                    {home && (infoWindow !== user.home) && <div className="infoWindow-button user-home" onClick={() => setHome(user.id, infoWindow)}>Set Home</div>}  
+                    {home && (infoWindow !== user.home) && <div className="infoWindow-button user-home set-home-active" onClick={() => setHome(user.id, infoWindow)}>Set Home</div>}  
                     {(infoWindow === user.home) && <div className="infoWindow-button user-home">Home</div>}               
                 </div>
             </InfoWindow>
