@@ -1,12 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { IoMdPerson, IoMdHome } from 'react-icons/io'
-import { toggleDrawer, goToMarker, setCenter } from '../store'
+import { toggleDrawer, goToMarker, setCenter, openLogIn } from '../store'
+import Login from './Login'
 
 class Header extends React.Component {
     constructor() {
         super()
         this.goHome = this.goHome.bind(this)
+        this.renderLoginHeader = this.renderLoginHeader.bind(this)
+        this.renderMapHeader = this.renderMapHeader.bind(this)
     }
 
     goHome() {
@@ -15,27 +18,48 @@ class Header extends React.Component {
         user.home ? goToMarker(user.home) : setCenter(NYC)
     }
 
-    render() {
-        const { user, toggleDrawer, drawer } = this.props
+    renderLoginHeader() {
+        const { login, openLogIn } = this.props
         return (
-            <div className={user.id ? "header" : "header header-login"}>
-                <div className={user.id ? "header-icon" : "invisible"}><IoMdPerson className="plain-link" onClick={() => toggleDrawer(drawer)} /></div>
+            <div className="header header-login">
+                <div className="header-icon"><img src="img/logo.png" width="40" height="40"></img></div>
                 <div className="header-title">iDestination</div>
-                <div className={user.id ? "header-icon" : "invisible"}><IoMdHome className="plain-link" onClick={this.goHome} /></div>
+                <div className="header-icon"><div className="header-login-link" onClick={() => openLogIn()}>Login</div></div>
+                {login && <Login />}
             </div>
+        )
+    }
+
+    renderMapHeader() {
+        const { toggleDrawer, drawer } = this.props
+        return (
+            <div className="header">
+                <div className="header-icon"><IoMdPerson className="plain-link" onClick={() => toggleDrawer(drawer)} /></div>
+                <div className="header-title">iDestination</div>
+                <div className="header-icon"><IoMdHome className="plain-link" onClick={this.goHome} /></div>
+            </div>
+        )
+    }
+
+    render() {
+        const { user } = this.props
+        return (
+            user.id ? this.renderMapHeader() : this.renderLoginHeader()
         )
     }
 }
 
 const mapState = (state) => ({
     user: state.user,
-    drawer: state.drawer
+    drawer: state.drawer,
+    login: state.login
 })
 
 const mapDispatch = (dispatch) => ({
     toggleDrawer: (drawer) => dispatch(toggleDrawer(drawer)),
     goToMarker: (marker) => dispatch(goToMarker(marker)),
-    setCenter: (coordinates) => dispatch(setCenter(coordinates))
+    setCenter: (coordinates) => dispatch(setCenter(coordinates)),
+    openLogIn: () => dispatch(openLogIn())
 })
 
 export default connect(mapState, mapDispatch)(Header)

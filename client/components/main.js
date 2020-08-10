@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import Header from './Header'
 import Footer from './Footer'
 import Map from './Map'
-import Login from './Login'
+import Home from './Home'
 import Drawer from './Drawer'
 import Panel from './Panel'
 import { login, logout } from '../store'
@@ -18,9 +18,9 @@ class Main extends React.Component {
         const { user } = this.props
         return (
             <div id="main">
-                <Drawer />
                 <Header />
-                {user.id ? <Map /> : <Login />}
+                {user.id ? <Map /> : <Home />}
+                <Drawer />
                 <Panel />
                 <Footer />
             </div>

@@ -30,10 +30,6 @@ body {
     height: 3rem;
 }
 
-.header-login {
-    background-color: transparent;
-}
-
 .header-title {
     font-size: 1.2rem;
     letter-spacing: 0.6rem;
@@ -51,50 +47,39 @@ body {
     align-items: center;
 }
 
-.login {
-    height: 100vh;
-    text-align: center;
-    background-image: url('/img/ktown.jpg');
-    background-size: cover;
+.header-login {
+    background-color: #000000;
 }
 
-.login-error {
-    color: red;
-    font-size: 0.8rem;
-    width: 100%;
-    text-align: center;
+.header-login-link {
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.home {
+    height: 100vh;
+    /* background-image: url('/img/ktown.jpg'); */
+    background-image: linear-gradient(black, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4), transparent), url('/img/fultoncenter.jpg');
+    background-size: cover;
+    background-position: center center;
+}
+
+.login {
     position: absolute;
     top: 3.6rem;
+    right: 0.6rem;
+    /* height: 12rem; */
+    text-align: center;
 }
 
-.login-form {
-    padding-top: 6rem;
-    padding-bottom: 24rem;
-    background-image: linear-gradient(black, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4), transparent);
-}
+.login-title { height: 2rem }
+.login-input { height: 2.6rem }
+.login-or { font-size: 0.6rem }
 
-.login-label {
-    margin: 1rem auto 2rem;
+.login-signup-link { 
+    font-size: 0.8rem;
     cursor: pointer;
-    width: 4rem;
-}
-
-.login-button {
-    font-size: 1rem;
-    width: 3.6rem;
-    margin: 1rem auto;
-    width: 4rem;
-    cursor: pointer;
-}
-
-.login-button-back {
     padding: 0.4rem;
-    font-size: 1.4rem;
-    cursor: pointer;
-}
-
-.login-input {
-    height: 2.6rem;
 }
 
 .login-input.password input {
@@ -106,7 +91,7 @@ body {
     color: var(--text);
     border: none;
     border-bottom: 1px solid var(--border);
-    text-align: center;
+    text-align: left;
     font-size: 1rem;
     padding: 0.4rem;
     width: 10rem;
@@ -119,6 +104,24 @@ body {
 
 .login input:focus {
     outline: none;
+}
+
+.login-button {
+    margin: 0.8rem auto;
+    width: 3.6rem;
+    cursor: pointer;
+}
+
+.login-button-back {
+    font-size: 1.4rem;
+    cursor: pointer;
+    position: absolute;
+    top: 0.4rem;
+}
+
+.login-error {
+    color: red;
+    font-size: 0.8rem;
 }
 
 .map {
@@ -167,7 +170,7 @@ body {
     color: black;
 }
 
-.home-popup {
+.set-home-popup {
     text-align: center;
     z-index: 2;
     border: 0.06rem solid var(--border);
@@ -177,7 +180,7 @@ body {
     padding: 1.2rem 0;
 }
 
-.home-popup span {
+.set-home-popup span {
     padding: 0 .8rem;
     font-size: .8rem;
 }
@@ -207,13 +210,13 @@ body {
 .infoWindow-button {
     padding: 0.2rem 0.4rem;
     margin: 0 0.4rem;
-    border: .06rem solid black;
+    border: 0.06rem solid black;
     border-radius: 0.26rem;
 }
 
 .infoWindow-button.experiences { background-color: lightsteelblue }
 .infoWindow-button.wishlist { background-color: palevioletred }
-.infoWindow-button.home { 
+.infoWindow-button.user-home { 
     background-color: lightgray;
     margin: 0.4rem auto 0;
     width: 6rem;
@@ -282,18 +285,21 @@ body {
     letter-spacing: 0.125rem;
 }
 
+.card {
+    background-color: var(--theme);
+    border: 0.06rem solid var(--border);
+    box-shadow: 0.08rem 0.08rem 0.6rem 0.06rem black;
+    padding: 0.6rem;
+}
+
 .drawer {
     position: absolute;
     box-sizing: border-box;
-    background-color: var(--theme);
     z-index: 2;
     width: 8.8rem;
     top: 3.4rem;
     bottom: 3.4rem;
     left: 0.3rem;
-    border: 0.06rem solid var(--border);
-    box-shadow: 0.08rem 0.08rem 0.6rem 0.06rem black;
-    padding: 0.6rem;
 }
 
 .drawer-name {
@@ -345,10 +351,6 @@ body {
     height: calc(100% - 10.68rem);
     overflow: scroll;
     z-index: 3;
-    border: 0.06rem solid var(--border);
-    background-color: var(--theme);
-    box-shadow: 0.08rem 0.08rem 0.6rem 0.06rem black;
-    padding: 0.6rem;
 }
 
 .panel::-webkit-scrollbar {
@@ -389,9 +391,7 @@ body {
     text-align: center;
 }
 
-.invisible {
-    display: none;
-}
+.invisible { display: none }
 
 .plain-link:hover {
     cursor: pointer;

@@ -9,13 +9,12 @@ class Login extends React.Component {
             password: '',
             name: '',
             signUp: false,
-            logIn: false,
+            logIn: true,
             error: ''
         }
         this.handleLogin = this.handleLogin.bind(this)
         this.handleSignUp = this.handleSignUp.bind(this)
         this.handleChange = this.handleChange.bind(this)
-        this.renderBackButton = this.renderBackButton.bind(this)
     }
 
     handleChange(event) {
@@ -27,7 +26,7 @@ class Login extends React.Component {
         firebase
         .auth()
         .signInWithEmailAndPassword(this.state.email, this.state.password)
-        .catch(error => error.message && this.setState({ error: error.message }))
+        .catch(error => error.message && this.setState({ error: 'Invalid credentials' }))
     }
 
     handleSignUp(event) {
@@ -41,55 +40,37 @@ class Login extends React.Component {
             .collection('users')
             .doc(credentials.user.uid)
             .set({ name: this.state.name, email: this.state.email, id: credentials.user.uid }))
-        .catch(error => error.message && this.setState({ error: error.message }))
-    }
-
-    renderBackButton() {
-        return (
-            <div className="login-button-back"><MdArrowBack onClick={() => this.setState({ signUp: false, logIn: false, error: '' })} /></div>
-        )
+        .catch(error => error.message && this.setState({ error: 'Invalid credentials' }))
     }
 
     render () {
         const { logIn, signUp, email, password, name, error } = this.state
         return (
-            <div className="login">
-                <div className="login-error"><span>{error}</span></div>
+            <div className="login card">
+                {logIn && (
+                <div className="login-form">
+                    <div className="login-title">Welcome!</div>
+                    <div className="login-input"><input name="email" type="email" placeholder="Email" value={email} onChange={this.handleChange} autoComplete="off" required></input></div>
+                    <div className={password ? "login-input password" : "login-input"}><input name="password" type="password" placeholder="Password" value={password} onChange={this.handleChange} autoComplete="off" required></input></div>
+                    <div className="login-button" onClick={this.handleLogin}>Log In</div>
+                    <div className="login-or">- OR -</div>
+                    <div className="login-signup-link" onClick={() => this.setState({ signUp: true, logIn: false, error: '' })}>Create Account</div>
+                </div>)}
 
-                {!logIn && !signUp && (
-                    <div className="login-form">
-                        <div className="login-label" onClick={() => this.setState({ signUp: false, logIn: true })}>Log In</div>
-                        <div className="login-label" onClick={() => this.setState({ signUp: true, logIn: false })}>Sign Up</div>
-                    </div>
-                )}
+                {signUp && (
+                <div className="signup-form">
+                    <div className="login-title">Create Account</div>
+                    <div className="login-input"><input name="name" type="text" placeholder="Name" value={name} onChange={this.handleChange} autoComplete="off" required></input></div>
+                    <div className="login-input"><input name="email" type="email" placeholder="Email" value={email} onChange={this.handleChange} autoComplete="off" required></input></div>
+                    <div className={password ? "login-input password" : "login-input"}><input name="password" type="password" placeholder="Password" value={password} onChange={this.handleChange} autoComplete="off" required></input></div>
+                    <div className="login-button" onClick={this.handleSignUp}>Sign Up</div>
+                    <div className="login-button-back"><MdArrowBack onClick={() => this.setState({ signUp: false, logIn: true, email: '', password: '', name: '', error: '' })} /></div>
+                </div>)}
 
-                {logIn && !signUp && (
-                    <div className="login-form">
-                        <div className="login-input"><input name="email" type="email" placeholder="Email" value={email} onChange={this.handleChange} autoComplete="off" required></input></div>
-                        <div className={password ? "login-input password" : "login-input"}><input name="password" type="password" placeholder="Password" value={password} onChange={this.handleChange} autoComplete="off" required></input></div>
-                        <div className="login-button" onClick={this.handleLogin}>Log In</div>
-                        {this.renderBackButton()}
-                    </div>
-                )}
-
-                {!logIn && signUp && (
-                    <div className="login-form">
-                        <div className="login-input"><input name="name" type="text" placeholder="Name" value={name} onChange={this.handleChange} autoComplete="off" required></input></div>
-                        <div className="login-input"><input name="email" type="email" placeholder="Email" value={email} onChange={this.handleChange} autoComplete="off" required></input></div>
-                        <div className={password ? "login-input password" : "login-input"}><input name="password" type="password" placeholder="Password" value={password} onChange={this.handleChange} autoComplete="off" required></input></div>
-                        <div className="login-button" onClick={this.handleSignUp}>Sign Up</div>
-                        {this.renderBackButton()}
-                    </div>
-                )}
+                {error && <div className="login-error"><span>{error}</span></div>}
             </div>
-
         )
     }
 }
 
 export default Login
-
-// iDestination is the Travel journal and travel planner, all in one.
-// Easily view all the places that you've visited in the past 
-// and all the places you wish to visit in the future.
-// Keep track of your adventures and plan your next vacation.

@@ -14,12 +14,15 @@ const initialState = {
     drawer: false,
     panel: { experiences: false, wishlist: false },
     category: { experiences: true, wishlist: true },
-    home: false
+    home: false,
+    login: false
 }
 
 const SET_USER_DATA = "SET_USER_DATA"
 const SET_CENTER = "SET_CENTER"
 const LOG_OUT = 'LOG_OUT'
+const OPEN_LOGIN = 'OPEN_LOGIN'
+const CLOSE_LOGIN = 'CLOSE_LOGIN'
 const TOGGLE_DRAWER = "TOGGLE_DRAWER"
 const TOGGLE_PANEL_EXPERIENCES = "TOGGLE_PANEL_EXPERIENCES"
 const TOGGLE_PANEL_WISHLIST = "TOGGLE_PANEL_WISHLIST"
@@ -43,6 +46,8 @@ const CHANGE_PLACE = 'CHANGE_PLACE'
 export const setUserData = (user) => ({ type: SET_USER_DATA, user })
 export const setCenter = (coordinates) => ({ type: SET_CENTER, coordinates })
 export const logout = () => ({ type: LOG_OUT })
+export const openLogIn = () => ({ type: OPEN_LOGIN })
+export const closeLogIn = () => ({ type: CLOSE_LOGIN })
 export const toggleDrawer = (drawer) => ({ type: TOGGLE_DRAWER, drawer })
 export const togglePanelExperiences = (panel) => ({ type: TOGGLE_PANEL_EXPERIENCES, panel })
 export const togglePanelWishlist = (panel) => ({ type: TOGGLE_PANEL_WISHLIST, panel })
@@ -217,7 +222,11 @@ function reducer (state = initialState, action) {
         case SET_CENTER:
             return { ...state, center: action.coordinates }
         case LOG_OUT:
-            return { ...state, user: {}, currentMarker: {}, infoWindow: {}, searchInput: '', drawer: false, home: false }
+            return { ...state, user: {}, currentMarker: {}, infoWindow: {}, searchInput: '', drawer: false, home: false, login: false }
+        case OPEN_LOGIN:
+            return { ...state, login: true }
+        case CLOSE_LOGIN:
+            return { ...state, login: false }
         case TOGGLE_DRAWER:
             return { ...state, drawer: !action.drawer, panel: { experiences: false, wishlist: false } }
         case TOGGLE_PANEL_EXPERIENCES:

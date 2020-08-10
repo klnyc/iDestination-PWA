@@ -6,7 +6,7 @@ class Drawer extends React.Component {
     render() {
         const { user, drawer, category, toggleCategory, home, toggleHome } = this.props
         return (
-            <div className={drawer ? "drawer" : "invisible"}>
+            <div className={drawer ? "drawer card" : "invisible"}>
                 <div className="drawer-section">
                     <div className="drawer-name">{user.name}</div>
                     <div className="drawer-email">{user.email}</div>
