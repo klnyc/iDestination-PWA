@@ -1,14 +1,23 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { closeLogIn } from '../store'
 
-const Home = () => {
-    return (
-        <div className="home">
-            
-        </div>
-    )
+class Home extends React.Component {
+    render() {
+        const { closeLogIn } = this.props
+        return (
+            <div className="home" onClick={() => closeLogIn()}>
+                
+            </div>
+        )
+    }
 }
 
-export default Home
+const mapDispatch = (dispatch) => ({
+    closeLogIn: () => dispatch(closeLogIn())
+})
+
+export default connect(null, mapDispatch)(Home)
 
 // iDestination is the Travel journal and travel planner, all in one.
 // Easily view all the places that you've visited in the past 

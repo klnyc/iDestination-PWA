@@ -1,23 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { IoMdPerson, IoMdHome } from 'react-icons/io'
-import { toggleDrawer, goToMarker, setCenter } from '../store'
+import { toggleDrawer, goToMarker, setCenter, openLogIn } from '../store'
 import Login from './Login'
 
 class Header extends React.Component {
     constructor() {
         super()
-        this.state = {
-            showLogin: false
-        }
-        this.showLoginForm = this.showLoginForm.bind(this)
         this.goHome = this.goHome.bind(this)
         this.renderLoginHeader = this.renderLoginHeader.bind(this)
         this.renderMapHeader = this.renderMapHeader.bind(this)
-    }
-
-    showLoginForm() {
-        this.setState({ showLogin: true })
     }
 
     goHome() {
@@ -27,13 +19,13 @@ class Header extends React.Component {
     }
 
     renderLoginHeader() {
-        const { showLogin } = this.state
+        const { login, openLogIn } = this.props
         return (
             <div className="header header-login">
                 <div className="header-icon"><img src="img/logo.png" width="40" height="40"></img></div>
                 <div className="header-title">iDestination</div>
-                <div className="header-icon"><div className="header-login-link" onClick={this.showLoginForm}>Login</div></div>
-                {showLogin && <Login />}
+                <div className="header-icon"><div className="header-login-link" onClick={() => openLogIn()}>Login</div></div>
+                {login && <Login />}
             </div>
         )
     }
@@ -59,13 +51,15 @@ class Header extends React.Component {
 
 const mapState = (state) => ({
     user: state.user,
-    drawer: state.drawer
+    drawer: state.drawer,
+    login: state.login
 })
 
 const mapDispatch = (dispatch) => ({
     toggleDrawer: (drawer) => dispatch(toggleDrawer(drawer)),
     goToMarker: (marker) => dispatch(goToMarker(marker)),
-    setCenter: (coordinates) => dispatch(setCenter(coordinates))
+    setCenter: (coordinates) => dispatch(setCenter(coordinates)),
+    openLogIn: () => dispatch(openLogIn())
 })
 
 export default connect(mapState, mapDispatch)(Header)
