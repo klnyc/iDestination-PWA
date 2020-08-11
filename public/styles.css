@@ -1,7 +1,7 @@
 :root {
     --text:white;
     --border: white;
-    --theme: rgb(63, 63, 63, 0.88);
+    --theme: rgb(63, 63, 63, 0.84);
 }
 
 body {
@@ -57,7 +57,7 @@ body {
 }
 
 .header-login-link:hover {
-    color: #5a4495
+    color: lightgray;
 }
 
 .home {
@@ -142,7 +142,7 @@ body {
 }
 
 .login-button:hover {
-    border: 0.06rem solid #5a4495;
+    border: 0.06rem solid lightgray;
 }
 
 .login-button-back {
@@ -423,6 +423,7 @@ body {
     border: 0.06rem solid var(--border);
     box-shadow: 0.08rem 0.08rem 0.6rem 0.06rem black;
     padding: 0.6rem;
+    border-radius: 0.4rem;
 }
 
 .invisible { display: none }
