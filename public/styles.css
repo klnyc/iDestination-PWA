@@ -60,29 +60,59 @@ body {
     color: lightgray;
 }
 
-.home {
+.home-description {
     height: 100vh;
     background-image: linear-gradient(black, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/img/fultoncenter.jpg');
     background-size: cover;
     background-position: center center;
 }
 
-.home-description {
+.home-description-content {
     padding-top: 8rem;
     text-align: center;
 }
 
-.home-title {
+.home-description-title {
     font-size: 2rem;
     padding: 1rem;
 }
 
-.home-text-container {
+.home-description-text {
     padding: 1rem;
 }
 
 .home-text {
     padding: 0.1rem;
+}
+
+.home-information {
+    height: 100vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4),transparent), url('/img/shinjuku.jpg');
+    background-size: cover;
+    background-position: center center;
+}
+
+.home-information-content {
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.home-information-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 2rem;
+    width: 26rem;
+}
+
+.home-information-functionality, .home-information-instruction {
+    height: calc(50% - 2.2rem);
+}
+
+.home-information-map {
+    margin: 2rem;
+    width: 26rem;
 }
 
 .login {
