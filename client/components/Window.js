@@ -29,7 +29,7 @@ class Window extends React.Component {
     renderInfoWindowIcons() {
         const { infoWindow } = this.props
         if (infoWindow.experiences && infoWindow.wishlist) return <div><GiFire /><MdStar /></div>
-        if (infoWindow.experiences) return <div><GiFire style={{ color: 'lightsteelblue' }} /></div>
+        if (infoWindow.experiences) return <div><GiFire style={{ color: '#00bcd4' }} /></div>
         if (infoWindow.wishlist) return <div><MdStar style={{ color: 'palevioletred' }} /></div>
     }
 

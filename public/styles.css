@@ -273,8 +273,16 @@ body {
     border-radius: 0.26rem;
 }
 
-.infoWindow-button.experiences { background-color: lightsteelblue }
-.infoWindow-button.wishlist { background-color: palevioletred }
+.infoWindow-button.experiences { 
+    background-color: #00bcd4;
+    cursor: pointer;
+}
+
+.infoWindow-button.wishlist { 
+    background-color: palevioletred;
+    cursor: pointer; 
+}
+
 .infoWindow-button.user-home { 
     background-color: lightgray;
     margin: 0.4rem auto 0;
@@ -282,8 +290,8 @@ body {
 }
 
 .infoWindow-button.user-home.set-home-active:hover {
-    cursor: pointer;
     background-color: silver;
+    cursor: pointer;
 }
 
 .infoWindow-date-container {
