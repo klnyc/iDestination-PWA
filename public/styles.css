@@ -298,9 +298,17 @@ body {
     cursor: pointer;
 }
 
+.infoWindow-button.experiences:hover {
+    background-color: #00bcd4d1;
+}
+
 .infoWindow-button.wishlist { 
     background-color: palevioletred;
     cursor: pointer; 
+}
+
+.infoWindow-button.wishlist:hover { 
+    background-color: #db7093db;
 }
 
 .infoWindow-button.user-home { 
