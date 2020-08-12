@@ -14,8 +14,10 @@ body {
 }
 
 #main {
-    min-height: 100vh;
+    height: 100vh;
     position: relative;
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
 }
 
 .header {
@@ -49,6 +51,7 @@ body {
 
 .header-login {
     background-color:black;
+    scroll-snap-align: start;
 }
 
 .header-login-link {
@@ -58,6 +61,10 @@ body {
 
 .header-login-link:hover {
     color: lightgray;
+}
+
+.home {
+    scroll-snap-align: end;
 }
 
 .home-description {

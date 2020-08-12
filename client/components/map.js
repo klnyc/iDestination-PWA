@@ -17,7 +17,7 @@ class Map extends React.Component {
   render() {
     const {
       mountMap, center, changeBounds, map, mountSearchBox, bounds, changePlace, searchBox, searchInput, 
-      handleChange, clearSearchBox, infoWindow, toggleOffPanelDrawer, home } = this.props
+      handleChange, clearSearchBox, clearCurrentMarker, infoWindow, toggleOffPanelDrawer, home } = this.props
 
     return (
       <GoogleMap
@@ -34,7 +34,7 @@ class Map extends React.Component {
           bounds={bounds}
           controlPosition={google.maps.ControlPosition.TOP_CENTER}
           onPlacesChanged={() => changePlace(searchBox.getPlaces()[0])}>
-          <div id="searchBox" onClick={() => toggleOffPanelDrawer()}>
+          <div id="searchBox" onClick={() => { toggleOffPanelDrawer(); clearCurrentMarker() }}>
             <input
               name="searchInput"
               type="text"
@@ -91,6 +91,7 @@ const mapDispatch = (dispatch) => ({
   changePlace: (place) => dispatch(actions.changePlace(place)),
   handleChange: (event) => dispatch(actions.handleChange(event)),
   clearSearchBox: () => dispatch(actions.clearSearchBox()),
+  clearCurrentMarker: () => dispatch(actions.clearCurrentMarker()),
   renderMarkers: (id) => dispatch(actions.renderMarkers(id)),
   toggleOffPanelDrawer: () => dispatch(actions.toggleOffPanelDrawer())
 })
