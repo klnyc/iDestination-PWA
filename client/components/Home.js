@@ -32,12 +32,12 @@ class Home extends React.Component {
                             <div className="home-information-title">Optimized for iPhone & Desktop</div>
                                 <div className="home-information-text">• To add this app to your iPhone:</div>
                                 <div className="home-information-text">• Visit idestination.web.app</div>
-                                <div className="home-information-text">• Go to options, settings, or preferences</div>
+                                <div className="home-information-text">• Go to your browser options, settings, or preferences</div>
                                 <div className="home-information-text">• Click "Add to Home Screen"</div>
                                 <div className="home-information-text">• For any questions, please email klnyc6@gmail.com</div>
                             </div>
                         </div>
-                        <div className="home-information-map card"><img src="img/screenshot.png"></img></div>
+                        <div className="home-information-map"><img src="img/screenshot.png" className="card"></img></div>
                     </div>
                 </div>
             </div>

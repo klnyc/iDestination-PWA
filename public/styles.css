@@ -82,7 +82,7 @@ body {
 }
 
 .home-description-text {
-    padding: 0.1rem;
+    padding: 0.2rem;
 }
 
 .home-information {
@@ -103,7 +103,7 @@ body {
     flex-direction: column;
     justify-content: space-between;
     margin: 2rem 0 2rem 2rem;
-    flex: 1.8;
+    flex: 2;
 }
 
 .home-information-title {
@@ -125,11 +125,14 @@ body {
 .home-information-map {
     margin: 2rem;
     flex: 1;
+    display: flex;
 }
 
 .home-information-map img {
-    height: 100%;
+    max-height: 100%;
     width: 100%;
+    margin: auto 0;
+    padding: 0;
 }
 
 .login {
