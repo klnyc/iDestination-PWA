@@ -46,7 +46,7 @@ class Markers extends React.Component {
                 .map((marker, index) => this.renderMarker(marker, 'palevioletred', index))}
 
                 {currentMarker.position && this.renderMarker(currentMarker, 'red')}
-                {user.home && this.renderMarker(user.home, 'blue')}
+                {user.home && this.renderMarker(user.home, 'silver')}
             </Fragment>
         )
     }

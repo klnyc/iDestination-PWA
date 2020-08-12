@@ -77,11 +77,11 @@ body {
     padding: 1rem;
 }
 
-.home-description-text {
+.home-description-text-container {
     padding: 1rem;
 }
 
-.home-text {
+.home-description-text {
     padding: 0.1rem;
 }
 
@@ -98,21 +98,38 @@ body {
     justify-content: space-around;
 }
 
-.home-information-text {
+.home-information-text-container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin: 2rem;
-    width: 26rem;
+    margin: 2rem 0 2rem 2rem;
+    flex: 1.8;
 }
 
-.home-information-functionality, .home-information-instruction {
+.home-information-title {
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 0.06rem solid lightgray;
+    padding-bottom: 0.4rem;
+}
+
+.home-information-text {
+    font-size: 0.8rem;
+    padding-top: 0.6rem;
+}
+
+.home-information-section {
     height: calc(50% - 2.2rem);
 }
 
 .home-information-map {
     margin: 2rem;
-    width: 26rem;
+    flex: 1;
+}
+
+.home-information-map img {
+    height: 100%;
+    width: 100%;
 }
 
 .login {
