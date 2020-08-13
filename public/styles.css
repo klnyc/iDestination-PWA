@@ -1,7 +1,8 @@
 :root {
-    --text:white;
-    --border: white;
+    --text:ghostwhite;
+    --border: ghostwhite;
     --theme: rgb(63, 63, 63, 0.84);
+    --secondary: lightgray;
 }
 
 body {
@@ -17,7 +18,7 @@ body {
     height: 100vh;
     position: relative;
     scroll-snap-type: y mandatory;
-    overflow-y: scroll;
+    overflow: scroll;
 }
 
 .header {
@@ -28,7 +29,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--theme);
     height: 3rem;
 }
 
@@ -47,9 +47,14 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 0.6rem;
 }
 
-.header-login {
+.header-map { 
+    background-color: var(--theme) 
+}
+
+.header-home {
     background-color:black;
     scroll-snap-align: start;
 }
@@ -60,7 +65,7 @@ body {
 }
 
 .header-login-link:hover {
-    color: lightgray;
+    color: var(--secondary);
 }
 
 .home {
@@ -82,6 +87,10 @@ body {
 .home-description-title {
     font-size: 2rem;
     padding: 1rem;
+}
+
+.home-description-title br {
+    display: none;
 }
 
 .home-description-text-container {
@@ -110,13 +119,13 @@ body {
     flex-direction: column;
     justify-content: space-between;
     margin: 2rem 0 2rem 2rem;
-    flex: 2;
+    flex: 2.8;
 }
 
 .home-information-title {
     font-weight: bold;
     text-align: center;
-    border-bottom: 0.06rem solid lightgray;
+    border-bottom: 0.06rem solid var(--secondary);
     padding-bottom: 0.4rem;
 }
 
@@ -193,13 +202,13 @@ body {
     width: 3.6rem;
     cursor: pointer;
     padding: 0.2rem 0.4rem;
-    border: 0.06rem solid white;
+    border: 0.06rem solid var(--border);
     border-radius: 0.26rem;
     background-color: black;
 }
 
 .login-button:hover {
-    border: 0.06rem solid lightgray;
+    border: 0.06rem solid var(--secondary);
 }
 
 .login-button-back {
@@ -267,21 +276,36 @@ body {
 }
 
 .set-home-popup span {
-    padding: 0 .8rem;
-    font-size: .8rem;
+    padding: 0 0.8rem;
+    font-size: 0.8rem;
+}
+
+.gm-style .gm-style-iw-c {
+    background-color: var(--theme);
+    padding: 0;
+}
+
+.gm-style .gm-style-iw-t::after {
+    background: linear-gradient(45deg, var(--theme) 50%,rgba(255,255,255,0) 51%,rgba(255,255,255,0) 100%);
+}
+
+.gm-style-iw-d {
+    overflow: hidden !important;
 }
 
 .infoWindow {
     font-size: 0.8rem;
     font-weight: 400;
     text-align: center;
-    color: black;
-    padding-left: 0.32rem;
+    color: var(--text);
+    padding: 1rem;
 }
 
 .infoWindow-name {
     font-size: 1rem;
     margin-bottom: 0.4rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 0.06rem solid var(--secondary);
 }
 
 .infoWindow-address {
@@ -298,6 +322,7 @@ body {
     margin: 0 0.4rem;
     border: 0.06rem solid black;
     border-radius: 0.26rem;
+    color: black;
 }
 
 .infoWindow-button.experiences { 
@@ -319,7 +344,7 @@ body {
 }
 
 .infoWindow-button.user-home { 
-    background-color: lightgray;
+    background-color: var(--secondary);
     margin: 0.4rem auto 0;
     width: 6rem;
 }
@@ -347,7 +372,7 @@ body {
 }
 
 .datepicker input {
-    border: 0.06rem solid lightgray;
+    border: 0.06rem solid var(--secondary);
     width: 2.6rem;
     padding: 0.2rem;
     text-align: center;
@@ -418,7 +443,7 @@ body {
 
 .drawer-section {
     padding: 1rem 0;
-    border-top: 0.06rem solid lightgray;
+    border-top: 0.06rem solid var(--secondary);
 }
 
 .drawer-section.first-section {
@@ -459,7 +484,7 @@ body {
 
 .panel-title {
     text-align: center;
-    border-bottom: 0.06rem solid lightgray;
+    border-bottom: 0.06rem solid var(--secondary);
     padding: 0.2rem 0 0.8rem;
     margin-bottom: 0.8rem;
     letter-spacing: 0.2rem;
@@ -508,4 +533,32 @@ body {
 .color-link:hover {
     cursor: pointer;
     color: #c4d7e6;
+}
+
+@media only screen and (max-width: 600px) {
+    .home-description-title br {
+        display: initial;
+    }
+
+    .home-information {
+        height: min-content;
+    }
+
+    .home-information-content {
+        display: block;
+    }
+
+    .home-information-text-container {
+        margin: 0;
+        padding: 1rem 0 0 0;
+    }
+
+    .home-information-section {
+        margin: 0 1rem 1rem 1rem;
+    }
+
+    .home-information-map {
+        margin: 0;
+        padding: 0 1rem 1rem 1rem;
+    }
 }

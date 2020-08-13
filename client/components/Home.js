@@ -9,7 +9,7 @@ class Home extends React.Component {
             <div className="home" onClick={() => closeLogIn()}>
                 <div className="home-description">
                     <div className="home-description-content">
-                        <div className="home-description-title">Travel journal. Travel planner. All in one.</div>
+                        <div className="home-description-title">Travel journal. <br></br>Travel planner. <br></br>All in one.</div>
                         <div className="home-description-text-container">
                             <div className="home-description-text">Keep track of your adventures and plan your next vacation.</div>
                             <div className="home-description-text">Easily view all the places that you've visited in the past</div>
