@@ -39,7 +39,7 @@ class Window extends React.Component {
           <div className="infoWindow-date-container">
             {this.renderInfoWindowIcons()}
             <div className="infoWindow-date">{infoWindow.date}</div>
-            <div className="infoWindow-icon-trash plain-link" onClick={() => removeMarker(user.id, infoWindow)}><FaTrash style={{ color: 'gray' }} /></div>
+            <div className="infoWindow-icon-trash plain-link" onClick={() => removeMarker(user.id, infoWindow)}><FaTrash style={{ color: 'silver' }} /></div>
           </div>
         )
     }

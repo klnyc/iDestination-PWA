@@ -1,6 +1,6 @@
 :root {
-    --text:white;
-    --border: white;
+    --text:ghostwhite;
+    --border: ghostwhite;
     --theme: rgb(63, 63, 63, 0.84);
     --secondary: lightgray;
 }
@@ -276,21 +276,36 @@ body {
 }
 
 .set-home-popup span {
-    padding: 0 .8rem;
-    font-size: .8rem;
+    padding: 0 0.8rem;
+    font-size: 0.8rem;
+}
+
+.gm-style .gm-style-iw-c {
+    background-color: var(--theme);
+    padding: 0;
+}
+
+.gm-style .gm-style-iw-t::after {
+    background: linear-gradient(45deg, var(--theme) 50%,rgba(255,255,255,0) 51%,rgba(255,255,255,0) 100%);
+}
+
+.gm-style-iw-d {
+    overflow: hidden !important;
 }
 
 .infoWindow {
     font-size: 0.8rem;
     font-weight: 400;
     text-align: center;
-    color: black;
-    padding-left: 0.32rem;
+    color: var(--text);
+    padding: 1rem;
 }
 
 .infoWindow-name {
     font-size: 1rem;
     margin-bottom: 0.4rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 0.06rem solid var(--secondary);
 }
 
 .infoWindow-address {
@@ -307,6 +322,7 @@ body {
     margin: 0 0.4rem;
     border: 0.06rem solid black;
     border-radius: 0.26rem;
+    color: black;
 }
 
 .infoWindow-button.experiences { 
