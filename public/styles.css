@@ -287,7 +287,7 @@ body {
 }
 
 .gm-style .gm-style-iw-t::after {
-    background: linear-gradient(45deg, var(--theme) 50%,rgba(255,255,255,0) 51%,rgba(255,255,255,0) 100%);
+    background: linear-gradient(45deg, var(--theme) 50%,rgba(255,255,255,0) 56%,rgba(255,255,255,0) 100%);
 }
 
 .gm-style-iw-d {
@@ -540,7 +540,7 @@ body {
     .main {
         scroll-snap-type: none;
     }
-    
+
     .home-description-title br {
         display: initial;
     }
