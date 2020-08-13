@@ -18,7 +18,7 @@ body {
     height: 100vh;
     position: relative;
     scroll-snap-type: y mandatory;
-    overflow-y: scroll;
+    overflow: scroll;
 }
 
 .header {
@@ -47,6 +47,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 0.6rem;
 }
 
 .header-map { 
@@ -86,6 +87,10 @@ body {
 .home-description-title {
     font-size: 2rem;
     padding: 1rem;
+}
+
+.home-description-title br {
+    display: none;
 }
 
 .home-description-text-container {
@@ -512,4 +517,32 @@ body {
 .color-link:hover {
     cursor: pointer;
     color: #c4d7e6;
+}
+
+@media only screen and (max-width: 600px) {
+    .home-description-title br {
+        display: initial;
+    }
+
+    .home-information {
+        height: min-content;
+    }
+
+    .home-information-content {
+        display: block;
+    }
+
+    .home-information-text-container {
+        margin: 0;
+        padding: 1rem 0 0 0;
+    }
+
+    .home-information-section {
+        margin: 0 1rem 1rem 1rem;
+    }
+
+    .home-information-map {
+        margin: 0;
+        padding: 0 1rem 1rem 1rem;
+    }
 }
