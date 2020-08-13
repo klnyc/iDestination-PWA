@@ -537,16 +537,15 @@ body {
 }
 
 @media only screen and (max-width: 600px) {
-    .main {
-        scroll-snap-type: none;
-    }
+    .main { scroll-snap-type: none }
+    .home, .header-home { scroll-snap-align: none }
 
     .home-description-title br {
         display: initial;
     }
 
     .home-information {
-        height: min-content;
+        height: auto;
     }
 
     .home-information-content {
@@ -556,6 +555,7 @@ body {
     .home-information-text-container {
         margin: 0;
         padding: 1rem 0 0 0;
+        display: block;
     }
 
     .home-information-section {
@@ -565,5 +565,6 @@ body {
     .home-information-map {
         margin: 0;
         padding: 0 1rem 1rem 1rem;
+        display: block;
     }
 }
