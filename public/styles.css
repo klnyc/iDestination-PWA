@@ -539,13 +539,13 @@ body {
 @media only screen and (max-width: 600px) {
     .main { scroll-snap-type: none }
     .home, .header-home { scroll-snap-align: none }
-    
+
     .home-description-title br {
         display: initial;
     }
 
     .home-information {
-        height: 100%;
+        height: auto;
     }
 
     .home-information-content {
