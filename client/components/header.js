@@ -8,7 +8,7 @@ class Header extends React.Component {
     constructor() {
         super()
         this.goHome = this.goHome.bind(this)
-        this.renderLoginHeader = this.renderLoginHeader.bind(this)
+        this.renderHomeHeader = this.renderHomeHeader.bind(this)
         this.renderMapHeader = this.renderMapHeader.bind(this)
     }
 
@@ -18,10 +18,10 @@ class Header extends React.Component {
         user.home ? goToMarker(user.home) : setCenter(NYC)
     }
 
-    renderLoginHeader() {
+    renderHomeHeader() {
         const { login, openLogIn } = this.props
         return (
-            <div className="header header-login">
+            <div className="header header-home">
                 <div className="header-icon"><img src="img/logo.png" width="40" height="40"></img></div>
                 <div className="header-title">iDestination</div>
                 <div className="header-icon"><div className="header-login-link" onClick={() => openLogIn()}>Login</div></div>
@@ -33,7 +33,7 @@ class Header extends React.Component {
     renderMapHeader() {
         const { toggleDrawer, drawer } = this.props
         return (
-            <div className="header">
+            <div className="header header-map">
                 <div className="header-icon"><IoMdPerson className="plain-link" onClick={() => toggleDrawer(drawer)} /></div>
                 <div className="header-title">iDestination</div>
                 <div className="header-icon"><IoMdHome className="plain-link" onClick={this.goHome} /></div>
@@ -43,7 +43,7 @@ class Header extends React.Component {
 
     render() {
         const { user } = this.props
-        return user.id ? this.renderMapHeader() : this.renderLoginHeader()
+        return user.id ? this.renderMapHeader() : this.renderHomeHeader()
     }
 }
 

@@ -2,6 +2,7 @@
     --text:white;
     --border: white;
     --theme: rgb(63, 63, 63, 0.84);
+    --secondary: lightgray;
 }
 
 body {
@@ -28,7 +29,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--theme);
     height: 3rem;
 }
 
@@ -49,7 +49,11 @@ body {
     align-items: center;
 }
 
-.header-login {
+.header-map { 
+    background-color: var(--theme) 
+}
+
+.header-home {
     background-color:black;
     scroll-snap-align: start;
 }
@@ -60,7 +64,7 @@ body {
 }
 
 .header-login-link:hover {
-    color: lightgray;
+    color: var(--secondary);
 }
 
 .home {
@@ -110,13 +114,13 @@ body {
     flex-direction: column;
     justify-content: space-between;
     margin: 2rem 0 2rem 2rem;
-    flex: 2;
+    flex: 2.8;
 }
 
 .home-information-title {
     font-weight: bold;
     text-align: center;
-    border-bottom: 0.06rem solid lightgray;
+    border-bottom: 0.06rem solid var(--secondary);
     padding-bottom: 0.4rem;
 }
 
@@ -193,13 +197,13 @@ body {
     width: 3.6rem;
     cursor: pointer;
     padding: 0.2rem 0.4rem;
-    border: 0.06rem solid white;
+    border: 0.06rem solid var(--border);
     border-radius: 0.26rem;
     background-color: black;
 }
 
 .login-button:hover {
-    border: 0.06rem solid lightgray;
+    border: 0.06rem solid var(--secondary);
 }
 
 .login-button-back {
@@ -319,7 +323,7 @@ body {
 }
 
 .infoWindow-button.user-home { 
-    background-color: lightgray;
+    background-color: var(--secondary);
     margin: 0.4rem auto 0;
     width: 6rem;
 }
@@ -347,7 +351,7 @@ body {
 }
 
 .datepicker input {
-    border: 0.06rem solid lightgray;
+    border: 0.06rem solid var(--secondary);
     width: 2.6rem;
     padding: 0.2rem;
     text-align: center;
@@ -418,7 +422,7 @@ body {
 
 .drawer-section {
     padding: 1rem 0;
-    border-top: 0.06rem solid lightgray;
+    border-top: 0.06rem solid var(--secondary);
 }
 
 .drawer-section.first-section {
@@ -459,7 +463,7 @@ body {
 
 .panel-title {
     text-align: center;
-    border-bottom: 0.06rem solid lightgray;
+    border-bottom: 0.06rem solid var(--secondary);
     padding: 0.2rem 0 0.8rem;
     margin-bottom: 0.8rem;
     letter-spacing: 0.2rem;
