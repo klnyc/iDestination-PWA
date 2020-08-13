@@ -546,7 +546,7 @@ body {
     }
 
     .home-information {
-        height: min-content;
+        height: 100%;
     }
 
     .home-information-content {
