@@ -37,7 +37,7 @@ body {
     font-size: 1.2rem;
     letter-spacing: 0.6rem;
     text-align: center;
-    flex: 6;
+    flex: 2;
 }
 
 .header-icon {
@@ -48,7 +48,6 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 0.6rem;
 }
 
 .header-map { 
@@ -81,7 +80,7 @@ body {
 }
 
 .home-description-content {
-    padding-top: 8rem;
+    padding-top: 6rem;
     text-align: center;
 }
 

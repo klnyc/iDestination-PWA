@@ -1,8 +1,19 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { toggleCategory, toggleHome } from '../store'
+import { toggleCategory, toggleHome, goToMarker, setCenter } from '../store'
 
 class Drawer extends React.Component {
+    constructor() {
+        super()
+        this.goHome = this.goHome.bind(this)
+    }
+
+    goHome() {
+        const { goToMarker, setCenter, user } = this.props
+        const NYC = { lat: 40.7473735256486, lng: -73.98564376909184 }
+        user.home ? goToMarker(user.home) : setCenter(NYC)
+    }
+
     render() {
         const { user, drawer, category, toggleCategory, home, toggleHome } = this.props
         return (
@@ -25,7 +36,7 @@ class Drawer extends React.Component {
                 </div>
                 <div className="drawer-section">
                     <div className="drawer-title">Account</div>
-                    <div className="drawer-link color-link" onClick={() => toggleHome(home)}>Home</div>
+                    <div className="drawer-link color-link" onClick={() => { toggleHome(home); this.goHome() }}>Home</div>
                     <div className="drawer-link color-link" onClick={() => firebase.auth().signOut()}>Sign Out</div>
                 </div>
                 <div className="drawer-copyright">© 2019 iDestination<br/>All Rights Reserved</div>
@@ -43,7 +54,9 @@ const mapState = (state) => ({
 
 const mapDispatch = (dispatch) => ({
     toggleCategory: (category) => dispatch(toggleCategory(category)),
-    toggleHome: (home) => dispatch(toggleHome(home))
+    toggleHome: (home) => dispatch(toggleHome(home)),
+    goToMarker: (marker) => dispatch(goToMarker(marker)),
+    setCenter: (coordinates) => dispatch(setCenter(coordinates)),
 })
 
 export default connect(mapState, mapDispatch)(Drawer)

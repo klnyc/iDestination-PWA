@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { goToMarker, toggleOffPanelDrawer } from '../store'
+import { goToMarker, toggleOffFeatures } from '../store'
 
 class Panel extends React.Component {
     constructor() {
@@ -10,10 +10,10 @@ class Panel extends React.Component {
     }
 
     renderMarkerDetails(marker, index) {
-        const { goToMarker, toggleOffPanelDrawer } = this.props
+        const { goToMarker, toggleOffFeatures } = this.props
         return (
             <div key={index} className="panel-line">
-                <div className="panel-column name color-link" onClick={() => { goToMarker(marker); toggleOffPanelDrawer() }}>{marker.name}</div>
+                <div className="panel-column name color-link" onClick={() => { goToMarker(marker); toggleOffFeatures() }}>{marker.name}</div>
                 <div className="panel-column city">{marker.city}</div>
                 <div className="panel-column date">{marker.date}</div>
             </div>
@@ -48,7 +48,7 @@ const mapState = (state) => ({
 
 const mapDispatch = (dispatch) => ({
     goToMarker: (marker) => dispatch(goToMarker(marker)),
-    toggleOffPanelDrawer: () => dispatch(toggleOffPanelDrawer())
+    toggleOffFeatures: () => dispatch(toggleOffFeatures())
 })
 
 export default connect(mapState, mapDispatch)(Panel)
