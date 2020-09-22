@@ -90,8 +90,8 @@ body {
     padding: 1rem;
 }
 
-.home-description-title br {
-    display: none;
+.home-description-title span {
+    padding: 0.28rem;
 }
 
 .home-description-text-container {
@@ -540,8 +540,8 @@ body {
     .main { scroll-snap-type: none }
     .home, .header-home { scroll-snap-align: none }
 
-    .home-description-title br {
-        display: initial;
+    .home-description-title {
+        display: grid;
     }
 
     .home-information {
