@@ -216,7 +216,7 @@ export const setHome = (id, marker) => {
 }
 
 function reducer (state = initialState, action) {
-    switch (action.type) {
+    switch(action.type) {
         case SET_USER_DATA:
             return { ...state, user: action.user, currentMarker: {}, infoWindow: {}, home: false }
         case SET_CENTER:
