@@ -17,7 +17,7 @@ class Map extends React.Component {
   render() {
     const {
       mountMap, center, changeBounds, map, mountSearchBox, bounds, changePlace, searchBox, searchInput, 
-      handleChange, clearSearchBox, clearCurrentMarker, infoWindow, toggleOffPanelDrawer, home } = this.props
+      handleChange, clearSearchBox, clearCurrentMarker, infoWindow, toggleOffFeatures, home } = this.props
 
     return (
       <GoogleMap
@@ -26,7 +26,7 @@ class Map extends React.Component {
         onBoundsChanged={() => changeBounds(map.getBounds())}
         defaultZoom={13}
         defaultOptions={mapSettings}
-        onClick={() => toggleOffPanelDrawer()}>
+        onClick={() => toggleOffFeatures()}>
 
         <SearchBox
           className="container"
@@ -34,7 +34,7 @@ class Map extends React.Component {
           bounds={bounds}
           controlPosition={google.maps.ControlPosition.TOP_CENTER}
           onPlacesChanged={() => changePlace(searchBox.getPlaces()[0])}>
-          <div id="searchBox" onClick={() => { toggleOffPanelDrawer(); clearCurrentMarker() }}>
+          <div id="searchBox" onClick={() => { toggleOffFeatures(); clearCurrentMarker() }}>
             <input
               name="searchInput"
               type="text"
@@ -42,7 +42,7 @@ class Map extends React.Component {
               value={searchInput}
               onChange={(event) => handleChange(event)} />
             <div className={searchInput ? "clear-input active" : "clear-input"} onClick={clearSearchBox}><IoMdCloseCircle /></div>
-            {home && !searchInput && <div className="set-home-popup card"><span><IoMdArrowRoundUp /></span>Enter Home Address<span><IoMdArrowRoundUp /></span></div>}
+            {home && !searchInput && <div className="set-home-popup card"><span><IoMdArrowRoundUp /></span>Enter New Home Address<span><IoMdArrowRoundUp /></span></div>}
           </div>
         </SearchBox>
         
@@ -93,7 +93,7 @@ const mapDispatch = (dispatch) => ({
   clearSearchBox: () => dispatch(actions.clearSearchBox()),
   clearCurrentMarker: () => dispatch(actions.clearCurrentMarker()),
   renderMarkers: (id) => dispatch(actions.renderMarkers(id)),
-  toggleOffPanelDrawer: () => dispatch(actions.toggleOffPanelDrawer())
+  toggleOffFeatures: () => dispatch(actions.toggleOffFeatures())
 })
 
 export default connect(mapState, mapDispatch)(compose(withProps(mapProperties), withScriptjs, withGoogleMap)(Map))

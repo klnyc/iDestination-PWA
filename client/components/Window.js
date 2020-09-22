@@ -23,7 +23,12 @@ class Window extends React.Component {
     }
 
     handleChange(event) {
-        this.setState({ [event.target.name]: event.target.value })
+        if (event.target.name === 'month' || event.target.name === 'day') {
+            if (event.target.value.length <= 2) this.setState({ [event.target.name]: event.target.value })
+        }
+        if (event.target.name === 'year') {
+            if (event.target.value.length <= 4) this.setState({ [event.target.name]: event.target.value })
+        }
     }
 
     renderInfoWindowIcons() {

@@ -26,7 +26,7 @@ const CLOSE_LOGIN = 'CLOSE_LOGIN'
 const TOGGLE_DRAWER = "TOGGLE_DRAWER"
 const TOGGLE_PANEL_EXPERIENCES = "TOGGLE_PANEL_EXPERIENCES"
 const TOGGLE_PANEL_WISHLIST = "TOGGLE_PANEL_WISHLIST"
-const TOGGLE_OFF_PANEL_DRAWER = "TOGGLE_OFF_PANEL_DRAWER"
+const TOGGLE_OFF_FEATURES = "TOGGLE_OFF_FEATURES"
 const TOGGLE_CATEGORY_ALL = "TOGGLE_CATEGORY_ALL"
 const TOGGLE_CATEGORY_EXPERIENCES = "TOGGLE_CATEGORY_EXPERIENCES"
 const TOGGLE_CATEGORY_WISHLIST = "TOGGLE_CATEGORY_WISHLIST"
@@ -51,7 +51,7 @@ export const closeLogIn = () => ({ type: CLOSE_LOGIN })
 export const toggleDrawer = (drawer) => ({ type: TOGGLE_DRAWER, drawer })
 export const togglePanelExperiences = (panel) => ({ type: TOGGLE_PANEL_EXPERIENCES, panel })
 export const togglePanelWishlist = (panel) => ({ type: TOGGLE_PANEL_WISHLIST, panel })
-export const toggleOffPanelDrawer = () => ({ type: TOGGLE_OFF_PANEL_DRAWER })
+export const toggleOffFeatures = () => ({ type: TOGGLE_OFF_FEATURES })
 export const toggleCategory = (category) => {
     switch(category) {
         case "all":
@@ -216,7 +216,7 @@ export const setHome = (id, marker) => {
 }
 
 function reducer (state = initialState, action) {
-    switch (action.type) {
+    switch(action.type) {
         case SET_USER_DATA:
             return { ...state, user: action.user, currentMarker: {}, infoWindow: {}, home: false }
         case SET_CENTER:
@@ -233,8 +233,8 @@ function reducer (state = initialState, action) {
             return { ...state, panel: { experiences: !action.panel, wishlist: false } }
         case TOGGLE_PANEL_WISHLIST:
             return { ...state, panel: { experiences: false, wishlist: !action.panel } }
-        case TOGGLE_OFF_PANEL_DRAWER:
-            return { ...state, drawer: false, panel: { experiences: false, wishlist: false } }
+        case TOGGLE_OFF_FEATURES:
+            return { ...state, drawer: false, panel: { experiences: false, wishlist: false }, home: false }
         case TOGGLE_CATEGORY_ALL:
             return { ...state, category: { experiences: true, wishlist: true } }
         case TOGGLE_CATEGORY_EXPERIENCES:
