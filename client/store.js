@@ -234,7 +234,7 @@ function reducer (state = initialState, action) {
         case TOGGLE_PANEL_WISHLIST:
             return { ...state, panel: { experiences: false, wishlist: !action.panel } }
         case TOGGLE_OFF_FEATURES:
-            return { ...state, drawer: false, panel: { experiences: false, wishlist: false }, home: false }
+            return { ...state, drawer: false, panel: { experiences: false, wishlist: false } }
         case TOGGLE_CATEGORY_ALL:
             return { ...state, category: { experiences: true, wishlist: true } }
         case TOGGLE_CATEGORY_EXPERIENCES:
