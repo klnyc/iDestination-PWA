@@ -20,6 +20,7 @@ class Home extends React.Component {
                 </div>
                 <div className="home-information">
                     <div className="home-information-content">
+                        <div className="home-information-map"><img src="img/screenshot.png" className="card"></img></div>
                         <div className="home-information-text-container">
                             <div className="home-information-section card">
                                 <div className="home-information-title">Features</div>
@@ -35,10 +36,10 @@ class Home extends React.Component {
                                 <div className="home-information-text">• Visit idestination.web.app</div>
                                 <div className="home-information-text">• Go to your browser options, settings, or preferences</div>
                                 <div className="home-information-text">• Click "Add to Home Screen"</div>
+                                <div className="home-information-text">• Open iDestination from your home screen</div>
                                 <div className="home-information-text">• For any questions, please email klnyc6@gmail.com</div>
                             </div>
                         </div>
-                        <div className="home-information-map"><img src="img/screenshot.png" className="card"></img></div>
                     </div>
                 </div>
             </div>
