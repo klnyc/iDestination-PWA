@@ -74,25 +74,31 @@ body {
 }
 
 .home-description-content {
-    padding-top: 6rem;
+    padding-top: 3rem;
     text-align: center;
 }
 
-.home-description-title {
+.home-description-slogan {
     font-size: 2rem;
     padding: 1rem;
 }
 
-.home-description-title span {
+.home-description-slogan span {
     padding: 0.28rem;
-}
-
-.home-description-text-container {
-    padding: 1rem;
 }
 
 .home-description-text {
     padding: 0.2rem;
+}
+
+.home-description-map {
+    padding: 1rem;
+    height: calc(100vh - 12rem);
+}
+
+.home-description-map img {
+    height: 100%;
+    padding: 0;
 }
 
 .home-information {
@@ -105,27 +111,21 @@ body {
 .home-information-content {
     height: 100%;
     display: flex;
-    justify-content: space-around;
-}
-
-.home-information-map {
-    margin: 2rem;
-    display: flex;
-}
-
-.home-information-map img {
-    height: 100%;
-    width: 22rem;
-    margin: auto 0 auto auto;
-    padding: 0;
-}
-
-.home-information-text-container {
-    display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    margin: 2rem 2rem 2rem 0;
+}
+
+.home-information-row {
+    display: flex;
     flex: 1;
+    padding: 1rem;
+}
+
+.home-information-row.top { padding-bottom: 0 }
+.home-information-row.bottom { padding-top: 0 }
+
+.home-information-section {
+    flex: 1;
+    margin: 1rem;
 }
 
 .home-information-title {
@@ -138,10 +138,6 @@ body {
 .home-information-text {
     font-size: 0.8rem;
     padding-top: 0.6rem;
-}
-
-.home-information-section {
-    height: calc(50% - 2.2rem);
 }
 
 .login {
@@ -535,7 +531,7 @@ body {
         transform: translate(0, 0);
     }
 
-    .home-description-title {
+    .home-description-slogan {
         display: grid;
     }
 
@@ -547,22 +543,7 @@ body {
         display: block;
     }
 
-    .home-information-text-container {
-        margin: 0;
-        padding: 1rem 0 0 0;
-    }
-
     .home-information-section {
         margin: 0rem 1rem 1rem 1rem;
-    }
-
-    .home-information-map {
-        margin: 0;
-        padding: 1rem 1rem 0rem 1rem;
-        text-align: center;
-    }
-
-    .home-information-map img {
-        width: 100%;
     }
 }
