@@ -20,6 +20,7 @@ class Window extends React.Component {
         this.handleChange = this.handleChange.bind(this)
         this.renderDatePicker = this.renderDatePicker.bind(this)
         this.submitPlace = this.submitPlace.bind(this)
+        this.dateFocus = this.dateFocus.bind(this)
     }
 
     handleChange(event) {
@@ -63,6 +64,14 @@ class Window extends React.Component {
         )
     }
 
+    dateFocus() {
+        const month = document.querySelectorAll("input[name=month]")[0]
+        const day = document.querySelectorAll("input[name=day]")[0]
+        const year = document.querySelectorAll("input[name=year]")[0]
+        if (month.value.length === 2) day.focus()
+        if (day.value.length === 2) year.focus()
+    }
+
     submitPlace(category) {
         const { month, day, year } = this.state
         const { user, currentMarker, addMarker } = this.props
@@ -91,6 +100,7 @@ class Window extends React.Component {
                     {!home && (infoWindow !== user.home) && markers.indexOf(infoWindow) === -1 &&
                     <Fragment>
                         {this.renderDatePicker()}
+                        {document.getElementsByClassName("datepicker")[0] && this.dateFocus()}
                         <div className="infoWindow-button-container">
                             <div className="infoWindow-button experiences" onClick={() => this.submitPlace('experiences')}>Add Experience</div>
                             <div className="infoWindow-button wishlist" onClick={() => this.submitPlace('wishlist')}>Add Wish</div>
