@@ -8,6 +8,7 @@ class Home extends React.Component {
         return (
             <div className="home" onClick={() => closeLogIn()}>
 
+                {/* Description Page */}
                 <div className="home-description">
                     <div className="home-description-content">
                         <div className="home-description-slogan">
@@ -21,6 +22,7 @@ class Home extends React.Component {
                     </div>
                 </div>
 
+                {/* Information Page */}
                 <div className="home-information">
                     <div className="home-information-content">
                         <div className="home-information-row top">

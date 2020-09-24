@@ -47,6 +47,8 @@ class Login extends React.Component {
         const { logIn, signUp, email, password, name, error } = this.state
         return (
             <div className="login card">
+
+                {/* Login */}
                 {logIn && (
                 <div className="login-form">
                     <div className="login-title">Welcome!</div>
@@ -57,6 +59,7 @@ class Login extends React.Component {
                     <div className="login-signup-link" onClick={() => this.setState({ signUp: true, logIn: false, error: '' })}>Create Account</div>
                 </div>)}
 
+                {/* Sign Up */}
                 {signUp && (
                 <div className="signup-form">
                     <div className="login-title">Create Account</div>

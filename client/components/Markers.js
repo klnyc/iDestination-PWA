@@ -32,20 +32,26 @@ class Markers extends React.Component {
         const { markers, currentMarker, category, user } = this.props
         return (
             <Fragment>
+                {/* Render Experiences & Wishlist Markers */}
                 {(category.experiences && category.wishlist) &&
                 markers.map((marker, index) => marker.experiences
                 ? this.renderMarker(marker, '#00bcd4', index)
                 : this.renderMarker(marker, 'palevioletred', index))}
 
+                {/* Render Only Experience Markers */}
                 {(category.experiences && !category.wishlist) && markers
                 .filter(marker => marker.experiences)
                 .map((marker, index) => this.renderMarker(marker, '#00bcd4', index))}
 
+                {/* Render Only Wishlist Markers */}
                 {(!category.experiences && category.wishlist) && markers
                 .filter(marker => marker.wishlist)
                 .map((marker, index) => this.renderMarker(marker, 'palevioletred', index))}
 
+                {/* Render Current Marker */}
                 {currentMarker.position && this.renderMarker(currentMarker, 'red')}
+
+                {/* Render Home Marker */}
                 {user.home && this.renderMarker(user.home, 'silver')}
             </Fragment>
         )
