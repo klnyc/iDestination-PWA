@@ -1,27 +1,21 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { toggleCategory, toggleHome, goToMarker, setCenter } from '../store'
+import { Header } from './Header'
 
-class Drawer extends React.Component {
-    constructor() {
-        super()
-        this.goHome = this.goHome.bind(this)
-    }
-
-    goHome() {
-        const { goToMarker, setCenter, user } = this.props
-        const NYC = { lat: 40.7473735256486, lng: -73.98564376909184 }
-        user.home ? goToMarker(user.home) : setCenter(NYC)
-    }
-
+class Drawer extends Header {
     render() {
         const { user, drawer, category, toggleCategory, home, toggleHome } = this.props
         return (
             <div className={drawer ? "drawer card" : "invisible"}>
-                <div className="drawer-section first-section">
+
+                {/* Name Section */}
+                <div className="drawer-section top">
                     <div className="drawer-name">{user.name}</div>
                     <div className="drawer-email">{user.email}</div>
                 </div>
+
+                {/* Display Section */}
                 <div className="drawer-section">
                     <div className="drawer-title">Display</div>
                     <div className="drawer-link color-link" onClick={() => toggleCategory('all')}>
@@ -34,12 +28,16 @@ class Drawer extends React.Component {
                         Wishlist{(!category.experiences && category.wishlist) ? <span>●</span> : ''}
                     </div>
                 </div>
+
+                {/* Account Section */}
                 <div className="drawer-section">
                     <div className="drawer-title">Account</div>
                     <div className="drawer-link color-link" onClick={() => { toggleHome(home); this.goHome() }}>Home</div>
                     <div className="drawer-link color-link" onClick={() => firebase.auth().signOut()}>Sign Out</div>
                 </div>
+
                 <div className="drawer-copyright">© 2019 iDestination<br/>All Rights Reserved</div>
+
             </div>
         )
     }

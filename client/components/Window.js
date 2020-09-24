@@ -69,7 +69,7 @@ class Window extends React.Component {
         if (!month && !day && !year) {
             addMarker(user.id, currentMarker, this.state, category)
         }
-        else if (month < 1 || month > 12 || day < 1 || day > 31 || year < 1920 || year > 3000) {
+        else if (month < 1 || month > 12 || day < 1 || day > 31 || year < 1920 || year > 2200) {
             this.setState({ error: 'Invalid date' })
         } else {
             addMarker(user.id, currentMarker, this.state, category)
@@ -81,10 +81,13 @@ class Window extends React.Component {
         return (
             <InfoWindow position={infoWindow.position} onCloseClick={() => closeInfoWindow()}>
                 <div className="infoWindow">
+
+                    {/* Location Details */}
                     <div className="infoWindow-name">{infoWindow.name}</div>
                     <div className="infoWindow-address">{infoWindow.street}</div>
                     <div className="infoWindow-address">{infoWindow.location}</div>
 
+                    {/* New Location */}
                     {!home && (infoWindow !== user.home) && markers.indexOf(infoWindow) === -1 &&
                     <Fragment>
                         {this.renderDatePicker()}
@@ -94,9 +97,15 @@ class Window extends React.Component {
                         </div>
                     </Fragment>}
 
+                    {/* Added Location */}
                     {!home && (infoWindow !== user.home) && markers.includes(infoWindow) && this.renderInfoWindowDate()}
-                    {home && (infoWindow !== user.home) && <div className="infoWindow-button user-home set-home-active" onClick={() => setHome(user.id, infoWindow)}>Set Home</div>}  
-                    {(infoWindow === user.home) && <div className="infoWindow-button user-home">Home</div>}               
+
+                    {/* Add Home */}
+                    {home && (infoWindow !== user.home) && <div className="infoWindow-button user-home set-home-active" onClick={() => setHome(user.id, infoWindow)}>Set Home</div>} 
+
+                    {/* Existing Home */} 
+                    {(infoWindow === user.home) && <div className="infoWindow-button user-home">Home</div>}     
+                              
                 </div>
             </InfoWindow>
         )
