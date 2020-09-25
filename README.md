@@ -4,11 +4,13 @@ iDestination is a travel planning desktop/mobile optimized single-page applicati
 
 ## :gear: Functionality
 * Optimized for iPhone and desktop
-* Add locations as past experiences or to your wishlist
+* Login or sign up with your email
+* Search and add locations as past experiences or to your wishlist
 * Add dates to each entry
+* Delete logged locations
 * Filter the map by categories
 * Set your home location
-* View all locations in a list
+* View lists of all logged locations' names, cities and dates
 
 ## :hammer_and_pick: Technology Stack
 
