@@ -10,9 +10,9 @@ class Panel extends React.Component {
     }
 
     renderMarkerDetails(marker, index) {
-        const { goToMarker, toggleOffFeatures } = this.props
+        const { goToMarker, toggleOffFeatures, panel } = this.props
         return (
-            <div key={index} className="panel-line">
+            <div key={index} className={"panel-line " + (panel.experiences ? "experiences" : "wishlist")}>
                 <div className="panel-column name color-link" onClick={() => { goToMarker(marker); toggleOffFeatures() }}>{marker.name}</div>
                 <div className="panel-column city">{marker.city}</div>
                 <div className="panel-column date">{marker.date}</div>
