@@ -15,6 +15,7 @@ class Login extends React.Component {
         this.handleLogin = this.handleLogin.bind(this)
         this.handleSignUp = this.handleSignUp.bind(this)
         this.handleChange = this.handleChange.bind(this)
+        this.enter = this.enter.bind(this)
     }
 
     handleChange(event) {
@@ -41,6 +42,12 @@ class Login extends React.Component {
             .doc(credentials.user.uid)
             .set({ name: this.state.name, email: this.state.email, id: credentials.user.uid }))
         .catch(error => error.message && this.setState({ error: 'Invalid credentials' }))
+    }
+
+    enter() {
+        document.addEventListener("keydown", function (event) {
+            if (event.key === 'Enter') document.getElementsByClassName("login-button")[0].click()
+        })
     }
 
     render () {
@@ -70,6 +77,7 @@ class Login extends React.Component {
                     <div className="login-button-back"><MdArrowBack onClick={() => this.setState({ signUp: false, logIn: true, email: '', password: '', name: '', error: '' })} /></div>
                 </div>)}
 
+                {email && password && this.enter()}
                 {error && <div className="login-error"><span>{error}</span></div>}
             </div>
         )
