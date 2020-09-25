@@ -38,11 +38,13 @@ class Home extends React.Component {
                             <div className="home-information-section card">
                             <div className="home-information-title">Features</div>
                                 <div className="home-information-text">• Optimized for iPhone and desktop</div>
-                                <div className="home-information-text">• Add locations as past experiences or to your wishlist</div>
+                                <div className="home-information-text">• Login or sign up with your email</div>
+                                <div className="home-information-text">• Search and add locations as past experiences or to your wishlist</div>
+                                <div className="home-information-text">• Delete logged locations</div>
                                 <div className="home-information-text">• Add dates to each entry</div>
                                 <div className="home-information-text">• Filter the map by categories</div>
                                 <div className="home-information-text">• Set your home location</div>
-                                <div className="home-information-text">• View all locations in a list</div>
+                                <div className="home-information-text">• View lists of all logged locations' names, cities and dates</div>
                             </div>
                         </div>
                         <div className="home-information-row bottom">
