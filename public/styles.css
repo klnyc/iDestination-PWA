@@ -482,9 +482,13 @@ body {
 
 .panel-line {
     font-size: 0.68rem;
-    padding: 0.2rem 0;
+    margin: 0.4rem 0;
+    padding: 0.2rem;
     display: flex;
 }
+
+.panel-line.experiences { background-color: #00bcd480 }
+.panel-line.wishlist { background-color: #db709396 }
 
 .panel-column {
     text-overflow: ellipsis;
