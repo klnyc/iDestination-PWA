@@ -482,6 +482,7 @@ body {
     margin: 0.4rem 0;
     padding: 0.2rem;
     display: flex;
+    border-radius: 0.26rem;
 }
 
 .panel-line.experiences { background-color: #00bcd480 }
