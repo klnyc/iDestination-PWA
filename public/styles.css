@@ -61,13 +61,13 @@ body {
 
 .header-home {
     background-color:black;
-    letter-spacing: 0.04rem;
 }
 
 .header-login-link {
     cursor: pointer;
     text-align: right;
     padding: 0 1rem;
+    letter-spacing: 0.04rem;
 }
 
 .header-login-link:hover {

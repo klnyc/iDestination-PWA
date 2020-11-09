@@ -81,3 +81,10 @@ export default connect(null, mapDispatch)(Home)
 // Search and add location markers as a past experience or as a wish.
 // FIlter your marked locations by categories.
 // Set your default home location.
+
+// Add To Your iPhone
+// Open Safari
+// Visit idestination.web.app
+// Go to your browser options, settings, or preferences
+// Click "Add to Home Screen"
+// Open iDestination from your home screen
