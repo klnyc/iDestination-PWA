@@ -46,6 +46,8 @@ body {
 
 .header-logo {
     position: relative;
+    text-align: left;
+    padding: 0 1rem;
 }
 
 .header-icon {
@@ -59,10 +61,13 @@ body {
 
 .header-home {
     background-color:black;
+    letter-spacing: 0.04rem;
 }
 
 .header-login-link {
     cursor: pointer;
+    text-align: right;
+    padding: 0 1rem;
 }
 
 .header-login-link:hover {
@@ -151,8 +156,7 @@ body {
     position: absolute;
     top: 3.6rem;
     text-align: center;
-    right: 12.5%;
-    transform: translate(50%, 0);
+    right: 1rem;
 }
 
 .login-title { height: 2rem }
@@ -544,11 +548,6 @@ body {
 
     .logo-title {
         color: transparent;
-    }
-
-    .login {
-        right: 0.6rem;
-        transform: translate(0, 0);
     }
 
     .home-description-slogan {
