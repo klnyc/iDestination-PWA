@@ -33,7 +33,6 @@ class Home extends React.Component {
                                 <div className="home-information-text">• Save places that you want to visit to easily view them on a map</div>
                                 <div className="home-information-text">• See how close they are to one another so you can plan accordingly!</div>
                                 <div className="home-information-text">• Look back at all the past places that you've visited already</div>
-                                <div className="home-information-text">• Be sure to share with your friends!</div>
                             </div>
                             <div className="home-information-section card">
                             <div className="home-information-title">Features</div>
@@ -75,3 +74,17 @@ const mapDispatch = (dispatch) => ({
 })
 
 export default connect(null, mapDispatch)(Home)
+
+// Track all the places you've visited in the past. Visually reminisce your travel history on a map.
+// Track all the places you wish to visit in the future. See how close they are to one another so you can plan accordingly.
+
+// Search and add location markers as a past experience or as a wish.
+// FIlter your marked locations by categories.
+// Set your default home location.
+
+// Add To Your iPhone
+// Open Safari
+// Visit idestination.web.app
+// Go to your browser options, settings, or preferences
+// Click "Add to Home Screen"
+// Open iDestination from your home screen
