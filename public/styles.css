@@ -34,16 +34,23 @@ body {
     letter-spacing: 0.6rem;
     text-align: center;
     flex: 2;
+    color: transparent;
+}
+
+.logo-title {
+    position: absolute;
+    top: 0.8rem;
+    margin: auto 0.4rem;
+    letter-spacing: 0.28rem;
+}
+
+.header-logo {
+    position: relative;
 }
 
 .header-icon {
     flex: 1;
     text-align: center;
-    font-size: 1.4rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 
 .header-map { 
@@ -55,12 +62,15 @@ body {
 }
 
 .header-login-link {
-    font-size: 1rem;
     cursor: pointer;
 }
 
 .header-login-link:hover {
     color: var(--secondary);
+}
+
+.home {
+    letter-spacing: 0.04rem;
 }
 
 .home-description {
@@ -90,7 +100,7 @@ body {
 
 .home-description-map {
     padding: 1rem 0;
-    height: calc(100vh - 12rem);
+    height: calc(100vh - 12.8rem);
 }
 
 .home-description-map img {
@@ -528,6 +538,14 @@ body {
 }
 
 @media only screen and (max-width: 768px) {
+    .header-title {
+        color: var(--text);
+    }
+
+    .logo-title {
+        color: transparent;
+    }
+
     .login {
         right: 0.6rem;
         transform: translate(0, 0);

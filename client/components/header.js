@@ -22,7 +22,12 @@ class Header extends React.Component {
         const { login, openLogIn } = this.props
         return (
             <div className="header header-home">
-                <div className="header-icon"><img src="img/logo.png" width="40" height="40"></img></div>
+                <div className="header-icon">
+                    <div className="header-logo">
+                        <img src="img/logo.png" width="40" height="40" />
+                        <span className="logo-title">iDestination</span>
+                    </div>
+                </div>
                 <div className="header-title">iDestination</div>
                 <div className="header-icon"><div className="header-login-link" onClick={() => openLogIn()}>Login</div></div>
                 {login && <Login />}
