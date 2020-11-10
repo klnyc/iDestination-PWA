@@ -4,7 +4,7 @@ import { closeLogIn } from '../store'
 import { MdStar, MdAddLocation } from 'react-icons/md'
 import { GiFire } from "react-icons/gi"
 import { FaSearch, FaMap } from "react-icons/fa"
-import { IoIosHome } from "react-icons/io"
+import { IoIosHome, IoIosPhonePortrait } from "react-icons/io"
 
 class Home extends React.Component {
     render() {
@@ -68,6 +68,24 @@ class Home extends React.Component {
                     </div>
                 </div>
 
+                {/* Footer Section */}
+                <div className="home-footer">
+                    <div className="home-footer-install">
+                        <div className="home-footer-install-left">
+                            <IoIosPhonePortrait className="phone-icon" />
+                        </div>
+                        <div className="home-footer-install-right">
+                            <div className="home-footer-install-title">Add iDestination to your iPhone</div>
+                            <div className="home-footer-install-text">• Open Safari</div>
+                            <div className="home-footer-install-text">• Visit idestination.web.app</div>
+                            <div className="home-footer-install-text">• Go to your browser settings</div>
+                            <div className="home-footer-install-text">• Click "Add to Home Screen"</div>
+                            <div className="home-footer-install-text">• Open iDestination from your home screen</div>
+                        </div>
+                    </div>
+                    <div className="home-footer-bottom">© 2020 iDestination</div>
+                </div>
+
             </div>
         )
     }
@@ -79,17 +97,9 @@ const mapDispatch = (dispatch) => ({
 
 export default connect(null, mapDispatch)(Home)
 
-// Track all the places you've visited in the past. Visually reminisce your travel history on a map.
-// Track all the places you wish to visit in the future. See how close they are to one another so you can plan accordingly.
-
-// Search thousands of places all over the world
-// add location markers as a past experience or as a wish.
-// FIlter your marked locations by categories.
-// Set your default home location.
-
-// Add To Your iPhone
+// Add iDestination to your iPhone
 // Open Safari
 // Visit idestination.web.app
-// Go to your browser options, settings, or preferences
+// Go to your browser settings
 // Click "Add to Home Screen"
 // Open iDestination from your home screen
