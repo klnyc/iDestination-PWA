@@ -83,16 +83,12 @@ body {
     background-image: linear-gradient(black, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/img/fultoncenter.jpg');
     background-size: cover;
     background-position: center center;
-}
-
-.home-description-content {
-    padding-top: 3rem;
     text-align: center;
 }
 
 .home-description-slogan {
     font-size: 2rem;
-    padding: 1rem;
+    padding: 4rem 0 1rem;
 }
 
 .home-description-slogan span {
@@ -104,8 +100,8 @@ body {
 }
 
 .home-description-map {
-    padding: 1rem 0;
-    height: calc(100vh - 12.8rem);
+    padding: 1.6rem 0;
+    height: calc(100vh - 14rem);
 }
 
 .home-description-map img {
@@ -114,42 +110,55 @@ body {
 }
 
 .home-information {
-    height: 100vh;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.4),transparent), url('/img/shinjuku.jpg');
-    background-size: cover;
-    background-position: center center;
+    background-color:ghostwhite;
+    color: black;
+    text-align: center;
 }
 
-.home-information-content {
-    height: 100%;
+.home-information-top {
+    height: 20rem;
     display: flex;
-    flex-direction: column;
 }
 
-.home-information-row {
-    display: flex;
+.home-information-top-box {
     flex: 1;
     padding: 1rem;
 }
 
-.home-information-row.top { padding-bottom: 0 }
-.home-information-row.bottom { padding-top: 0 }
+.home-information-top-icon {
+    padding: 2.8rem 0 0;
+    font-size: 2.6rem;
+}
 
-.home-information-section {
+.home-information-top-title {
+    font-size: 2rem;
+    padding: 1.6rem 0;
+    letter-spacing: 0.2rem;
+}
+
+.home-information-top-text {
+    padding: 0 0 0.28rem;
+    color: #525252
+}
+
+.home-information-bottom {
+    height: 12.8rem;
+    display: flex;
+}
+
+.home-information-bottom-box {
     flex: 1;
-    margin: 1rem;
+    padding: 1rem;
 }
 
-.home-information-title {
-    font-weight: bold;
-    text-align: center;
-    border-bottom: 0.06rem solid var(--secondary);
-    padding-bottom: 0.4rem;
+.home-information-bottom-icon {
+    font-size: 1.6rem;
+    padding: 2rem 0;
 }
 
-.home-information-text {
+.home-information-bottom-text {
+    color: #525252;
     font-size: 0.8rem;
-    padding-top: 0.6rem;
 }
 
 .login {
