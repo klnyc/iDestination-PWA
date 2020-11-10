@@ -9,11 +9,11 @@ class Footer extends React.Component {
         const { user, panel, togglePanelExperiences, togglePanelWishlist } = this.props
         return (
             <div className={user.id ? "footer" : "invisible"}>
-                <div className="footer-icon">
+                <div className="footer-section">
                     <GiFire className="plain-link" onClick={() => togglePanelExperiences(panel.experiences)} />
                     <div className="footer-label">Experiences</div>
                 </div>
-                <div className="footer-icon">
+                <div className="footer-section">
                     <MdStar className="plain-link" onClick={() => togglePanelWishlist(panel.wishlist)} />
                     <div className="footer-label">Wishlist</div>
                 </div>

@@ -22,14 +22,14 @@ class Header extends React.Component {
         const { login, openLogIn } = this.props
         return (
             <div className="header header-home">
-                <div className="header-icon">
+                <div className="header-section">
                     <div className="header-logo">
                         <img src="img/logo.png" width="40" height="40" />
                         <span className="logo-title">iDestination</span>
                     </div>
                 </div>
-                <div className="header-title">iDestination</div>
-                <div className="header-icon"><div className="header-login-link" onClick={() => openLogIn()}>Login</div></div>
+                <div className="header-home-title">iDestination</div>
+                <div className="header-section"><div className="header-login-link" onClick={() => openLogIn()}>Login</div></div>
                 {login && <Login />}
             </div>
         )
@@ -39,9 +39,9 @@ class Header extends React.Component {
         const { toggleDrawer, drawer } = this.props
         return (
             <div className="header header-map">
-                <div className="header-icon"><IoMdPerson className="plain-link" onClick={() => toggleDrawer(drawer)} /></div>
-                <div className="header-title">iDestination</div>
-                <div className="header-icon"><IoMdHome className="plain-link" onClick={this.goHome} /></div>
+                <div className="header-section"><IoMdPerson className="header-icon plain-link" onClick={() => toggleDrawer(drawer)} /></div>
+                <div className="header-map-title">iDestination</div>
+                <div className="header-section"><IoMdHome className="header-icon plain-link" onClick={this.goHome} /></div>
             </div>
         )
     }
