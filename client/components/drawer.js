@@ -36,7 +36,7 @@ class Drawer extends Header {
                     <div className="drawer-link color-link" onClick={() => firebase.auth().signOut()}>Sign Out</div>
                 </div>
 
-                <div className="drawer-copyright">© 2019 iDestination<br/>All Rights Reserved</div>
+                <div className="drawer-copyright">© 2020 iDestination</div>
 
             </div>
         )
