@@ -4,3 +4,4 @@ public/bundle.js.map
 global.js
 .firebase
 .firebaserc
+.DS_Store
