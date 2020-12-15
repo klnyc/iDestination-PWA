@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { MdStar } from 'react-icons/md'
 import { GiFire } from "react-icons/gi"
 import { togglePanelExperiences, togglePanelWishlist } from '../store'
+import { colors } from '../../global'
 
 class Footer extends React.Component {
     render() {
@@ -10,11 +11,11 @@ class Footer extends React.Component {
         return (
             <div className={user.id ? "footer" : "invisible"}>
                 <div className="footer-section">
-                    <GiFire className="plain-link" onClick={() => togglePanelExperiences(panel.experiences)} />
+                    <GiFire className="plain-link" color={colors.experiences} onClick={() => togglePanelExperiences(panel.experiences)} />
                     <div className="footer-label">Experiences</div>
                 </div>
                 <div className="footer-section">
-                    <MdStar className="plain-link" onClick={() => togglePanelWishlist(panel.wishlist)} />
+                    <MdStar className="plain-link" color={colors.wishlist} onClick={() => togglePanelWishlist(panel.wishlist)} />
                     <div className="footer-label">Wishlist</div>
                 </div>
             </div>

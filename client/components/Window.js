@@ -5,6 +5,7 @@ import { FaTrash } from "react-icons/fa"
 import { MdStar } from 'react-icons/md'
 import { GiFire } from 'react-icons/gi'
 import { addMarker, removeMarker, closeInfoWindow, setHome } from '../store'
+import { colors } from '../../global'
 
 class Window extends React.Component {
     constructor() {
@@ -35,8 +36,8 @@ class Window extends React.Component {
     renderInfoWindowIcons() {
         const { infoWindow } = this.props
         if (infoWindow.experiences && infoWindow.wishlist) return <div><GiFire /><MdStar /></div>
-        if (infoWindow.experiences) return <div><GiFire style={{ color: '#00bcd4' }} /></div>
-        if (infoWindow.wishlist) return <div><MdStar style={{ color: 'palevioletred' }} /></div>
+        if (infoWindow.experiences) return <div><GiFire style={{ color: colors.experiences }} /></div>
+        if (infoWindow.wishlist) return <div><MdStar style={{ color: colors.wishlist }} /></div>
     }
 
     renderInfoWindowDate() {
@@ -77,8 +78,7 @@ class Window extends React.Component {
         const { user, currentMarker, addMarker } = this.props
         if (!month && !day && !year) {
             addMarker(user.id, currentMarker, this.state, category)
-        }
-        else if (month < 1 || month > 12 || day < 1 || day > 31 || year < 1920 || year > 2200) {
+        } else if (month < 1 || month > 12 || day < 1 || day > 31 || year < 1920 || year > 2200) {
             this.setState({ error: 'Invalid date' })
         } else {
             addMarker(user.id, currentMarker, this.state, category)
