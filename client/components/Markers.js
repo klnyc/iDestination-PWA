@@ -2,6 +2,7 @@ import React, { Fragment}  from 'react'
 import { connect } from 'react-redux'
 import { Marker } from "react-google-maps"
 import { openInfoWindow } from '../store'
+import { colors } from '../../global'
 
 class Markers extends React.Component {
     constructor() {
@@ -35,18 +36,18 @@ class Markers extends React.Component {
                 {/* Render Experiences & Wishlist Markers */}
                 {(category.experiences && category.wishlist) &&
                 markers.map((marker, index) => marker.experiences
-                ? this.renderMarker(marker, '#00bcd4', index)
-                : this.renderMarker(marker, 'palevioletred', index))}
+                ? this.renderMarker(marker, colors.experiences, index)
+                : this.renderMarker(marker, colors.wishlist, index))}
 
                 {/* Render Only Experience Markers */}
                 {(category.experiences && !category.wishlist) && markers
                 .filter(marker => marker.experiences)
-                .map((marker, index) => this.renderMarker(marker, '#00bcd4', index))}
+                .map((marker, index) => this.renderMarker(marker, colors.experiences, index))}
 
                 {/* Render Only Wishlist Markers */}
                 {(!category.experiences && category.wishlist) && markers
                 .filter(marker => marker.wishlist)
-                .map((marker, index) => this.renderMarker(marker, 'palevioletred', index))}
+                .map((marker, index) => this.renderMarker(marker, colors.wishlist, index))}
 
                 {/* Render Current Marker */}
                 {currentMarker.position && this.renderMarker(currentMarker, 'red')}

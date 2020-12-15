@@ -5,6 +5,7 @@ import { MdStar, MdAddLocation } from 'react-icons/md'
 import { GiFire } from "react-icons/gi"
 import { FaSearch, FaMap } from "react-icons/fa"
 import { IoIosHome, IoIosPhonePortrait } from "react-icons/io"
+import { colors } from '../../global'
 
 class Home extends React.Component {
     render() {
@@ -28,7 +29,7 @@ class Home extends React.Component {
                 <div className="home-information">
                     <div className="home-information-top">
                         <div className="home-information-top-box">
-                            <GiFire className="home-information-top-icon" color="#00bcd4" />
+                            <GiFire className="home-information-top-icon" color={colors.experiences} />
                             <div className="home-information-top-title">Experiences</div>
                             <div className="home-information-top-text">Track all the places that</div>
                             <div className="home-information-top-text">you've visited in the past.</div>
@@ -36,7 +37,7 @@ class Home extends React.Component {
                             <div className="home-information-top-text">travel history on a map.</div>
                         </div>
                         <div className="home-information-top-box">
-                            <MdStar className="home-information-top-icon" color="palevioletred" />
+                            <MdStar className="home-information-top-icon" color={colors.wishlist} />
                             <div className="home-information-top-title"> Wishlist</div>
                             <div className="home-information-top-text">Track all the places that</div>
                             <div className="home-information-top-text">you wish to visit in the future.</div>
