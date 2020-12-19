@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import Header from './Header'
 import Footer from './Footer'
@@ -6,12 +6,34 @@ import Map from './Map'
 import Home from './Home'
 import Drawer from './Drawer'
 import Panel from './Panel'
+import Weather from './Weather'
 import { login, logout } from '../store'
 
 class Main extends React.Component {
+    constructor() {
+        super()
+        this.renderApp = this.renderApp.bind(this)
+        this.renderHomePage = this.renderHomePage.bind(this)
+    }
+
     componentDidMount() {
         const { login, logout } = this.props
         firebase.auth().onAuthStateChanged(user => user ? login(user): logout())
+    }
+
+    renderApp() {
+        return (
+            <Fragment>
+                <Map />
+                <Drawer />
+                <Panel />
+                <Weather />
+            </Fragment>
+        )
+    }
+
+    renderHomePage() {
+        return <Home />
     }
 
     render() {
@@ -19,9 +41,7 @@ class Main extends React.Component {
         return (
             <div id="main">
                 <Header />
-                {user.id ? <Map /> : <Home />}
-                <Drawer />
-                <Panel />
+                {user.id ? this.renderApp() : this.renderHomePage()}
                 <Footer />
             </div>
         )

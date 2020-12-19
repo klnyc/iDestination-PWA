@@ -1,11 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { toggleCategory, toggleHome, goToMarker, setCenter } from '../store'
+import { toggleCategory, toggleHome, goToMarker, setCenter, toggleWeather } from '../store'
 import { Header } from './Header'
 
 class Drawer extends Header {
     render() {
-        const { user, drawer, category, toggleCategory, home, toggleHome } = this.props
+        const { user, drawer, category, toggleCategory, home, toggleHome, weather, toggleWeather } = this.props
         return (
             <div className={drawer ? "drawer card" : "invisible"}>
 
@@ -29,6 +29,12 @@ class Drawer extends Header {
                     </div>
                 </div>
 
+                {/* Features Section*/}
+                <div className="drawer-section">
+                    <div className="drawer-title">Features</div>
+                    <div className="drawer-link color-link" onClick={() => toggleWeather(weather)}>Weather</div>
+                </div>
+
                 {/* Account Section */}
                 <div className="drawer-section">
                     <div className="drawer-title">Account</div>
@@ -47,12 +53,14 @@ const mapState = (state) => ({
     user: state.user,
     drawer: state.drawer,
     category: state.category,
-    home: state.home
+    home: state.home,
+    weather: state.weather
 })
 
 const mapDispatch = (dispatch) => ({
     toggleCategory: (category) => dispatch(toggleCategory(category)),
     toggleHome: (home) => dispatch(toggleHome(home)),
+    toggleWeather: (weather) => dispatch(toggleWeather(weather)),
     goToMarker: (marker) => dispatch(goToMarker(marker)),
     setCenter: (coordinates) => dispatch(setCenter(coordinates)),
 })

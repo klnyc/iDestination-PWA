@@ -525,7 +525,7 @@ body {
     left: 1.62rem;
 }
 
-.panel {
+.panel, .weather {
     position: absolute;
     top: 6rem;
     right: 1.8rem;
@@ -576,6 +576,10 @@ body {
 .panel-column.date {
     flex: 2;
     text-align: center;
+}
+
+.weather {
+
 }
 
 .card {

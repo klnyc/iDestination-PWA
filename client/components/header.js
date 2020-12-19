@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { IoMdPerson, IoMdHome } from 'react-icons/io'
-import { toggleDrawer, goToMarker, setCenter, openLogIn } from '../store'
+import { toggleDrawer, goToMarker, setCenter, openLogIn, toggleOffFeatures } from '../store'
 import Login from './Login'
 
 class Header extends React.Component {
@@ -13,9 +13,10 @@ class Header extends React.Component {
     }
 
     goHome() {
-        const { goToMarker, setCenter, user } = this.props
+        const { goToMarker, setCenter, user, toggleOffFeatures } = this.props
         const NYC = { lat: 40.7473735256486, lng: -73.98564376909184 }
         user.home ? goToMarker(user.home) : setCenter(NYC)
+        toggleOffFeatures()
     }
 
     renderHomeHeader() {
@@ -62,7 +63,8 @@ const mapDispatch = (dispatch) => ({
     toggleDrawer: (drawer) => dispatch(toggleDrawer(drawer)),
     goToMarker: (marker) => dispatch(goToMarker(marker)),
     setCenter: (coordinates) => dispatch(setCenter(coordinates)),
-    openLogIn: () => dispatch(openLogIn())
+    openLogIn: () => dispatch(openLogIn()),
+    toggleOffFeatures: () => dispatch(toggleOffFeatures())
 })
 
 export default connect(mapState, mapDispatch)(Header)
