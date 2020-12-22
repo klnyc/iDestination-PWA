@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { goToMarker, toggleOffFeatures } from '../store'
 
-class Panel extends React.Component {
+class List extends React.Component {
     constructor() {
         super()
         this.renderMarkerDetails = this.renderMarkerDetails.bind(this)
@@ -10,12 +10,12 @@ class Panel extends React.Component {
     }
 
     renderMarkerDetails(marker, index) {
-        const { goToMarker, toggleOffFeatures, panel } = this.props
+        const { goToMarker, toggleOffFeatures, list } = this.props
         return (
-            <div key={index} className={"panel-line color-link " + (panel.experiences ? "experiences" : "wishlist")} onClick={() => { goToMarker(marker); toggleOffFeatures() }}>
-                <div className="panel-column name">{marker.name}</div>
-                <div className="panel-column city">{marker.city}</div>
-                <div className="panel-column date">{marker.date}</div>
+            <div key={index} className={"list-line color-link " + (list.experiences ? "experiences" : "wishlist")} onClick={() => { goToMarker(marker); toggleOffFeatures() }}>
+                <div className="list-column name">{marker.name}</div>
+                <div className="list-column city">{marker.city}</div>
+                <div className="list-column date">{marker.date}</div>
             </div>
         )
     }
@@ -28,14 +28,14 @@ class Panel extends React.Component {
     }
 
     render() {
-        const { panel, markers } = this.props
+        const { list, markers } = this.props
         const experiences = markers.filter(marker => marker.experiences)
         const wishlist = markers.filter(marker => marker.wishlist)
-        const panelMarkers = panel.experiences ? experiences : wishlist
+        const listMarkers = list.experiences ? experiences : wishlist
         return (
-            <div className={(panel.experiences || panel.wishlist) ? "panel card" : "invisible"}>
-                <div className="panel-title">{panel.experiences ? "Experiences" : "Wishlist"}</div>
-                {this.sortMarkers(panelMarkers).map((marker, index) => this.renderMarkerDetails(marker, index))}
+            <div className="panel card">
+                <div className="panel-title">{list.experiences ? "Experiences" : "Wishlist"}</div>
+                {this.sortMarkers(listMarkers).map((marker, index) => this.renderMarkerDetails(marker, index))}
             </div>
         )
     }
@@ -43,7 +43,7 @@ class Panel extends React.Component {
 
 const mapState = (state) => ({
     markers: state.markers,
-    panel: state.panel
+    list: state.list
 })
 
 const mapDispatch = (dispatch) => ({
@@ -51,4 +51,4 @@ const mapDispatch = (dispatch) => ({
     toggleOffFeatures: () => dispatch(toggleOffFeatures())
 })
 
-export default connect(mapState, mapDispatch)(Panel)
+export default connect(mapState, mapDispatch)(List)

@@ -6,13 +6,13 @@ const initialState = {
     center: {},
     bounds: null,
     map: {},
-    searchBox: {},
-    searchInput: '',
+    mapSearchBox: {},
+    mapSearchInput: '',
     markers: [],
     currentMarker: {},
     infoWindow: {},
     drawer: false,
-    panel: { experiences: false, wishlist: false },
+    list: { experiences: false, wishlist: false },
     category: { experiences: true, wishlist: true },
     home: false,
     login: false,
@@ -25,8 +25,8 @@ const LOG_OUT = 'LOG_OUT'
 const OPEN_LOGIN = 'OPEN_LOGIN'
 const CLOSE_LOGIN = 'CLOSE_LOGIN'
 const TOGGLE_DRAWER = "TOGGLE_DRAWER"
-const TOGGLE_PANEL_EXPERIENCES = "TOGGLE_PANEL_EXPERIENCES"
-const TOGGLE_PANEL_WISHLIST = "TOGGLE_PANEL_WISHLIST"
+const TOGGLE_LIST_EXPERIENCES = "TOGGLE_LIST_EXPERIENCES"
+const TOGGLE_LIST_WISHLIST = "TOGGLE_LIST_WISHLIST"
 const TOGGLE_OFF_FEATURES = "TOGGLE_OFF_FEATURES"
 const TOGGLE_CATEGORY_ALL = "TOGGLE_CATEGORY_ALL"
 const TOGGLE_CATEGORY_EXPERIENCES = "TOGGLE_CATEGORY_EXPERIENCES"
@@ -37,11 +37,11 @@ const GO_TO_MARKER = "GO_TO_MARKER"
 const OPEN_INFO_WINDOW = 'OPEN_INFO_WINDOW'
 const CLOSE_INFO_WINDOW = 'CLOSE_INFO_WINDOW'
 const HANDLE_CHANGE = 'HANDLE_CHANGE'
-const CLEAR_SEARCH_BOX = 'CLEAR_SEARCH_BOX'
+const CLEAR_MAP_SEARCH_BOX = 'CLEAR_MAP_SEARCH_BOX'
 const CLEAR_CURRENT_MARKER = 'CLEAR_CURRENT_MARKER'
 const MOUNT_MARKERS = 'MOUNT_MARKERS'
 const MOUNT_MAP = 'MOUNT_MAP'
-const MOUNT_SEARCH_BOX = 'MOUNT_SEARCH_BOX'
+const MOUNT_MAP_SEARCH_BOX = 'MOUNT_MAP_SEARCH_BOX'
 const CHANGE_BOUNDS = 'CHANGE_BOUNDS'
 const CHANGE_PLACE = 'CHANGE_PLACE'
 
@@ -51,8 +51,8 @@ export const logout = () => ({ type: LOG_OUT })
 export const openLogIn = () => ({ type: OPEN_LOGIN })
 export const closeLogIn = () => ({ type: CLOSE_LOGIN })
 export const toggleDrawer = (drawer) => ({ type: TOGGLE_DRAWER, drawer })
-export const togglePanelExperiences = (panel) => ({ type: TOGGLE_PANEL_EXPERIENCES, panel })
-export const togglePanelWishlist = (panel) => ({ type: TOGGLE_PANEL_WISHLIST, panel })
+export const toggleListExperiences = (list) => ({ type: TOGGLE_LIST_EXPERIENCES, list })
+export const toggleListWishlist = (list) => ({ type: TOGGLE_LIST_WISHLIST, list })
 export const toggleOffFeatures = () => ({ type: TOGGLE_OFF_FEATURES })
 export const toggleCategory = (category) => {
     switch(category) {
@@ -72,11 +72,11 @@ export const goToMarker = (marker) => ({ type: GO_TO_MARKER, marker })
 export const openInfoWindow = (marker) => ({ type: OPEN_INFO_WINDOW, infoWindow: marker })
 export const closeInfoWindow = () => ({ type: CLOSE_INFO_WINDOW })
 export const handleChange = (event) => ({ type: HANDLE_CHANGE, [event.target.name]: event.target.value })
-export const clearSearchBox = () => ({ type: CLEAR_SEARCH_BOX })
+export const clearMapSearchBox = () => ({ type: CLEAR_MAP_SEARCH_BOX })
 export const clearCurrentMarker = () => ({ type: CLEAR_CURRENT_MARKER })
 export const mountMarkers = (markers) => ({ type: MOUNT_MARKERS, markers })
 export const mountMap = (map) => ({ type: MOUNT_MAP, map })
-export const mountSearchBox = (searchBox) => ({ type: MOUNT_SEARCH_BOX, searchBox })
+export const mountMapSearchBox = (mapSearchBox) => ({ type: MOUNT_MAP_SEARCH_BOX, mapSearchBox })
 export const changeBounds = (bounds) => ({ type: CHANGE_BOUNDS, bounds })
 export const changePlace = (place) => {
     const convertAddress = (place) => {
@@ -100,7 +100,7 @@ export const changePlace = (place) => {
 
     return {
         type: CHANGE_PLACE,
-        searchInput: `${place.name} ${address.input}`,
+        mapSearchInput: `${place.name} ${address.input}`,
         center: { lat, lng },
         currentMarker: {
             position: { lat, lng },
@@ -171,7 +171,7 @@ export const addMarker = (id, marker, date, category) => {
         .collection('markers')
         .add(marker)
         .then(() => dispatch(renderMarkers(id)))
-        .then(() => { dispatch(clearSearchBox()); dispatch(closeInfoWindow()); dispatch(clearCurrentMarker()) })
+        .then(() => { dispatch(clearMapSearchBox()); dispatch(closeInfoWindow()); dispatch(clearCurrentMarker()) })
     }
 }
 
@@ -196,7 +196,7 @@ export const removeMarker = (id, marker) => {
             })
         })
         .then(() => dispatch(renderMarkers(id)))
-        .then(() => { dispatch(clearSearchBox()); dispatch(clearCurrentMarker()); dispatch(closeInfoWindow()) })
+        .then(() => { dispatch(clearMapSearchBox()); dispatch(clearCurrentMarker()); dispatch(closeInfoWindow()) })
     }
 }
 
@@ -225,19 +225,19 @@ function reducer (state = initialState, action) {
         case SET_CENTER:
             return { ...state, center: action.coordinates }
         case LOG_OUT:
-            return { ...state, user: {}, currentMarker: {}, infoWindow: {}, searchInput: '', drawer: false, home: false, login: false }
+            return { ...state, user: {}, currentMarker: {}, infoWindow: {}, mapSearchInput: '', drawer: false, home: false, login: false }
         case OPEN_LOGIN:
             return { ...state, login: true }
         case CLOSE_LOGIN:
             return { ...state, login: false }
         case TOGGLE_DRAWER:
-            return { ...state, drawer: !action.drawer, panel: { experiences: false, wishlist: false }, weather: false }
-        case TOGGLE_PANEL_EXPERIENCES:
-            return { ...state, drawer: false, panel: { experiences: !action.panel, wishlist: false }, weather: false }
-        case TOGGLE_PANEL_WISHLIST:
-            return { ...state, drawer: false, panel: { experiences: false, wishlist: !action.panel }, weather: false }
+            return { ...state, drawer: !action.drawer, list: { experiences: false, wishlist: false }, weather: false }
+        case TOGGLE_LIST_EXPERIENCES:
+            return { ...state, drawer: false, list: { experiences: !action.list, wishlist: false }, weather: false }
+        case TOGGLE_LIST_WISHLIST:
+            return { ...state, drawer: false, list: { experiences: false, wishlist: !action.list }, weather: false }
         case TOGGLE_OFF_FEATURES:
-            return { ...state, drawer: false, panel: { experiences: false, wishlist: false }, weather: false }
+            return { ...state, drawer: false, list: { experiences: false, wishlist: false }, weather: false }
         case TOGGLE_CATEGORY_ALL:
             return { ...state, category: { experiences: true, wishlist: true } }
         case TOGGLE_CATEGORY_EXPERIENCES:
@@ -245,7 +245,7 @@ function reducer (state = initialState, action) {
         case TOGGLE_CATEGORY_WISHLIST:
             return { ...state, category: { experiences: false, wishlist: true } }
         case TOGGLE_HOME:
-            return { ...state, home: !action.home, drawer: false, panel: { experiences: false, wishlist: false }, currentMarker: {}, infoWindow: {}, searchInput: '' }
+            return { ...state, home: !action.home, drawer: false, list: { experiences: false, wishlist: false }, currentMarker: {}, infoWindow: {}, mapSearchInput: '' }
         case TOGGLE_WEATHER:
             return { ...state, drawer: false, weather: !action.weather }
         case GO_TO_MARKER:
@@ -256,20 +256,20 @@ function reducer (state = initialState, action) {
             return { ...state, infoWindow: {}, home: false }
         case HANDLE_CHANGE:
             return { ...state, [event.target.name]: action[event.target.name] }
-        case CLEAR_SEARCH_BOX:
-            return { ...state, searchInput: '' }
+        case CLEAR_MAP_SEARCH_BOX:
+            return { ...state, mapSearchInput: '' }
         case CLEAR_CURRENT_MARKER:
             return { ...state, currentMarker: {} }
         case MOUNT_MARKERS:
             return { ...state, markers: action.markers }
         case MOUNT_MAP:
             return { ...state, map: action.map }
-        case MOUNT_SEARCH_BOX:
-            return { ...state, searchBox: action.searchBox }
+        case MOUNT_MAP_SEARCH_BOX:
+            return { ...state, mapSearchBox: action.mapSearchBox }
         case CHANGE_BOUNDS:
             return { ...state, bounds: action.bounds }
         case CHANGE_PLACE:
-            return { ...state, center: action.center, currentMarker: action.currentMarker, searchInput: action.searchInput, infoWindow: action.infoWindow }
+            return { ...state, center: action.center, currentMarker: action.currentMarker, mapSearchInput: action.mapSearchInput, infoWindow: action.infoWindow }
         default:
             return state
     }

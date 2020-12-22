@@ -5,9 +5,9 @@ import { Header } from './Header'
 
 class Drawer extends Header {
     render() {
-        const { user, drawer, category, toggleCategory, home, toggleHome, weather, toggleWeather } = this.props
+        const { user, category, toggleCategory, home, toggleHome, weather, toggleWeather } = this.props
         return (
-            <div className={drawer ? "drawer card" : "invisible"}>
+            <div className="drawer card">
 
                 {/* Name Section */}
                 <div className="drawer-section top">
@@ -51,7 +51,6 @@ class Drawer extends Header {
 
 const mapState = (state) => ({
     user: state.user,
-    drawer: state.drawer,
     category: state.category,
     home: state.home,
     weather: state.weather

@@ -287,13 +287,13 @@ body {
     height: 100%;
 }
 
-#searchBox {
+#mapSearchBox {
     width: 18.5rem;
     padding-right: 1rem;
     margin-left: -0.16rem;
 }
 
-#searchBox input {
+#mapSearchBox input {
     height: 2rem;
     width: 100%;
     visibility: visible;
@@ -309,11 +309,11 @@ body {
     letter-spacing: 0.04rem;
 }
 
-#searchBox input:focus {
+#mapSearchBox input:focus {
     outline: 0.06rem solid transparent;
 }
 
-#searchBox .clear-input {
+#mapSearchBox .clear-input {
     font-size: 1rem;
     position: absolute;
     top: 4rem;
@@ -321,7 +321,7 @@ body {
     opacity: 0;
 }
 
-#searchBox .clear-input.active {
+#mapSearchBox .clear-input.active {
     opacity: 0.3;
     color: black;
 }
@@ -525,7 +525,7 @@ body {
     left: 1.62rem;
 }
 
-.panel, .weather {
+.panel {
     position: absolute;
     top: 6rem;
     right: 1.8rem;
@@ -547,7 +547,7 @@ body {
     letter-spacing: 0.2rem;
 }
 
-.panel-line {
+.list-line {
     font-size: 0.68rem;
     margin: 0.4rem 0;
     padding: 0.2rem;
@@ -555,31 +555,27 @@ body {
     border-radius: 0.26rem;
 }
 
-.panel-line.experiences { background-color: #00bcd480 }
-.panel-line.wishlist { background-color: #db709396 }
+.list-line.experiences { background-color: #00bcd480 }
+.list-line.wishlist { background-color: #db709396 }
 
-.panel-column {
+.list-column {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
 }
 
-.panel-column.name {
+.list-column.name {
     flex: 6;
 }
 
-.panel-column.city {
+.list-column.city {
     flex: 2;
     margin: 0 0.4rem;
 }
 
-.panel-column.date {
+.list-column.date {
     flex: 2;
     text-align: center;
-}
-
-.weather {
-
 }
 
 .card {
@@ -589,8 +585,6 @@ body {
     padding: 0.6rem;
     border-radius: 0.4rem;
 }
-
-.invisible { display: none }
 
 .plain-link:hover {
     cursor: pointer;

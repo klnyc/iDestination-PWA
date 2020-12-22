@@ -2,20 +2,20 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { MdStar } from 'react-icons/md'
 import { GiFire } from "react-icons/gi"
-import { togglePanelExperiences, togglePanelWishlist } from '../store'
+import { toggleListExperiences, toggleListWishlist } from '../store'
 import { colors } from '../../global'
 
 class Footer extends React.Component {
     render() {
-        const { user, panel, togglePanelExperiences, togglePanelWishlist } = this.props
+        const { list, toggleListExperiences, toggleListWishlist } = this.props
         return (
-            <div className={user.id ? "footer" : "invisible"}>
+            <div className="footer">
                 <div className="footer-section">
-                    <GiFire className="plain-link" color={colors.experiences} onClick={() => togglePanelExperiences(panel.experiences)} />
+                    <GiFire className="plain-link" color={colors.experiences} onClick={() => toggleListExperiences(list.experiences)} />
                     <div className="footer-label">Experiences</div>
                 </div>
                 <div className="footer-section">
-                    <MdStar className="plain-link" color={colors.wishlist} onClick={() => togglePanelWishlist(panel.wishlist)} />
+                    <MdStar className="plain-link" color={colors.wishlist} onClick={() => toggleListWishlist(list.wishlist)} />
                     <div className="footer-label">Wishlist</div>
                 </div>
             </div>
@@ -24,13 +24,12 @@ class Footer extends React.Component {
 }
 
 const mapState = (state) => ({
-    user: state.user,
-    panel: state.panel
+    list: state.list
 })
 
 const mapDispatch = (dispatch) => ({
-    togglePanelExperiences: (panel) => dispatch(togglePanelExperiences(panel)),
-    togglePanelWishlist: (panel) => dispatch(togglePanelWishlist(panel))
+    toggleListExperiences: (list) => dispatch(toggleListExperiences(list)),
+    toggleListWishlist: (list) => dispatch(toggleListWishlist(list))
 })
 
 export default connect(mapState, mapDispatch)(Footer)

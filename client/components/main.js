@@ -5,7 +5,7 @@ import Footer from './Footer'
 import Map from './Map'
 import Home from './Home'
 import Drawer from './Drawer'
-import Panel from './Panel'
+import List from './List'
 import Weather from './Weather'
 import { login, logout } from '../store'
 
@@ -22,12 +22,14 @@ class Main extends React.Component {
     }
 
     renderApp() {
+        const { drawer, list, weather } = this.props
         return (
             <Fragment>
                 <Map />
-                <Drawer />
-                <Panel />
-                <Weather />
+                {drawer && <Drawer />}
+                {(list.experiences || list.wishlist) && <List />}
+                {weather && <Weather />}
+                <Footer />
             </Fragment>
         )
     }
@@ -42,14 +44,16 @@ class Main extends React.Component {
             <div id="main">
                 <Header />
                 {user.id ? this.renderApp() : this.renderHomePage()}
-                <Footer />
             </div>
         )
     }
 }
 
 const mapState = (state) => ({
-    user: state.user
+    user: state.user,
+    drawer: state.drawer,
+    list: state.list,
+    weather: state.weather
 })
 
 const mapDispatch = (dispatch) => ({
