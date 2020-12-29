@@ -17,7 +17,7 @@ class Map extends React.Component {
   render() {
     const {
       mountMap, center, changeBounds, map, mountMapSearchBox, bounds, changePlace, mapSearchBox, mapSearchInput, 
-      handleChange, clearMapSearchBox, clearCurrentMarker, infoWindow, toggleOffFeatures, home } = this.props
+      handleMapSearchInput, clearMapSearchInput, clearCurrentMarker, infoWindow, toggleOffFeatures, home } = this.props
 
     return (
       <GoogleMap
@@ -40,8 +40,8 @@ class Map extends React.Component {
               type="text"
               placeholder="Enter Destination"
               value={mapSearchInput}
-              onChange={(event) => handleChange(event)} />
-            <div className={mapSearchInput ? "clear-input active" : "clear-input"} onClick={clearMapSearchBox}><IoMdCloseCircle /></div>
+              onChange={(event) => handleMapSearchInput(event)} />
+            <div className={mapSearchInput ? "clear-input active" : "clear-input"} onClick={clearMapSearchInput}><IoMdCloseCircle /></div>
             {home && !mapSearchInput && <div className="set-home-popup card"><span><IoMdArrowRoundUp /></span>Enter New Home Address<span><IoMdArrowRoundUp /></span></div>}
           </div>
         </SearchBox>
@@ -89,8 +89,8 @@ const mapDispatch = (dispatch) => ({
   mountMapSearchBox: (mapSearchBox) => dispatch(actions.mountMapSearchBox(mapSearchBox)),
   changeBounds: (bounds) => dispatch(actions.changeBounds(bounds)),
   changePlace: (place) => dispatch(actions.changePlace(place)),
-  handleChange: (event) => dispatch(actions.handleChange(event)),
-  clearMapSearchBox: () => dispatch(actions.clearMapSearchBox()),
+  handleMapSearchInput: (event) => dispatch(actions.handleMapSearchInput(event)),
+  clearMapSearchInput: () => dispatch(actions.clearMapSearchInput()),
   clearCurrentMarker: () => dispatch(actions.clearCurrentMarker()),
   renderMarkers: (id) => dispatch(actions.renderMarkers(id)),
   toggleOffFeatures: () => dispatch(actions.toggleOffFeatures())
