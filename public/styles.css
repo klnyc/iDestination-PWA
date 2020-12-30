@@ -620,6 +620,10 @@ body {
     text-align: center;
 }
 
+.weather-icon {
+    font-size: 2.4rem;
+}
+
 .weather-icon-trash {
     font-size: 0.6rem;
 }

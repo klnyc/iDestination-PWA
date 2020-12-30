@@ -1,8 +1,9 @@
-import React, { Fragment, useReducer } from 'react'
+import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { setUserData } from '../store'
 import { FaTrash } from "react-icons/fa"
 import { IoIosAddCircleOutline } from "react-icons/io"
+import { WiDaySunny, WiDayCloudy, WiCloud, WiCloudy, WiRainMix, WiRain, WiThunderstorm, WiSnow, WiFog } from "react-icons/wi";
 import { WEATHER_API_KEY } from '../../global'
 
 class Weather extends React.Component {
@@ -98,12 +99,12 @@ class Weather extends React.Component {
         return (
             <Fragment>
                 {weatherCities.map((city, index) => {
-                    console.log(city)
+                    const weatherIcon = weatherIcons[city.weather[0].icon.slice(0, -1)]
                     return (
                         <div key={index} className="weather-row">
                             <div className="weather-column">{city.name}</div>
                             <div className="weather-column">{Math.round(city.main.temp)}° {user.weather.unit === "Metric" ? "C" : "F"}</div>
-                            <div className="weather-column">Icon</div>
+                            <div className="weather-column weather-icon">{weatherIcon}</div>
                             <div className="weather-icon-trash"><FaTrash className="plain-link" style={{ color: 'silver' }} onClick={() => this.removeWeatherCity(city.name)} /></div>
                         </div>
                     )
@@ -114,12 +115,11 @@ class Weather extends React.Component {
 
     changeTemperatureUnit(unit) {
         const { user } = this.props
-        const newUnit = (unit === 'F') ? 'Imperial' : 'Metric'
         firebase
         .firestore()
         .collection('users')
         .doc(user.id)
-        .update({ ['weather.unit']: newUnit })
+        .update({ ['weather.unit']: unit })
         .then(this.updateUserState)
     }
 
@@ -130,9 +130,9 @@ class Weather extends React.Component {
                 <div className="panel-title">Weather</div>
                 <div className="weather-top">
                     <div className="weather-temperature">
-                        <span className="plain-link" onClick={() => this.changeTemperatureUnit('F')}>F</span>
+                        <span className="plain-link" onClick={() => this.changeTemperatureUnit('Imperial')}>F</span>
                         <span> | </span>
-                        <span className="plain-link" onClick={() => this.changeTemperatureUnit('C')}>C</span>
+                        <span className="plain-link" onClick={() => this.changeTemperatureUnit('Metric')}>C</span>
                     </div>
                     <div className="weather-input">
                         <input name="weatherSearchInput" type="text" value={weatherSearchInput} placeholder="Enter City" onChange={this.handleChange} autoComplete="off"></input>
@@ -144,6 +144,18 @@ class Weather extends React.Component {
             </div>
         )
     }
+}
+
+const weatherIcons = {
+    "01": <WiDaySunny />,       //Sunny
+    "02": <WiDayCloudy />,      //Few Clouds
+    "03": <WiCloud />,          //Scattered Clouds
+    "04": <WiCloudy />,         //Broken Clouds
+    "09": <WiRainMix />,        //Shower Rain
+    "10": <WiRain />,           //Rain
+    "11": <WiThunderstorm />,   //Thunderstorm
+    "13": <WiSnow />,           //Snow
+    "50": <WiFog />,            //Mist
 }
 
 const mapState = (state) => ({
