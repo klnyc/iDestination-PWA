@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useReducer } from 'react'
 import { connect } from 'react-redux'
 import { setUserData } from '../store'
 import { FaTrash } from "react-icons/fa"
@@ -20,6 +20,7 @@ class Weather extends React.Component {
         this.addWeatherCity = this.addWeatherCity.bind(this)
         this.removeWeatherCity = this.removeWeatherCity.bind(this)
         this.renderWeatherCities = this.renderWeatherCities.bind(this)
+        this.changeTemperatureUnit = this.changeTemperatureUnit.bind(this)
     }
 
     componentDidMount() {
@@ -93,6 +94,7 @@ class Weather extends React.Component {
     }
 
     renderWeatherCities(weatherCities) {
+        const { user } = this.props
         return (
             <Fragment>
                 {weatherCities.map((city, index) => {
@@ -100,14 +102,25 @@ class Weather extends React.Component {
                     return (
                         <div key={index} className="weather-row">
                             <div className="weather-column">{city.name}</div>
-                            <div className="weather-column">{Math.round(city.main.temp)}°</div>
+                            <div className="weather-column">{Math.round(city.main.temp)}° {user.weather.unit === "Metric" ? "C" : "F"}</div>
                             <div className="weather-column">Icon</div>
-                            <div className="weather-icon-trash"><FaTrash style={{ color: 'silver' }} onClick={() => this.removeWeatherCity(city.name)} /></div>
+                            <div className="weather-icon-trash"><FaTrash className="plain-link" style={{ color: 'silver' }} onClick={() => this.removeWeatherCity(city.name)} /></div>
                         </div>
                     )
                 })}
             </Fragment>
         )
+    }
+
+    changeTemperatureUnit(unit) {
+        const { user } = this.props
+        const newUnit = (unit === 'F') ? 'Imperial' : 'Metric'
+        firebase
+        .firestore()
+        .collection('users')
+        .doc(user.id)
+        .update({ ['weather.unit']: newUnit })
+        .then(this.updateUserState)
     }
 
     render() {
@@ -117,11 +130,13 @@ class Weather extends React.Component {
                 <div className="panel-title">Weather</div>
                 <div className="weather-top">
                     <div className="weather-temperature">
-                        <span>F</span> | <span>C</span>
+                        <span className="plain-link" onClick={() => this.changeTemperatureUnit('F')}>F</span>
+                        <span> | </span>
+                        <span className="plain-link" onClick={() => this.changeTemperatureUnit('C')}>C</span>
                     </div>
                     <div className="weather-input">
-                        <input name="weatherSearchInput" type="text" value={weatherSearchInput} onChange={this.handleChange} autoComplete="off"></input>
-                        <div className="weather-icon-add"><IoIosAddCircleOutline onClick={this.addWeatherCity} style={{ color: 'silver' }} /></div>
+                        <input name="weatherSearchInput" type="text" value={weatherSearchInput} placeholder="Enter City" onChange={this.handleChange} autoComplete="off"></input>
+                        <div className="weather-icon-add"><IoIosAddCircleOutline className="plain-link" onClick={this.addWeatherCity} /></div>
                     </div>
                 </div>
                 <div className="weather-error">{error}</div>

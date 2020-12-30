@@ -249,10 +249,6 @@ body {
     color: var(--text);
 }
 
-.login input:focus {
-    outline: none;
-}
-
 .login-button {
     margin: 0.6rem auto;
     width: 3.6rem;
@@ -307,10 +303,6 @@ body {
     -webkit-appearance: none;
     font-size: 0.8rem;
     letter-spacing: 0.04rem;
-}
-
-#mapSearchBox input:focus {
-    outline: 0.06rem solid transparent;
 }
 
 #mapSearchBox .clear-input {
@@ -433,10 +425,6 @@ body {
     width: 2.6rem;
     padding: 0.2rem;
     text-align: center;
-}
-
-.datepicker input:focus {
-    outline: none;
 }
 
 .datepicker input::-webkit-inner-spin-button {
@@ -580,11 +568,13 @@ body {
 
 .weather-top {
     text-align: center;
+    position: relative;
 }
 
 .weather-temperature {
     position: absolute;
     left: 1rem;
+    top: 0.24rem;
 }
 
 .weather-input {
@@ -593,19 +583,30 @@ body {
     width: 10rem;
 }
 
+.weather-input input {
+    text-overflow: ellipsis;
+    letter-spacing: 0.04rem;
+    border-radius: 0.25rem;
+    padding: 0.26rem;
+    font-size: 0.8rem;
+    border: 0.06rem solid transparent;
+}
+
 .weather-icon-add {
     position: absolute;
-    top: 0;
-    right: -2rem;
+    top: 0.24rem;
+    right: -1rem;
     font-size: 1.2rem;
+    cursor: pointer;
 }
 
 .weather-error {
-    height: 1.6rem;
-    line-height: 1.6rem;
     font-size: 0.8rem;
     text-align: center;
     color: red;
+    position: absolute;
+    width: calc(100% - 1.2rem);
+    padding: 0.4rem 0 0;
 }
 
 .weather-row {
@@ -638,6 +639,10 @@ body {
 .color-link:hover {
     cursor: pointer;
     color: #c4d7e6;
+}
+
+input:focus {
+    outline: none;
 }
 
 @media only screen and (max-width: 768px) {

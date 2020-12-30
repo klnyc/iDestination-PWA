@@ -233,9 +233,9 @@ function reducer (state = initialState, action) {
         case TOGGLE_DRAWER:
             return { ...state, drawer: !action.drawer, list: { experiences: false, wishlist: false }, weather: false }
         case TOGGLE_LIST_EXPERIENCES:
-            return { ...state, drawer: false, list: { experiences: !action.list, wishlist: false }, weather: false }
+            return { ...state, drawer: false, list: { experiences: !action.list, wishlist: false }, weather: false, infoWindow: {} }
         case TOGGLE_LIST_WISHLIST:
-            return { ...state, drawer: false, list: { experiences: false, wishlist: !action.list }, weather: false }
+            return { ...state, drawer: false, list: { experiences: false, wishlist: !action.list }, weather: false, infoWindow: {} }
         case TOGGLE_OFF_FEATURES:
             return { ...state, drawer: false, list: { experiences: false, wishlist: false }, weather: false }
         case TOGGLE_CATEGORY_ALL:
@@ -247,7 +247,7 @@ function reducer (state = initialState, action) {
         case TOGGLE_HOME:
             return { ...state, home: !action.home, drawer: false, list: { experiences: false, wishlist: false }, currentMarker: {}, infoWindow: {}, mapSearchInput: '' }
         case TOGGLE_WEATHER:
-            return { ...state, drawer: false, weather: !action.weather }
+            return { ...state, drawer: false, weather: !action.weather, infoWindow: {} }
         case GO_TO_MARKER:
             return { ...state, infoWindow: action.marker, center: action.marker.position }
         case OPEN_INFO_WINDOW:
