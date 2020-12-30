@@ -23,24 +23,31 @@ class Login extends React.Component {
     }
 
     handleLogin(event) {
+        const { email, password } = this.state
         event.preventDefault()
         firebase
         .auth()
-        .signInWithEmailAndPassword(this.state.email, this.state.password)
+        .signInWithEmailAndPassword(email, password)
         .catch(error => error.message && this.setState({ error: 'Invalid credentials' }))
     }
 
     handleSignUp(event) {
+        const { name, email, password } = this.state
         event.preventDefault()
         firebase
         .auth()
-        .createUserWithEmailAndPassword(this.state.email, this.state.password)
+        .createUserWithEmailAndPassword(email, password)
         .then((credentials) => 
             firebase
             .firestore()
             .collection('users')
             .doc(credentials.user.uid)
-            .set({ name: this.state.name, email: this.state.email, id: credentials.user.uid }))
+            .set({
+                name, 
+                email, 
+                id: credentials.user.uid,
+                weather: { unit: 'imperial', weatherCities: [] } 
+            }))
         .catch(error => error.message && this.setState({ error: 'Invalid credentials' }))
     }
 

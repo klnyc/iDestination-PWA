@@ -16,8 +16,8 @@ class Map extends React.Component {
 
   render() {
     const {
-      mountMap, center, changeBounds, map, mountSearchBox, bounds, changePlace, searchBox, searchInput, 
-      handleChange, clearSearchBox, clearCurrentMarker, infoWindow, toggleOffFeatures, home } = this.props
+      mountMap, center, changeBounds, map, mountMapSearchBox, bounds, changePlace, mapSearchBox, mapSearchInput, 
+      handleMapSearchInput, clearMapSearchInput, clearCurrentMarker, infoWindow, toggleOffFeatures, home } = this.props
 
     return (
       <GoogleMap
@@ -30,19 +30,19 @@ class Map extends React.Component {
 
         <SearchBox
           className="container"
-          ref={(searchBox) => mountSearchBox(searchBox)}
+          ref={(mapSearchBox) => mountMapSearchBox(mapSearchBox)}
           bounds={bounds}
           controlPosition={google.maps.ControlPosition.TOP_CENTER}
-          onPlacesChanged={() => changePlace(searchBox.getPlaces()[0])}>
-          <div id="searchBox" onClick={() => { toggleOffFeatures(); clearCurrentMarker() }}>
+          onPlacesChanged={() => changePlace(mapSearchBox.getPlaces()[0])}>
+          <div id="mapSearchBox" onClick={() => { toggleOffFeatures(); clearCurrentMarker() }}>
             <input
-              name="searchInput"
+              name="mapSearchInput"
               type="text"
               placeholder="Enter Destination"
-              value={searchInput}
-              onChange={(event) => handleChange(event)} />
-            <div className={searchInput ? "clear-input active" : "clear-input"} onClick={clearSearchBox}><IoMdCloseCircle /></div>
-            {home && !searchInput && <div className="set-home-popup card"><span><IoMdArrowRoundUp /></span>Enter New Home Address<span><IoMdArrowRoundUp /></span></div>}
+              value={mapSearchInput}
+              onChange={(event) => handleMapSearchInput(event)} />
+            <div className={mapSearchInput ? "clear-input active" : "clear-input"} onClick={clearMapSearchInput}><IoMdCloseCircle /></div>
+            {home && !mapSearchInput && <div className="set-home-popup card"><span><IoMdArrowRoundUp /></span>Enter New Home Address<span><IoMdArrowRoundUp /></span></div>}
           </div>
         </SearchBox>
         
@@ -78,19 +78,19 @@ const mapState = (state) => ({
   center: state.center,
   bounds: state.bounds,
   map: state.map,
-  searchBox: state.searchBox,
-  searchInput: state.searchInput,
+  mapSearchBox: state.mapSearchBox,
+  mapSearchInput: state.mapSearchInput,
   infoWindow: state.infoWindow,
   home: state.home
 })
 
 const mapDispatch = (dispatch) => ({
   mountMap: (map) => dispatch(actions.mountMap(map)),
-  mountSearchBox: (searchBox) => dispatch(actions.mountSearchBox(searchBox)),
+  mountMapSearchBox: (mapSearchBox) => dispatch(actions.mountMapSearchBox(mapSearchBox)),
   changeBounds: (bounds) => dispatch(actions.changeBounds(bounds)),
   changePlace: (place) => dispatch(actions.changePlace(place)),
-  handleChange: (event) => dispatch(actions.handleChange(event)),
-  clearSearchBox: () => dispatch(actions.clearSearchBox()),
+  handleMapSearchInput: (event) => dispatch(actions.handleMapSearchInput(event)),
+  clearMapSearchInput: () => dispatch(actions.clearMapSearchInput()),
   clearCurrentMarker: () => dispatch(actions.clearCurrentMarker()),
   renderMarkers: (id) => dispatch(actions.renderMarkers(id)),
   toggleOffFeatures: () => dispatch(actions.toggleOffFeatures())

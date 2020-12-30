@@ -97,10 +97,3 @@ const mapDispatch = (dispatch) => ({
 })
 
 export default connect(null, mapDispatch)(Home)
-
-// Add iDestination to your iPhone
-// Open Safari
-// Visit idestination.web.app
-// Go to your browser settings
-// Click "Add to Home Screen"
-// Open iDestination from your home screen
