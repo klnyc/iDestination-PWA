@@ -578,6 +578,51 @@ body {
     text-align: center;
 }
 
+.weather-top {
+    text-align: center;
+}
+
+.weather-temperature {
+    position: absolute;
+    left: 1rem;
+}
+
+.weather-input {
+    margin: 0 auto;
+    position: relative;
+    width: 10rem;
+}
+
+.weather-icon-add {
+    position: absolute;
+    top: 0;
+    right: -2rem;
+    font-size: 1.2rem;
+}
+
+.weather-error {
+    height: 1.6rem;
+    line-height: 1.6rem;
+    font-size: 0.8rem;
+    text-align: center;
+    color: red;
+}
+
+.weather-row {
+    display: flex;
+    height: 6rem;
+    line-height: 6rem;
+}
+
+.weather-column {
+    flex: 1;
+    text-align: center;
+}
+
+.weather-icon-trash {
+    font-size: 0.6rem;
+}
+
 .card {
     background-color: var(--theme);
     border: 0.06rem solid var(--primary);

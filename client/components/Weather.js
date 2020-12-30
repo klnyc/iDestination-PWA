@@ -1,18 +1,9 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { setUserData } from '../store'
+import { FaTrash } from "react-icons/fa"
 import { IoIosAddCircleOutline } from "react-icons/io"
 import { WEATHER_API_KEY } from '../../global'
-
-/**
- * Local State Weather Search Input
- * Take search input string, check if string is valid/ valid API
- * Send the city to user weather object in database
- * Query all user cities in database, grab all city APIs
- * Mount all city APIs to state
- * Render all cities { city, temperature, weather}
- * 
- */
 
 class Weather extends React.Component {
     constructor() {
@@ -24,8 +15,10 @@ class Weather extends React.Component {
         }
         this.handleChange = this.handleChange.bind(this)
         this.weatherAPI_url = this.weatherAPI_url.bind(this)
+        this.updateUserState = this.updateUserState.bind(this)
         this.queryWeatherCities = this.queryWeatherCities.bind(this)
         this.addWeatherCity = this.addWeatherCity.bind(this)
+        this.removeWeatherCity = this.removeWeatherCity.bind(this)
         this.renderWeatherCities = this.renderWeatherCities.bind(this)
     }
 
@@ -39,6 +32,19 @@ class Weather extends React.Component {
 
     weatherAPI_url(city, unit) {
         return `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${unit || 'imperial'}&appid=${WEATHER_API_KEY}`
+    }
+
+    updateUserState() {
+        const { user, setUserData } = this.props
+        firebase
+        .firestore()
+        .collection('users')
+        .doc(user.id)
+        .get()
+        .then((userDocument) => {
+            setUserData(userDocument.data())
+            this.queryWeatherCities()
+        })
     }
 
     queryWeatherCities() {
@@ -55,7 +61,7 @@ class Weather extends React.Component {
     }
 
     addWeatherCity() {
-        const { user, setUserData } = this.props
+        const { user } = this.props
         const { weatherSearchInput } = this.state
 
         if (!weatherSearchInput) return
@@ -68,46 +74,58 @@ class Weather extends React.Component {
                 .firestore()
                 .collection('users')
                 .doc(user.id)
-                .update({ ['weather.weatherCities']: firebase.firestore.FieldValue.arrayUnion(weatherSearchInput) })
-                .then(() => {
-                    firebase
-                    .firestore()
-                    .collection('users')
-                    .doc(user.id)
-                    .get()
-                    .then((userDocument) => {
-                        setUserData(userDocument.data())
-                        this.queryWeatherCities()
-                    })
-                })
+                .update({ ['weather.weatherCities']: firebase.firestore.FieldValue.arrayUnion(weatherData.name) })
+                .then(this.updateUserState)
             } else {
                 this.setState({ error: 'Invalid City'})
             }
         })
     }
 
-    renderWeatherCities() {
-        const { weatherCities } = this.state
+    removeWeatherCity(city) {
+        const { user } = this.props
+        firebase
+        .firestore()
+        .collection('users')
+        .doc(user.id)
+        .update({ ['weather.weatherCities']: firebase.firestore.FieldValue.arrayRemove(city) })
+        .then(this.updateUserState)
+    }
+
+    renderWeatherCities(weatherCities) {
         return (
-            <div>
-                {weatherCities.map((city) => {
-                    return <div key={Math.random() * 10000}>{city.name}</div>
+            <Fragment>
+                {weatherCities.map((city, index) => {
+                    console.log(city)
+                    return (
+                        <div key={index} className="weather-row">
+                            <div className="weather-column">{city.name}</div>
+                            <div className="weather-column">{Math.round(city.main.temp)}°</div>
+                            <div className="weather-column">Icon</div>
+                            <div className="weather-icon-trash"><FaTrash style={{ color: 'silver' }} onClick={() => this.removeWeatherCity(city.name)} /></div>
+                        </div>
+                    )
                 })}
-            </div>
+            </Fragment>
         )
     }
 
     render() {
-        const { weatherSearchInput, error } = this.state
+        const { weatherCities, weatherSearchInput, error } = this.state
         return (
             <div className="panel card">
                 <div className="panel-title">Weather</div>
-                <div className="weather-input">
-                    <input name="weatherSearchInput" type="text" value={weatherSearchInput} onChange={this.handleChange} autoComplete="off"></input>
-                    <IoIosAddCircleOutline onClick={this.addWeatherCity} />
+                <div className="weather-top">
+                    <div className="weather-temperature">
+                        <span>F</span> | <span>C</span>
+                    </div>
+                    <div className="weather-input">
+                        <input name="weatherSearchInput" type="text" value={weatherSearchInput} onChange={this.handleChange} autoComplete="off"></input>
+                        <div className="weather-icon-add"><IoIosAddCircleOutline onClick={this.addWeatherCity} style={{ color: 'silver' }} /></div>
+                    </div>
                 </div>
-            {this.renderWeatherCities()}
-            {error && <div>{error}</div>}
+                <div className="weather-error">{error}</div>
+                {this.renderWeatherCities(weatherCities)}
             </div>
         )
     }
