@@ -19,7 +19,7 @@
     <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-firestore.js"></script>
     <script>
-        var firebaseConfig = {
+        const firebaseConfig = {
             apiKey: "AIzaSyAJTmT147N4OhGIRyIkN62PmA7HJKacgMY",
             authDomain: "idestination.firebaseapp.com",
             databaseURL: "https://idestination.firebaseio.com",
@@ -30,13 +30,7 @@
             measurementId: "G-1ZE9RN4P1D"
         }
         firebase.initializeApp(firebaseConfig)
-        // async function update() {
-        //     const userRef = firebase.firestore().collection('users')
-        //     const users = await userRef.get()
-        //     users.forEach((x) => console.log(x.data()))
-        // }
-
-        // update()
+        const database = firebase.firestore()
     </script>
     <script src="./bundle.js"></script>
 </body>

@@ -126,8 +126,7 @@ export const changePlace = (place) => {
 export const login = (user) => {
     const NYC = { lat: 40.7473735256486, lng: -73.98564376909184 }
     return (dispatch) => {
-        firebase
-        .firestore()
+        database
         .collection('users')
         .doc(user.uid)
         .get()
@@ -141,8 +140,7 @@ export const login = (user) => {
 export const renderMarkers = (id) => {
     return (dispatch) => {
         const markers = []
-        firebase
-        .firestore()
+        database
         .collection('users')
         .doc(id)
         .collection('markers')
@@ -164,8 +162,7 @@ export const addMarker = (id, marker, date, category) => {
     if (category === 'experiences') {marker = { ...marker, date: formatDate(date), experiences: true }}
     if (category === 'wishlist') {marker = { ...marker, date: formatDate(date), wishlist: true }}
     return (dispatch) => {
-        firebase
-        .firestore()
+        database
         .collection('users')
         .doc(id)
         .collection('markers')
@@ -177,8 +174,7 @@ export const addMarker = (id, marker, date, category) => {
 
 export const removeMarker = (id, marker) => {
     return (dispatch) => {
-        firebase
-        .firestore()
+        database
         .collection('users')
         .doc(id)
         .collection('markers')
@@ -186,8 +182,7 @@ export const removeMarker = (id, marker) => {
         .get()
         .then((markersSnapshot) => {
             markersSnapshot.forEach((markerDocument) => {
-                firebase
-                .firestore()
+                database
                 .collection('users')
                 .doc(id)
                 .collection('markers')
@@ -202,14 +197,12 @@ export const removeMarker = (id, marker) => {
 
 export const setHome = (id, marker) => {
     return (dispatch) => {
-        firebase
-        .firestore()
+        database
         .collection('users')
         .doc(id)
         .set({ home: marker }, { merge: true })
         .then(() => {
-            firebase
-            .firestore()
+            database
             .collection('users')
             .doc(id)
             .get()
