@@ -38,8 +38,7 @@ class Weather extends React.Component {
 
     updateUserState() {
         const { user, setUserData } = this.props
-        firebase
-        .firestore()
+        database
         .collection('users')
         .doc(user.id)
         .get()
@@ -72,8 +71,7 @@ class Weather extends React.Component {
         .then(weatherData => {
             if (weatherData.id) {
                 this.setState({ weatherSearchInput: '', error: '' })
-                firebase
-                .firestore()
+                database
                 .collection('users')
                 .doc(user.id)
                 .update({ ['weather.weatherCities']: firebase.firestore.FieldValue.arrayUnion(weatherData.name) })
@@ -86,8 +84,7 @@ class Weather extends React.Component {
 
     removeWeatherCity(city) {
         const { user } = this.props
-        firebase
-        .firestore()
+        database
         .collection('users')
         .doc(user.id)
         .update({ ['weather.weatherCities']: firebase.firestore.FieldValue.arrayRemove(city) })
@@ -115,8 +112,7 @@ class Weather extends React.Component {
 
     changeTemperatureUnit(unit) {
         const { user } = this.props
-        firebase
-        .firestore()
+        database
         .collection('users')
         .doc(user.id)
         .update({ ['weather.unit']: unit })

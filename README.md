@@ -11,6 +11,7 @@ iDestination is a travel planning desktop/mobile optimized single-page applicati
 * Filter the map by categories
 * Set your home location
 * View lists of all logged locations' names, cities and dates
+* View the current weather of any city
 
 ## :hammer_and_pick: Technology Stack
 
@@ -26,6 +27,7 @@ Back End
 
 Other
 * Google Maps API
+* Open Weather API
 * Node.js
 * Git
 

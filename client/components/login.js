@@ -38,8 +38,7 @@ class Login extends React.Component {
         .auth()
         .createUserWithEmailAndPassword(email, password)
         .then((credentials) => 
-            firebase
-            .firestore()
+            database
             .collection('users')
             .doc(credentials.user.uid)
             .set({
