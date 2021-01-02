@@ -1,9 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { MdStar } from 'react-icons/md'
-import { GiFire } from "react-icons/gi"
-import { toggleListExperiences, toggleListWishlist } from '../store'
 import { colors } from '../../global'
+import { MdStar, GiFire } from '../icons'
+import { toggleListExperiences, toggleListWishlist } from '../store'
 
 class Footer extends React.Component {
     render() {

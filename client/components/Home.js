@@ -1,11 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { closeLogIn } from '../store'
-import { MdStar, MdAddLocation } from 'react-icons/md'
-import { GiFire } from "react-icons/gi"
-import { FaSearch, FaMap } from "react-icons/fa"
-import { IoIosHome, IoIosPhonePortrait } from "react-icons/io"
 import { colors } from '../../global'
+import { GiFire, MdStar, MdAddLocation, FaSearch, FaMap, IoIosHome, IoIosPhonePortrait, IoMdSunny } from '../icons'
 
 class Home extends React.Component {
     render() {
@@ -65,6 +62,11 @@ class Home extends React.Component {
                             <IoIosHome className="home-information-bottom-icon" />
                             <div className="home-information-bottom-text">Set your default</div>
                             <div className="home-information-bottom-text">home location.</div>
+                        </div>
+                        <div className="home-information-bottom-box">
+                            <IoMdSunny className="home-information-bottom-icon" />
+                            <div className="home-information-bottom-text">Check the weather</div>
+                            <div className="home-information-bottom-text">of any city.</div>
                         </div>
                     </div>
                 </div>

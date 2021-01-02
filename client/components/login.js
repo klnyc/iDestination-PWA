@@ -1,5 +1,5 @@
 import React from 'react'
-import { MdArrowBack } from 'react-icons/md'
+import { MdArrowBack } from '../icons'
 
 class Login extends React.Component {
     constructor() {
