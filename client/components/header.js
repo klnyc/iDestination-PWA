@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { IoMdPerson, IoMdHome } from 'react-icons/io'
+import { IoMdPerson, IoMdHome } from '../icons'
 import { toggleDrawer, goToMarker, setCenter, openLogIn, toggleOffFeatures } from '../store'
 import Login from './Login'
 

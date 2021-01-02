@@ -1,9 +1,7 @@
 import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { InfoWindow } from "react-google-maps"
-import { FaTrash } from "react-icons/fa"
-import { MdStar } from 'react-icons/md'
-import { GiFire } from 'react-icons/gi'
+import { FaTrash, MdStar, GiFire } from "../icons"
 import { addMarker, removeMarker, closeInfoWindow, setHome } from '../store'
 import { colors } from '../../global'
 
