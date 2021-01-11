@@ -67,7 +67,7 @@ export const toggleCategory = (category) => {
     }
 }
 export const toggleHome = (home) => ({ type: TOGGLE_HOME, home })
-export const toggleWeather = (weather) => ({ type: TOGGLE_WEATHER, weather })
+export const toggleWeather = () => ({ type: TOGGLE_WEATHER })
 export const goToMarker = (marker) => ({ type: GO_TO_MARKER, marker })
 export const openInfoWindow = (marker) => ({ type: OPEN_INFO_WINDOW, infoWindow: marker })
 export const closeInfoWindow = () => ({ type: CLOSE_INFO_WINDOW })
@@ -240,7 +240,7 @@ function reducer (state = initialState, action) {
         case TOGGLE_HOME:
             return { ...state, home: !action.home, drawer: false, list: { experiences: false, wishlist: false }, currentMarker: {}, infoWindow: {}, mapSearchInput: '' }
         case TOGGLE_WEATHER:
-            return { ...state, drawer: false, weather: !action.weather, infoWindow: {} }
+            return { ...state, drawer: false, weather: true, infoWindow: {} }
         case GO_TO_MARKER:
             return { ...state, infoWindow: action.marker, center: action.marker.position }
         case OPEN_INFO_WINDOW:

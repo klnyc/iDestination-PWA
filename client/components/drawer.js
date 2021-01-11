@@ -5,7 +5,7 @@ import { Header } from './Header'
 
 class Drawer extends Header {
     render() {
-        const { user, category, toggleCategory, home, toggleHome, weather, toggleWeather } = this.props
+        const { user, category, toggleCategory, home, toggleHome, toggleWeather } = this.props
         return (
             <div className="drawer card">
 
@@ -32,7 +32,7 @@ class Drawer extends Header {
                 {/* Features Section*/}
                 <div className="drawer-section">
                     <div className="drawer-title">Features</div>
-                    <div className="drawer-link color-link" onClick={() => toggleWeather(weather)}>Weather</div>
+                    <div className="drawer-link color-link" onClick={() => toggleWeather()}>Weather</div>
                 </div>
 
                 {/* Account Section */}
@@ -52,14 +52,13 @@ class Drawer extends Header {
 const mapState = (state) => ({
     user: state.user,
     category: state.category,
-    home: state.home,
-    weather: state.weather
+    home: state.home
 })
 
 const mapDispatch = (dispatch) => ({
     toggleCategory: (category) => dispatch(toggleCategory(category)),
     toggleHome: (home) => dispatch(toggleHome(home)),
-    toggleWeather: (weather) => dispatch(toggleWeather(weather)),
+    toggleWeather: () => dispatch(toggleWeather()),
     goToMarker: (marker) => dispatch(goToMarker(marker)),
     setCenter: (coordinates) => dispatch(setCenter(coordinates)),
 })
