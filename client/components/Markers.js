@@ -2,7 +2,7 @@ import React, { Fragment}  from 'react'
 import { connect } from 'react-redux'
 import { Marker } from "react-google-maps"
 import { openInfoWindow } from '../store'
-import { colors } from '../../global'
+import { colors } from './Index'
 
 class Markers extends React.Component {
     constructor() {

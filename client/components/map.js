@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withScriptjs, withGoogleMap, GoogleMap } from "react-google-maps"
 import { SearchBox } from "react-google-maps/lib/components/places/SearchBox"
 import { compose, withProps } from 'recompose'
-import { GOOGLE_MAPS_API_KEY } from '../../global'
+import { GOOGLE_MAPS_API_KEY } from '../../API_keys'
 import { IoMdCloseCircle, IoMdArrowRoundUp } from '../icons'
 import * as actions from '../store'
 import Window from './Window'

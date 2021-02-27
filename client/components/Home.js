@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { closeLogIn } from '../store'
-import { colors } from '../../global'
+import { colors } from './Index'
 import { GiFire, MdStar, MdAddLocation, FaSearch, FaMap, IoIosHome, IoIosPhonePortrait, IoMdSunny } from '../icons'
 
 class Home extends React.Component {

@@ -1,12 +1,6 @@
 import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
-import Header from './Header'
-import Footer from './Footer'
-import Map from './Map'
-import Home from './Home'
-import Drawer from './Drawer'
-import List from './List'
-import Weather from './Weather'
+import { Header, Footer, Map, Home, Drawer, List, Weather } from './Index'
 import { login, logout } from '../store'
 
 class Main extends React.Component {

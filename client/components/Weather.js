@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { setUserData } from '../store'
-import { WEATHER_API_KEY } from '../../global'
+import { WEATHER_API_KEY } from '../../API_keys'
 import { FaTrash, IoIosAddCircleOutline, WiDaySunny, WiDayCloudy, WiCloud, WiCloudy, WiRainMix, WiRain, WiThunderstorm, WiSnow, WiFog } from "../icons"
 
 class Weather extends React.Component {

@@ -1,7 +1,7 @@
 node_modules
 public/bundle.js
 public/bundle.js.map
-global.js
+API_keys.js
 .firebase
 .firebaserc
 .DS_Store

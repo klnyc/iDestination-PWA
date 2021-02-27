@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { InfoWindow } from "react-google-maps"
 import { FaTrash, MdStar, GiFire } from "../icons"
 import { addMarker, removeMarker, closeInfoWindow, setHome } from '../store'
-import { colors } from '../../global'
+import { colors } from './Index'
 
 class Window extends React.Component {
     constructor() {
