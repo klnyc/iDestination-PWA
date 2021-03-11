@@ -1,6 +1,6 @@
 # iDestination
 
-iDestination is a travel planning desktop/mobile optimized single-page application which allows users to keep track of places that they have traveled to in the past and places that they plan to visit in the future which allows the user to plan trips more efficiently. Users can create an account with their email to search, add, delete and filter locations by category on an integrated map and save their home location.
+iDestination is a travel planning desktop/mobile optimized single-page application which allows users to keep track of places that they have traveled to in the past and places that they plan to visit in the future which allows the user to plan trips more efficiently. Users can search, add and filter locations by category on an integrated map and view real-time weather of any city.
 
 ## :gear: Functionality
 * Optimized for iPhone and desktop
@@ -11,7 +11,7 @@ iDestination is a travel planning desktop/mobile optimized single-page applicati
 * Filter the map by categories
 * Set your home location
 * View lists of all logged locations' names, cities and dates
-* View the current weather of any city
+* View real-time weather of any city
 
 ## :hammer_and_pick: Technology Stack
 
