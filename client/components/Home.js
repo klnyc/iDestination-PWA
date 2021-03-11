@@ -65,7 +65,7 @@ class Home extends React.Component {
                         </div>
                         <div className="home-information-bottom-box">
                             <IoMdSunny className="home-information-bottom-icon" />
-                            <div className="home-information-bottom-text">Check the weather</div>
+                            <div className="home-information-bottom-text">Check real-time weather</div>
                             <div className="home-information-bottom-text">of any city.</div>
                         </div>
                     </div>
