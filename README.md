@@ -23,11 +23,11 @@ Front End
 
 Back End
 * Firebase
-* Cloud Firestore
-
-Other
 * Google Maps API
 * Open Weather API
+
+
+Other
 * Node.js
 * Git
 
