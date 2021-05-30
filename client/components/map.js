@@ -11,13 +11,28 @@ import Markers from './Markers'
 
 class Map extends React.Component {
   componentDidMount() {
-    this.props.renderMarkers(this.props.user.id)
+    const { renderMarkers, user } = this.props
+    renderMarkers(user.id)
   }
 
   render() {
     const {
-      mountMap, center, changeBounds, map, mountMapSearchBox, bounds, changePlace, mapSearchBox, mapSearchInput, 
-      handleMapSearchInput, clearMapSearchInput, clearCurrentMarker, infoWindow, toggleOffFeatures, home } = this.props
+      mountMap, 
+      center, 
+      changeBounds, 
+      map, 
+      mountMapSearchBox, 
+      bounds, 
+      changePlace, 
+      mapSearchBox, 
+      mapSearchInput, 
+      handleMapSearchInput, 
+      clearMapSearchInput, 
+      clearCurrentMarker, 
+      infoWindow, 
+      toggleOffFeatures, 
+      home 
+    } = this.props
 
     return (
       <GoogleMap
